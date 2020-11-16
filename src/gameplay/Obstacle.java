@@ -1,4 +1,4 @@
 package gameplay;
-public class Obstacle{
+public class Obstacle extends Box{
     
 }
