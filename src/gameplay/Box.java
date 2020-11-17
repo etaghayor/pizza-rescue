@@ -1,7 +1,6 @@
 package gameplay;
 
-public class Box {
-
+public abstract class Box {
     private int x, y;
 
     public int getX() {

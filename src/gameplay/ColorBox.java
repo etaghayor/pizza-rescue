@@ -1,7 +1,5 @@
 package gameplay;
 
-import gameplay.ColorBox.Color;
-
 public class ColorBox extends Box {
 
     public enum Color {
@@ -15,9 +13,13 @@ public class ColorBox extends Box {
     public Color getColor() {
         return this.color;
     }
+    public String toString() {
+    	return "colorBox : " + this.getColor();
+    }
     public static void main(String[] args) {
     	ColorBox c1 = new ColorBox();
     	c1.setColor(Color.ORANGE);
-    	System.out.println(c1.getColor());
+    	System.out.println(c1);
+    	
 	}
 }
