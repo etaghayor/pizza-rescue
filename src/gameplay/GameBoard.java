@@ -35,8 +35,8 @@ public class GameBoard {
         return height;
     }
 
-    public void emptyBox(int x, int y) {
-        //TODO
+    public boolean emptyBox(int x, int y) {
+        return (board[x][y] == null);
     }
 
     public void emptyPack(int x, int y) {
