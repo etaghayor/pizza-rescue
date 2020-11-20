@@ -1,10 +1,10 @@
 package view;
 
 public class GUI {
-	private Page page;
+	private View view;
 	
 	public GUI() {
-		page = new Page();
+		view = new View();
 	}
 	
 	/*public void displayLevel(Snapshot snapshot) {

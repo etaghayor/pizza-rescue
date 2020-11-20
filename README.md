@@ -13,7 +13,7 @@
 - Split the model and the view
 - Split the differents works in objects and methods
 - Game environment : where we choose the level, the player's progression. We can also make a demonstration and present him the rules.
-- Board : Case[][], be careful to play in the cases 
+- Board : Case\[\]\[\], be careful to play in the cases 
 - Add a bot who could play instead of a human ?
 
 ## Running the software 
@@ -29,11 +29,13 @@
  ```
  java PetRescue ...
  ```
+ 
  Or ... :
  
  ``` 
  java PetRescue ... 
  ```
+ 
  Or even to let's a bot play :
   
  ```
@@ -44,5 +46,4 @@
  ```
  java PetRescue -h
  ```
- 
  

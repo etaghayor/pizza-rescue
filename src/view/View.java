@@ -2,9 +2,9 @@ package view;
 
 import javax.swing.JFrame;
 
-public class Page extends JFrame{
+public class View extends JFrame{
 
-		public Page() {
+		public View() {
 			setTitle("Pet Rescue Saga Game");
 			setSize(1000,600);
 			setLocationRelativeTo(null);
