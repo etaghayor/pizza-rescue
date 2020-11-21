@@ -18,29 +18,36 @@
 
 ## Running the software 
 
- It can be run with several options. In order to pass program arguments, you have to do :
+ First you have to do : 
  
  ```
  javac PetRescue.java
  ```
  
- And then if : 
+You can simply do this to run the first level :
  
  ```
- java PetRescue ...
+ java PetRescue
  ```
  
- Or ... :
+ Or you have several possible options :
  
  ``` 
- java PetRescue ... 
+ java PetRescue --level "int"
+ ```
+ 
+ And then u can add the graphical interface :
+  
+ ```
+ java PetRescue --level "int" -g
  ```
  
  Or even to let's a bot play :
-  
+ 
+  ```
+ java PetRescue --level "int" -b
  ```
- java PetRescue ...
- ```
+ 
  You can show the help with the following command : 
  
  ```
