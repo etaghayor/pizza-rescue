@@ -23,7 +23,8 @@ public class Level {
 	      //throw new IllegalArgumentException(String.format("Couldn't read level at : %s", path), i);
 	    } catch (ClassNotFoundException e) {
 	      throw new IllegalArgumentException(
-	          //"This litterally cannot happen. What have you done ???", e);
+	          //"This litterally cannot happen. What have you done ???", e
+	    		  );
 	    }
 
 	    return l;
