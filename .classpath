@@ -7,9 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/home/porlk/Downloads/commons-cli-1.4/commons-cli-1.4.jar"/>
-	<classpathentry kind="lib" path="/home/porlk/Downloads/commons-cli-1.4/commons-cli-1.4-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/porlk/Downloads/commons-cli-1.4/commons-cli-1.4-sources.jar"/>
-	<classpathentry kind="lib" path="/home/porlk/Downloads/commons-cli-1.4/commons-cli-1.4-tests.jar"/>
-	<classpathentry kind="lib" path="/home/porlk/Downloads/commons-cli-1.4/commons-cli-1.4-test-sources.jar"/>
 	<classpathentry kind="output" path="src"/>
 </classpath>

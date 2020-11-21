@@ -1,3 +1,4 @@
+package main;
 import view.GUI;
 import view.TextUI;
 
@@ -35,6 +36,7 @@ public class PetRescue {
 							/* Call the graphical user interface 
 							 * and select the level
 							 */
+							GUI view = new GUI();
 						} else if (commandLine.hasOption("b")) {
 							System.out.println("bot method");
 							//TODO : make the bot gameplay method

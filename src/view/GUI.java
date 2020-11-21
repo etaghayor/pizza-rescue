@@ -6,8 +6,11 @@ public class GUI {
 	public GUI() {
 		view = new View();
 	}
+	public void setLevel() {
+		
+	}
 	
-	/*public void displayLevel(Snapshot snapshot) {
+	public void displayLevel() {
 		//TODO
-	}*/
+	}
 }
