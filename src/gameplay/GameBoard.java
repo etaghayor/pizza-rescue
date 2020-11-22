@@ -75,5 +75,7 @@ public class GameBoard {
         return copy;
     }
 
-
+    public void reset() {
+    	//TODO : restart the level
+    }
 }
