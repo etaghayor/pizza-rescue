@@ -34,7 +34,10 @@ public class Level implements Serializable{
 			oos.close();
 			fos.close();
 			serializableFile++;
+<<<<<<< HEAD
 			System.out.println("The file " + path + " has been serialize");
+=======
+>>>>>>> 0961ff0e5d83dc221cfccf9de6484e8372736089
 			return path;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -53,7 +56,10 @@ public class Level implements Serializable{
 			  deserializableLevel = (Level) ois.readObject();
 			  ois.close();
 			  fis.close();
+<<<<<<< HEAD
 			  System.out.println("The level " + path.charAt(5) + " has been deserialize");
+=======
+>>>>>>> 0961ff0e5d83dc221cfccf9de6484e8372736089
 		  } catch (FileNotFoundException e) {
 			  System.err.println("The file : " + path +" cannot be found.");
 			  e.printStackTrace();
