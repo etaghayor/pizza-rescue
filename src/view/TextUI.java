@@ -9,7 +9,4 @@ public class TextUI {
 	public void displayLevel() {
 		
 	}
-    public static void main(String[] args) {
-    	
-    }
 }
