@@ -3,8 +3,14 @@ package main;
 // import view.TextUI;
 // import view.GUI;
 // import view.*;
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
-import org.apache.commons.cli.*;
+import view.GUI;
 
 // import main.org.apache.commons.cli.*;
 // import org.apache.commons.cli.BasicParser;
@@ -37,6 +43,7 @@ public class PetRescue {
 							 */
 						} else if (commandLine.hasOption("g")) {
 							System.out.println("graphical method");
+							GUI gui = new GUI();
 							/*
 							 * Call the graphical user interface and select the level
 							 */
