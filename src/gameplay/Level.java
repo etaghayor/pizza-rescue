@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class Level implements Serializable{
 	private static final long serialVersionUID = -6578584791683082932L;
 	private Box[][] board;
-	private static int serializableFile = 0;
 	
 	public Level(Box[][] b) {
 		setBoard(b);
@@ -25,21 +24,17 @@ public class Level implements Serializable{
 	//TODO : after making sure that our both method to stock levels work 
 	//we should create a directory to stock them then not stock them in the 
 	//src
-	public static String Serializable(Level serializable_level) {
-		String path = "level"+ serializableFile + ".ser";
+	public static void Serializable(String path, Level serializable_level) {
 		try {
 			FileOutputStream fos = new FileOutputStream(path);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(serializable_level);
 			oos.close();
 			fos.close();
-			serializableFile++;
 			System.out.println("The file " + path + " has been serialize");
-			return path;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
 	  //We will create many levels and add each of them in different
