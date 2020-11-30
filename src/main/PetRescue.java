@@ -1,35 +1,25 @@
 package main;
 
-// import view.TextUI;
-// import view.GUI;
-// import view.*;
-import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import view.GUI;
 
-// import main.org.apache.commons.cli.*;
-// import org.apache.commons.cli.BasicParser;
-// import org.apache.commons.cli.CommandLine;
-// import org.apache.commons.cli.CommandLineParser;
-// import org.apache.commons.cli.HelpFormatter;
-// import org.apache.commons.cli.Options;
-// import org.apache.commons.cli.ParseException;
-
 public class PetRescue {
-	static CommandLineParser parser = new BasicParser();
+	static CommandLineParser parser = new DefaultParser();
 	static Options options = new Options();
-
-	static void makeConfigFromCommandLineArgs(String[] args) {
+	static {		
 		options.addOption("t", "text", false, "Run the program in console");
 		options.addOption("g", "graphical", false, "Run the program in a window");
 		options.addOption("l", "level", true, "Choose the level you want to play");
 		options.addOption("b", "bot", false, "Let's a bot play the game on graphical interface");
 		options.addOption("h", "help", false, "Shows this help");
+	}
+	static void makeConfigFromCommandLineArgs(String[] args) {
 
 		try {
 			CommandLine commandLine = parser.parse(options, args);
@@ -103,9 +93,6 @@ public class PetRescue {
 
 	public static void main(String[] args) {
 		makeConfigFromCommandLineArgs(args);
-
-		// GUI graphicalInterface = new GUI();
-		// UI textInterface = new UI();
 	}
 
 }

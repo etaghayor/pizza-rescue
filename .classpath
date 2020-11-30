@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/porlk/Downloads/commons-cli-1.4/commons-cli-1.4.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-cli-1.4.jar"/>
 	<classpathentry kind="output" path="src"/>
 </classpath>

@@ -25,12 +25,9 @@ public class Level implements Serializable{
 	//we should create a directory to stock them then not stock them in the 
 	//src
 	public static void Serializable(String path, Level serializable_level) {
-		try {
-			FileOutputStream fos = new FileOutputStream(path);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
+		try(FileOutputStream fos = new FileOutputStream(path);
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(serializable_level);
-			oos.close();
-			fos.close();
 			System.out.println("The file " + path + " has been serialize");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -42,12 +39,9 @@ public class Level implements Serializable{
 	  //level and deserialize it
 	  public static Level Deserialize2(String path) {
 		  Level deserializableLevel = null;
-		  try {
-			  FileInputStream fis = new FileInputStream(path);
-			  ObjectInputStream ois = new ObjectInputStream(fis);
+		  try (FileInputStream fis = new FileInputStream(path);
+				  ObjectInputStream ois = new ObjectInputStream(fis)){
 			  deserializableLevel = (Level) ois.readObject();
-			  ois.close();
-			  fis.close();
 			  System.out.println("The level " + path.charAt(5) + " has been deserialize");
 		  } catch (FileNotFoundException e) {
 			  System.err.println("The file : " + path +" cannot be found.");
