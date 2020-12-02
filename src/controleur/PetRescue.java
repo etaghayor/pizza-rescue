@@ -1,4 +1,4 @@
-package main;
+package controleur;
 
 import view.GUI;
 import view.TextUI;
