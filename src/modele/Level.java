@@ -1,4 +1,4 @@
-package gameplay;
+package modele;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

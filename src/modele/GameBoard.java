@@ -1,4 +1,4 @@
-package gameplay;
+package modele;
 
 public class GameBoard {
     private Box[][] board;

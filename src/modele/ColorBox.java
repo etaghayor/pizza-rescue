@@ -1,4 +1,4 @@
-package gameplay;
+package modele;
 
 public class ColorBox extends Box {
 

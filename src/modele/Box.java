@@ -1,4 +1,4 @@
-package gameplay;
+package modele;
 
 public abstract class Box {
     private int x, y;
