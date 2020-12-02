@@ -1,5 +1,8 @@
 package main;
 
+import view.GUI;
+import view.TextUI;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -9,9 +12,8 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import view.GUI;
-
 public class PetRescue {
+	//Create the command line parser and the differents options
 	static CommandLineParser parser = new DefaultParser();
 	static Options options = new Options();
 	static {		
@@ -47,7 +49,8 @@ public class PetRescue {
 		options.addOptionGroup(chooseLevel);
 		options.addOptionGroup(interfaceGroup);
 	}
-
+	
+	//Check if the level exists
 	static boolean isValidLevel(String level) {
 		try {
 			int levelInt = Integer.parseInt(level);
@@ -76,6 +79,7 @@ public class PetRescue {
 					displayHelpAndExit();
 				if (isValidLevel(commandLine.getOptionValue("l"))) {
 					if (commandLine.hasOption("t")) {
+						new TextUI();
 						System.out.println("text method");
 						//Call the text user interface and select the good level
 					}
@@ -91,6 +95,7 @@ public class PetRescue {
 						//Let's create the bot method
 					}
 					if (args.length == 2) {
+						new TextUI();
 						System.out.println("text method by default");
 						//Call the text user by default
 					}
