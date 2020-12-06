@@ -1,4 +1,4 @@
-package modele;
+package model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,7 +24,7 @@ public class Level implements Serializable{
 	//TODO : after making sure that our both method to stock levels work 
 	//we should create a directory to stock them then not stock them in the 
 	//src
-	public static void Serializable(String path, Level serializable_level) {
+	public static void serialize(String path, Level serializable_level) {
 		try(FileOutputStream fos = new FileOutputStream(path);
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(serializable_level);

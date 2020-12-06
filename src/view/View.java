@@ -13,8 +13,11 @@ import javax.swing.JToolBar;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 
+import controleur.PetRescue;
+
 public class View extends JFrame{
 	private static final long serialVersionUID = 1L;
+	private PetRescue controleur;
 	JButton restart = new JButton("restart");
 	JToolBar northComponent = new JToolBar();
 	JScrollPane westComponent = new JScrollPane(new JTree());
@@ -28,7 +31,8 @@ public class View extends JFrame{
 	
 	
 
-		public View() {
+		public View(PetRescue c) {
+			controleur = c;
 			setTitle("Pet Rescue Saga Game");
 			setSize(900,600);
 			setLocationRelativeTo(null);

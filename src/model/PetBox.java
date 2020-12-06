@@ -1,4 +1,4 @@
-package modele;
+package model;
 
 public class PetBox extends Box{
 	

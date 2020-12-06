@@ -1,8 +1,5 @@
 package controleur;
 
-import view.GUI;
-import view.TextUI;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -12,10 +9,15 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import view.GUI;
+import view.TextUI;
+
 public class PetRescue {
 	//Create the command line parser and the differents options
 	static CommandLineParser parser = new DefaultParser();
 	static Options options = new Options();
+	GUI gui;
+	TextUI textUI;
 	static {		
 		OptionGroup interfaceGroup = new OptionGroup();
 		interfaceGroup.addOption(
@@ -50,6 +52,14 @@ public class PetRescue {
 		options.addOptionGroup(interfaceGroup);
 	}
 	
+	public PetRescue() {}
+	public PetRescue(boolean b) {
+		if (b) {
+			this.gui = new GUI(this);			
+		} else {
+			textUI = new TextUI();
+		}
+	}
 	//Check if the level exists
 	static boolean isValidLevel(String level) {
 		try {
@@ -79,13 +89,13 @@ public class PetRescue {
 					displayHelpAndExit();
 				if (isValidLevel(commandLine.getOptionValue("l"))) {
 					if (commandLine.hasOption("t")) {
-						new TextUI();
+						new PetRescue(false);
 						System.out.println("text method");
 						//Call the text user interface and select the good level
 					}
 					if (commandLine.hasOption("g")) {
 						System.out.println("graphical method");
-						new GUI();
+						new PetRescue(true);
 						/*
 						 * Call the graphical user interface and select the level
 						 */
@@ -95,7 +105,7 @@ public class PetRescue {
 						//Let's create the bot method
 					}
 					if (args.length == 2) {
-						new TextUI();
+						new PetRescue(false);
 						System.out.println("text method by default");
 						//Call the text user by default
 					}
@@ -109,5 +119,4 @@ public class PetRescue {
 				displayHelpAndExit();
 			}
 	}
-
 }
