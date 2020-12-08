@@ -1,20 +1,21 @@
 # Pet-Rescue
 
 ## Todo list
+##### Must have
+- Make the game works quickly (remove a case, create a board, represente the board, define the obstacles fixed, be carefull to play in the cases)
+- Use a simple text interface to allows the player to play
+- Create one or two levels and check our game work well
 
-- Define the differents levels and stock them on a hard disk
-- Introduce constraints and options as things progress
-- How to remove a case
-- Define the obstacles fixed
-- How to represente the board
+##### Should have
+- Stock the different levels on the disk (via Serializable)
+- Have a basic window on which we can play levels
+- Handle and check that we can run the code on console, without have to use an IDE, and handle the .class files
+- Make a basic UML file with ObjectAid 
 
-## Some advices in this implementation
-
-- Split the model and the view
-- Split the differents works in objects and methods
-- Game environment : where we choose the level, the player's progression. We can also make a demonstration and present him the rules.
-- Board : Case\[\]\[\], be careful to play in the cases 
-- Add a bot who could play instead of a human ?
+##### Could have
+- Add a bot who could play instead of a human
+- Ask for some help
+- Go back and cancel our last turn
 
 ## Running the software 
 
