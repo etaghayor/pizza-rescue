@@ -86,6 +86,7 @@ public class GameBoard {
     }
 
     public void rearrange() {
+
         // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
         for (int j = 0; j < height; j++) {
             for (int i = width - 1; i >= 0; i--) {
@@ -99,6 +100,20 @@ public class GameBoard {
                         board[index][j] = new EmptyBox();
                     }
             }
+        }
+    }
+
+    public void printBoard() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (board[i][j].getType() == BoxType.EMPTY)
+                    System.out.print("n ");
+                else {
+                    FruitBox cb = (FruitBox) board[i][j];
+                    System.out.print(cb.getColor().toString().charAt(0) + " ");
+                }
+            }
+            System.out.println();
         }
     }
 

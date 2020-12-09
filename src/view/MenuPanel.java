@@ -31,6 +31,9 @@ public class MenuPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 System.out.println("clicked");
                 mainPanel.removeAll();
+                mainPanel.revalidate();
+
+                mainPanel.add(new GamePanel(dim));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
