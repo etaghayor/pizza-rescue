@@ -1,7 +1,8 @@
 package model;
 
-public abstract class Box {
-    private int x, y;
+public abstract class Box implements Cloneable {
+    protected int x, y;
+    protected BoxType type;
 
     public int getX() {
         return x;
@@ -11,15 +12,7 @@ public abstract class Box {
         return y;
     }
 
-    public char getType() {
-        if (this instanceof PetBox)
-            return 'p';
-        if (this instanceof ColorBox)
-            return 'c';
-        if (this instanceof Obstacle)
-            return 'o';
-        return 'x';
-    }
+    public abstract BoxType getType();
 
     @Override
     protected Box clone() throws CloneNotSupportedException {

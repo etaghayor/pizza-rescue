@@ -1,13 +1,14 @@
 package model;
 
-public class PetBox extends Box {
+public class ObstacleBox extends Box {
+
 
     public String toString() {
-        return "PetBox";
+        return "Obstacle";
     }
 
     @Override
     public BoxType getType() {
-        return BoxType.PET;
+        return BoxType.OBSTACLE;
     }
 }
