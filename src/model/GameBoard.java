@@ -102,6 +102,10 @@ public class GameBoard {
         }
     }
 
+    public void isPetDown() {
+        //TODO    check if a pet is reached down the board
+    }
+
 
     public Box[][] getBoard() {
 //        Box[][] copy = new Box[width][height];

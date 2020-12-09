@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,40 +31,26 @@ public class GUI extends JFrame {
 
 
     public GUI(PetRescue c) {
-        controleur = c;
-        setTitle("Pet Rescue Saga Game");
-//        setSize(900, 600);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
 
-//        JPanel contentPane = (JPanel) getContentPane();
-        GamePanel gamePanel = new GamePanel();
-        setPreferredSize(new Dimension(Images.getBackgroundImage().getWidth(null), Images.getBackgroundImage().getHeight(null)));
-        this.add(gamePanel);
-
-        pack();
-//        contentPane.add(southComponent, BorderLayout.SOUTH);
-//        contentPane.add(westComponent, BorderLayout.WEST);
-//        contentPane.add(northComponent, BorderLayout.NORTH);
-//
-//        southComponent.add(restart, BorderLayout.NORTH);
-//        southComponent.setPreferredSize(new Dimension(0, 60));
-//
-//        JLabel imgJLabel = new JLabel();
-//        imgJLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-//        //imgJLabel.setIcon(new ImageIcon(View.class.getResource("/media/tomate.jpg")));
-//        contentPane.add(imgJLabel, BorderLayout.CENTER);
-//
-//        northComponent.add(pets, BorderLayout.NORTH);
-//        northComponent.add(realPets, BorderLayout.NORTH);
-//        northComponent.add(score, BorderLayout.NORTH);
-//        northComponent.add(realScore, BorderLayout.NORTH);
-//        northComponent.add(etoiles, BorderLayout.NORTH);
-//        northComponent.add(realEtoiles, BorderLayout.NORTH);
-//        northComponent.setPreferredSize(new Dimension(0, 100));
+        this.controleur = c;
+        init();
 
 
+    }
+
+    private void init() {
+        this.setTitle("Pet Rescue Saga Game");
+        Dimension dim = new Dimension(Images.getBackgroundImage().getWidth(null), Images.getBackgroundImage().getHeight(null));
+        this.setPreferredSize(dim);
+        this.setSize(dim);
+        Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(this.getSize());
+        this.setLocation(screenDim.width / 2 - this.getSize().width / 2, screenDim.height / 2 - this.getSize().height / 2);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        MainPanel mainPanel = new MainPanel(dim);
+        this.getContentPane().add(mainPanel);
+        this.pack();
+        this.setVisible(true);
     }
 }
 
