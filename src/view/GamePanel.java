@@ -21,6 +21,8 @@ public class GamePanel extends JPanel {
     private static int startX, startY;
     private final static int BOX_WIDTH = 60;
 
+
+    // TODO It'd be nice if we pass mainPanel to this constructor, right now I just get a new instance, it's not convenient
     public GamePanel(Dimension dim) {
         super();
         this.dim = dim;
@@ -114,13 +116,6 @@ public class GamePanel extends JPanel {
         board.getBoard()[4][6] = new FruitBox(FruitBox.Color.GREEN);
         board.getBoard()[5][6] = new FruitBox(FruitBox.Color.GREEN);
 
-
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (board.getBoard()[i][j] == null)
-                    System.out.println(i + " " + j);
-            }
-        }
     }
 
     private void initBoard0() {
@@ -133,7 +128,6 @@ public class GamePanel extends JPanel {
                     board.getBoard()[i][j] = new FruitBox(FruitBox.Color.BLUE);
             }
         }
-//        board.emptyPack(5, 5);
     }
 
     @Override

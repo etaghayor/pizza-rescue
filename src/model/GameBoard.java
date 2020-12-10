@@ -118,7 +118,7 @@ public class GameBoard {
         }
 
         // TODO Horizontal rearranging:
-        
+
     }
 
     public void printBoard() {
@@ -137,6 +137,14 @@ public class GameBoard {
 
     public void isPetDown() {
         //TODO    check if a pet is reached down the board
+    }
+
+    public void hasWon() {
+        //TODO
+    }
+
+    public void hasLost() {
+        //TODO
     }
 
 
