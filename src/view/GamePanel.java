@@ -124,9 +124,9 @@ public class GamePanel extends JPanel {
     }
 
     private void initBoard0() {
-        board = new GameBoard(10, 15);
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 15; j++) {
+        board = new GameBoard(10, 10);
+        for (int i = 0; i < board.getWidth(); i++) {
+            for (int j = 0; j < board.getHeight(); j++) {
                 if (i % 2 == 1)
                     board.getBoard()[i][j] = new FruitBox(FruitBox.Color.RED);
                 else
@@ -162,10 +162,6 @@ public class GamePanel extends JPanel {
                         case ORANGE -> g2.drawImage(orangeBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                         case YELLOW -> g2.drawImage(yellowBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                     }
-//                    if (box.getColor() == FruitBox.Color.BLUE)
-//                        g2.drawImage(blueBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-//                    if (box.getColor() == FruitBox.Color.RED)
-//                        g2.drawImage(redBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                 }
             }
         }

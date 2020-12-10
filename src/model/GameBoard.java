@@ -54,7 +54,7 @@ public class GameBoard {
                 }
             }
         }
-        if (count < 3)
+        if (count < 2)
             return;
         emptyPackAux(x, y);
         rearrange();
@@ -62,9 +62,7 @@ public class GameBoard {
     }
 
     private void emptyPackAux(int x, int y) {
-        // BIGGEST METHOD I THINK
         // EMPTY ALL BOXES IN A PACK WITH THE SAME COLOR AND REARANGE THE BOARD
-        // ACTAULLY, IT SHOULDN'T BE BIG SO WE NEED A METHOD REARRANGE()
         FruitBox clickedBox = null;
         try {
             clickedBox = (FruitBox) board[x][y].clone();
@@ -73,21 +71,38 @@ public class GameBoard {
         }
         emptyBox(x, y);
 
-        for (int i = x - 1; i <= x + 1; i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
-                if (!outOfRange(i, j) && board[i][j].getType() == BoxType.FRUIT) {
-                    FruitBox box = (FruitBox) board[i][j];
-                    if (!(i == x && j == y) && box.getColor() == clickedBox.getColor())
-                        emptyPackAux(i, j);
-                }
-            }
+        if (!outOfRange(x + 1, y) && board[x + 1][y].getType() == BoxType.FRUIT) {
+            FruitBox box = (FruitBox) board[x + 1][y];
+            if (box.getColor() == clickedBox.getColor())
+                emptyPackAux(x + 1, y);
+        }
+        if (!outOfRange(x - 1, y) && board[x - 1][y].getType() == BoxType.FRUIT) {
+            FruitBox box = (FruitBox) board[x - 1][y];
+            if (box.getColor() == clickedBox.getColor())
+                emptyPackAux(x - 1, y);
+        }
+        if (!outOfRange(x, y + 1) && board[x][y + 1].getType() == BoxType.FRUIT) {
+            FruitBox box = (FruitBox) board[x][y + 1];
+            if (box.getColor() == clickedBox.getColor())
+                emptyPackAux(x, y + 1);
+        }
+        if (!outOfRange(x, y - 1) && board[x][y - 1].getType() == BoxType.FRUIT) {
+            FruitBox box = (FruitBox) board[x][y - 1];
+            if (box.getColor() == clickedBox.getColor())
+                emptyPackAux(x, y - 1);
+        }
+        if (!outOfRange(x - 1, y) && board[x - 1][y].getType() == BoxType.FRUIT) {
+            FruitBox box = (FruitBox) board[x - 1][y];
+            if (box.getColor() == clickedBox.getColor())
+                emptyPackAux(x - 1, y);
         }
 
     }
 
     public void rearrange() {
-
         // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
+
+        // Vertical rearranging:
         for (int j = 0; j < height; j++) {
             for (int i = width - 1; i >= 0; i--) {
                 int index = i;
@@ -101,6 +116,9 @@ public class GameBoard {
                     }
             }
         }
+
+        // TODO Horizontal rearranging:
+        
     }
 
     public void printBoard() {
