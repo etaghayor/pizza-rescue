@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Images {
     private static BufferedImage backgroundImage;
     private static Image yellowBoxImage, redBoxImage, blueBoxImage, pinkBoxImage, greenBoxImage, orangeBoxImage;
+    private static Image pizzaImage;
 
     public static Image getBackgroundImage() {
         if (backgroundImage == null) {
@@ -88,7 +89,7 @@ public class Images {
     public static Image getOrangeBoxImage() {
         if (orangeBoxImage == null) {
             try {
-                BufferedImage tmp = ImageIO.read(new File("images/green.png"));
+                BufferedImage tmp = ImageIO.read(new File("images/orange.png"));
                 orangeBoxImage = tmp.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -96,5 +97,18 @@ public class Images {
 
         }
         return orangeBoxImage;
+    }
+
+    public static Image getPizzaImage() {
+        if (pizzaImage == null) {
+            try {
+                BufferedImage tmp = ImageIO.read(new File("images/pizza.png"));
+                pizzaImage = tmp.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return pizzaImage;
     }
 }

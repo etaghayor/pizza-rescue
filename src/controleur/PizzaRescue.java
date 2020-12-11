@@ -12,7 +12,7 @@ import org.apache.commons.cli.ParseException;
 import view.GUI;
 import view.TextUI;
 
-public class PetRescue {
+public class PizzaRescue {
 	//Create the command line parser and the differents options
 	static CommandLineParser parser = new DefaultParser();
 	static Options options = new Options();
@@ -52,8 +52,8 @@ public class PetRescue {
 		options.addOptionGroup(interfaceGroup);
 	}
 	
-	public PetRescue() {}
-	public PetRescue(boolean b) {
+	public PizzaRescue() {}
+	public PizzaRescue(boolean b) {
 		if (b) {
 			this.gui = new GUI(this);			
 		} else {
@@ -77,7 +77,7 @@ public class PetRescue {
 	static void displayHelpAndExit() {
 		new HelpFormatter().printHelp
 		("java -cp "+"Libraries/commons-cli-1.4.jar "+" src/"+
-		new PetRescue().getClass().getName()+".java",
+		new PizzaRescue().getClass().getName()+".java",
 		options);
 		System.exit(1);
 	}
@@ -89,13 +89,13 @@ public class PetRescue {
 					displayHelpAndExit();
 				if (isValidLevel(commandLine.getOptionValue("l"))) {
 					if (commandLine.hasOption("t")) {
-						new PetRescue(false);
+						new PizzaRescue(false);
 						System.out.println("text method");
 						//Call the text user interface and select the good level
 					}
 					if (commandLine.hasOption("g")) {
 						System.out.println("graphical method");
-						new PetRescue(true);
+						new PizzaRescue(true);
 						/*
 						 * Call the graphical user interface and select the level
 						 */
@@ -105,7 +105,7 @@ public class PetRescue {
 						//Let's create the bot method
 					}
 					if (args.length == 2) {
-						new PetRescue(false);
+						new PizzaRescue(false);
 						System.out.println("text method by default");
 						//Call the text user by default
 					}

@@ -13,27 +13,27 @@ import javax.swing.JToolBar;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 
-import controleur.PetRescue;
+import controleur.PizzaRescue;
 
 public class View extends JFrame{
 	private static final long serialVersionUID = 1L;
-	private PetRescue controleur;
+	private PizzaRescue controleur;
 	JButton restart = new JButton("restart");
 	JToolBar northComponent = new JToolBar();
 	JScrollPane westComponent = new JScrollPane(new JTree());
 	JToolBar southComponent = new JToolBar();
 	JLabel score = new JLabel("Score ");
 	JLabel realScore = new JLabel("0");
-	JLabel pets = new JLabel("Pets");
-	JLabel realPets = new JLabel("0/5");
+	JLabel Pizzas = new JLabel("Pizzas");
+	JLabel realPizzas = new JLabel("0/5");
 	JLabel etoiles = new JLabel("Etoiles");
 	JLabel realEtoiles = new JLabel("0/3");
 	
 	
 
-		public View(PetRescue c) {
+		public View(PizzaRescue c) {
 			controleur = c;
-			setTitle("Pet Rescue Saga Game");
+			setTitle("Pizza Rescue Saga Game");
 			setSize(900,600);
 			setLocationRelativeTo(null);
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,8 +53,8 @@ public class View extends JFrame{
 			//imgJLabel.setIcon(new ImageIcon(View.class.getResource("/media/tomate.jpg")));
 			contentPane.add(imgJLabel, BorderLayout.CENTER);
 			
-			northComponent.add(pets, BorderLayout.NORTH);
-			northComponent.add(realPets, BorderLayout.NORTH);
+			northComponent.add(Pizzas, BorderLayout.NORTH);
+			northComponent.add(realPizzas, BorderLayout.NORTH);
 			northComponent.add(score, BorderLayout.NORTH);
 			northComponent.add(realScore, BorderLayout.NORTH);
 			northComponent.add(etoiles, BorderLayout.NORTH);

@@ -12,25 +12,25 @@ import javax.swing.JToolBar;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 
-import controleur.PetRescue;
+import controleur.PizzaRescue;
 import media.Images;
 
 public class GUI extends JFrame {
     private static final long serialVersionUID = 1L;
-    private PetRescue controleur;
+    private PizzaRescue controleur;
     JButton restart = new JButton("restart");
     JToolBar northComponent = new JToolBar();
     JScrollPane westComponent = new JScrollPane(new JTree());
     JToolBar southComponent = new JToolBar();
     JLabel score = new JLabel("Score ");
     JLabel realScore = new JLabel("0");
-    JLabel pets = new JLabel("Pets");
-    JLabel realPets = new JLabel("0/5");
+    JLabel Pizzas = new JLabel("Pizzas");
+    JLabel realPizzas = new JLabel("0/5");
     JLabel etoiles = new JLabel("Etoiles");
     JLabel realEtoiles = new JLabel("0/3");
 
 
-    public GUI(PetRescue c) {
+    public GUI(PizzaRescue c) {
 
         this.controleur = c;
         init();
@@ -39,7 +39,7 @@ public class GUI extends JFrame {
     }
 
     private void init() {
-        this.setTitle("Pet Rescue Saga Game");
+        this.setTitle("Pizza Rescue Saga Game");
         Dimension dim = new Dimension(Images.getBackgroundImage().getWidth(null), Images.getBackgroundImage().getHeight(null));
         this.setPreferredSize(dim);
         this.setSize(dim);

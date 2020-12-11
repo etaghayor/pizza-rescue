@@ -110,7 +110,7 @@ public class GameBoard {
                     index--;
                 }
                 if (!outOfRange(index, j) && index != i)
-                    if (board[index][j].getType() == BoxType.PET || board[index][j].getType() == BoxType.FRUIT) {
+                    if (board[index][j].getType() == BoxType.PIZZA || board[index][j].getType() == BoxType.FRUIT) {
                         board[i][j] = board[index][j];
                         board[index][j] = new EmptyBox();
                     }
@@ -135,8 +135,8 @@ public class GameBoard {
         }
     }
 
-    public void isPetDown() {
-        //TODO    check if a pet is reached down the board
+    public void isPizzaDown() {
+        //TODO    check if a Pizza is reached down the board
     }
 
     public void hasWon() {

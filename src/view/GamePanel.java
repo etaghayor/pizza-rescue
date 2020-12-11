@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 
 import media.Images;
 import model.BoxType;
 import model.FruitBox;
 import model.GameBoard;
+import model.PizzaBox;
 
 
 public class GamePanel extends JPanel {
@@ -120,14 +120,19 @@ public class GamePanel extends JPanel {
 
     private void initBoard0() {
         board = new GameBoard(10, 10);
+
         for (int i = 0; i < board.getWidth(); i++) {
             for (int j = 0; j < board.getHeight(); j++) {
                 if (i % 2 == 1)
-                    board.getBoard()[i][j] = new FruitBox(FruitBox.Color.RED);
+                    board.getBoard()[i][j] = new FruitBox(FruitBox.Color.ORANGE);
                 else
                     board.getBoard()[i][j] = new FruitBox(FruitBox.Color.BLUE);
             }
         }
+//        board.getBoard()[0][2] = new PizzaBox();
+//        board.getBoard()[0][4] = new PizzaBox();
+//        board.getBoard()[0][6] = new PizzaBox();
+//        board.getBoard()[0][8] = new PizzaBox();
     }
 
     @Override
@@ -140,33 +145,27 @@ public class GamePanel extends JPanel {
         Image pinkBoxImage = Images.getPinkBoxImage();
         Image greenBoxImage = Images.getGreenBoxImage();
         Image orangeBoxImage = Images.getOrangeBoxImage();
+        Image pizzaBoxImage = Images.getPizzaImage();
         startX = (dim.width - board.getHeight() * BOX_WIDTH) / 2;
         startY = (dim.height - board.getWidth() * BOX_WIDTH) / 2;
         g2.setColor(new Color(125, 125, 125, 150));
         g2.fillRoundRect(startX - 15, startY - 15, board.getHeight() * BOX_WIDTH + 30, board.getWidth() * BOX_WIDTH + 30, 100, 100);
         for (int j = 0; j < board.getHeight(); j++) {
             for (int i = 0; i < board.getWidth(); i++) {
+                if (board.getBox(i, j) == null)
+                    continue;
+                if (board.getBox(i, j).getType() == BoxType.PIZZA) {
+                    g2.drawImage(pizzaBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                }
                 if (board.getBox(i, j).getType() == BoxType.FRUIT) {
                     FruitBox box = (FruitBox) board.getBox(i, j);
                     switch (box.getColor()) {
-                        case RED:
-                            g2.drawImage(redBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                            break;
-                        case BLUE:
-                            g2.drawImage(blueBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                            break;
-                        case PINK:
-                            g2.drawImage(pinkBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                            break;
-                        case GREEN:
-                            g2.drawImage(greenBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                            break;
-                        case ORANGE:
-                            g2.drawImage(orangeBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                            break;
-                        case YELLOW:
-                            g2.drawImage(yellowBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                            break;
+                        case RED -> g2.drawImage(redBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case BLUE -> g2.drawImage(blueBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case PINK -> g2.drawImage(pinkBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case GREEN -> g2.drawImage(greenBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case ORANGE -> g2.drawImage(orangeBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case YELLOW -> g2.drawImage(yellowBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                     }
                 }
             }

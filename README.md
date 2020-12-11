@@ -1,4 +1,4 @@
-# Pet-Rescue
+# Pizza-Rescue
 
 ## Todo list
 ##### Must have
@@ -22,36 +22,36 @@
  First you have to do : 
  
  ```
- javac PetRescue.java
+ javac PizzaRescue.java
  ```
  
 You can simply do this to run the first level :
  
  ```
- java PetRescue
+ java PizzaRescue
  ```
  
  Or you have several possible options :
  
  ``` 
- java PetRescue --level "int"
+ java PizzaRescue --level "int"
  ```
  
  And then u can add the graphical interface :
   
  ```
- java PetRescue --level "int" -g
+ java PizzaRescue --level "int" -g
  ```
  
  Or even to let's a bot play :
  
   ```
- java PetRescue --level "int" -b
+ java PizzaRescue --level "int" -b
  ```
  
  You can show the help with the following command : 
  
  ```
- java PetRescue -h
+ java PizzaRescue -h
  ```
  
