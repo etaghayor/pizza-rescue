@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
         super();
         this.dim = dim;
         init();
-        initBoard0(); // ce methode c'est juste pour tester
+        initBoard1(); // ce methode c'est juste pour tester
         // en gros on doit passer un model a ce panel.
     }
 
@@ -166,6 +166,22 @@ public class GamePanel extends JPanel {
                         case GREEN -> g2.drawImage(greenBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                         case ORANGE -> g2.drawImage(orangeBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                         case YELLOW -> g2.drawImage(yellowBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+//                        case RED ->
+//                            g2.drawImage(redBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+//                        case BLUE ->
+//                            g2.drawImage(blueBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+//                        case PINK ->
+//                            g2.drawImage(pinkBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+//                          
+//                        case GREEN ->
+//                            g2.drawImage(greenBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+//                            
+//                        case ORANGE ->
+//                            g2.drawImage(orangeBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+//                            
+//                        case YELLOW ->
+//                            g2.drawImage(yellowBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                            
                     }
                 }
             }

@@ -12,13 +12,14 @@ import org.apache.commons.cli.ParseException;
 import view.GUI;
 import view.TextUI;
 
+
 public class PizzaRescue {
-	//Create the command line parser and the differents options
+	//Create the command line parser and the differents option
 	static CommandLineParser parser = new DefaultParser();
 	static Options options = new Options();
 	GUI gui;
 	TextUI textUI;
-	static {		
+	static {	
 		OptionGroup interfaceGroup = new OptionGroup();
 		interfaceGroup.addOption(
 				Option.builder("t")
@@ -77,7 +78,8 @@ public class PizzaRescue {
 	static void displayHelpAndExit() {
 		new HelpFormatter().printHelp
 		("java -cp "+"Libraries/commons-cli-1.4.jar "+" src/"+
-		new PizzaRescue().getClass().getName()+".java",
+		new PizzaRescue().getClass().getName()+".java -l is mandatory",
+
 		options);
 		System.exit(1);
 	}
@@ -115,7 +117,6 @@ public class PizzaRescue {
 				}
 			} catch (ParseException e) {
 				System.err.println("Wrong command");
-				e.printStackTrace();
 				displayHelpAndExit();
 			}
 	}

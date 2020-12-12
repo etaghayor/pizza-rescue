@@ -43,7 +43,7 @@ public class Level implements Serializable{
 				  ObjectInputStream ois = new ObjectInputStream(fis)){
 			  deserializableLevel = (Level) ois.readObject();
 			  System.out.println("The level " + path.charAt(5) + " has been deserialize");
-		  } catch (FileNotFoundException e) {
+		  } catch (FileNotFoundException e) { 
 			  System.err.println("The file : " + path +" cannot be found.");
 			  e.printStackTrace();
 		} catch (IOException e) {
