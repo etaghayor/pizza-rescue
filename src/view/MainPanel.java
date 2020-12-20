@@ -7,7 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
-    MenuPanel menuPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	MenuPanel menuPanel;
     private Dimension dim;
 
     public MainPanel(Dimension dim) {

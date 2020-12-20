@@ -17,24 +17,10 @@ import media.Images;
 
 public class GUI extends JFrame {
     private static final long serialVersionUID = 1L;
-    private PizzaRescue controleur;
-    JButton restart = new JButton("restart");
-    JToolBar northComponent = new JToolBar();
-    JScrollPane westComponent = new JScrollPane(new JTree());
-    JToolBar southComponent = new JToolBar();
-    JLabel score = new JLabel("Score ");
-    JLabel realScore = new JLabel("0");
-    JLabel Pizzas = new JLabel("Pizzas");
-    JLabel realPizzas = new JLabel("0/5");
-    JLabel etoiles = new JLabel("Etoiles");
-    JLabel realEtoiles = new JLabel("0/3");
 
 
-    public GUI(PizzaRescue c) {
-
-        this.controleur = c;
+    public GUI() {
         init();
-
 
     }
 

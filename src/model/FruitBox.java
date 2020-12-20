@@ -1,8 +1,13 @@
 package model;
 
-public class FruitBox extends Box implements Cloneable {
+public class FruitBox extends Box   {
 
-    public enum Color {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3331793081734295256L;
+
+	public enum Color {
         YELLOW, ORANGE, RED, GREEN, BLUE, PINK;
     }
 

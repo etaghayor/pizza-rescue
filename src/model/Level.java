@@ -21,18 +21,7 @@ public class Level implements Serializable{
 	public void setBoard(Box[][] board) {
 		this.board = board;
 	}
-	//TODO : after making sure that our both method to stock levels work 
-	//we should create a directory to stock them then not stock them in the 
-	//src
-	public static void serialize(String path, Level serializable_level) {
-		try(FileOutputStream fos = new FileOutputStream(path);
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			oos.writeObject(serializable_level);
-			System.out.println("The file " + path + " has been serialize");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	  //We will create many levels and add each of them in different
 	  //files and the only thing we would have to do is recover the

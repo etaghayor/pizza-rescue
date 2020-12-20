@@ -10,7 +10,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import view.GUI;
-import view.TextUI;
 
 
 public class PizzaRescue {
@@ -18,7 +17,7 @@ public class PizzaRescue {
 	static CommandLineParser parser = new DefaultParser();
 	static Options options = new Options();
 	GUI gui;
-	TextUI textUI;
+	//TextUI textUI;
 	static {	
 		OptionGroup interfaceGroup = new OptionGroup();
 		interfaceGroup.addOption(
@@ -56,9 +55,9 @@ public class PizzaRescue {
 	public PizzaRescue() {}
 	public PizzaRescue(boolean b) {
 		if (b) {
-			this.gui = new GUI(this);			
+			this.gui = new GUI();			
 		} else {
-			textUI = new TextUI();
+			//textUI = new TextUI();
 		}
 	}
 	//Check if the level exists
