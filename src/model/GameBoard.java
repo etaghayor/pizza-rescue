@@ -129,14 +129,37 @@ public class GameBoard {
 					}
 			}
 		}
-		for (int i = 1; i < width-1; i++) {
-			if (board[i][height-1].getType() == BoxType.EMPTY) {
-				System.out.println(1);
+//		for(int j = 0;j<width;j++) {
+//			for (int i = height-1; i>=0; i-- ) {
+//				int index = i;
+//				while(!outOfRange(j, index) && board[j][index].getType() == BoxType.EMPTY) {
+//					index--;
+//					System.out.println(index);
+//				}
+//				if(!outOfRange(j, index) && index !=i) {
+//					if(board[j][index].getType() == BoxType.PIZZA || board[j][index].getType() == BoxType.FRUIT) {
+//						board[i][j] = board[j][index];
+//						board[j][index] = new EmptyBox();
+//					}
+//				}
+//			}
+//		}
+		for (int h = 0; h < width; h++) {
+			for (int i = 0; i < width - 1; i++) {
+				if (board[height - 1][i].getType() == BoxType.EMPTY) {
+					for (int j = height - 1; j >= 0; j--) {
+						board[j][i] = board[j][i + 1];
+						board[j][i + 1] = new EmptyBox();
+					}
+				}
 			}
+
 		}
-
+		System.out.println(33);
+//		System.out.println(width);
+//		System.out.println(height);
+//		System.out.println(board[5][0].getType().getClass());
 		// TODO Horizontal rearranging:
-
 	}
 
 	public void printBoard() {

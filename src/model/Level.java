@@ -29,6 +29,11 @@ public class Level implements Serializable {
 			initBoard1();
 			pizzas = 5;
 		}
+		case 2 -> {
+			initBoard2();
+			pizzas = 5;
+		}
+		
 		}
 	}
 
@@ -87,6 +92,12 @@ public class Level implements Serializable {
 
 		board.getBoard()[4][6] = new FruitBox(FruitBox.Color.GREEN);
 		board.getBoard()[5][6] = new FruitBox(FruitBox.Color.GREEN);
+		for (int i = 0;i<6;i++) {
+			for(int j = 0;j<6;j++) {
+				if (j == 1 || j == 3)
+					board.getBoard()[i][j] = new EmptyBox();
+			}
+		}
 	}
 
 	private void initBoard1() {

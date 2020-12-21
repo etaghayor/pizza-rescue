@@ -36,7 +36,7 @@ public class GamePanel extends JPanel {
         super();
         this.dim = dim;
         init();
-        Level level = new Level(1);
+        Level level = new Level(0);
         board = level.getBoard();
     }
 
