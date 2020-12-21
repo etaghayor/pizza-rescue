@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+// Implementation of the button play, to start the game
 public class Button extends JLabel implements MouseListener {
     /**
 	 * 
@@ -67,7 +68,6 @@ public class Button extends JLabel implements MouseListener {
         Font font = new Font("Serif", Font.PLAIN, 35);
         g2.setFont(font);
         g2.drawString(text, x + 55, y + 60);
-		System.out.println("resized");
     }
 
 

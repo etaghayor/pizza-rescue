@@ -16,6 +16,7 @@ public class GUI extends JFrame {
 
     }
 
+    // Initialize the window and add the mainPanel to it
     private void init() {
         this.setTitle("Pizza Rescue Saga Game");
         Dimension dim = new Dimension(Images.getBackgroundImage().getWidth(null), Images.getBackgroundImage().getHeight(null));
@@ -27,7 +28,7 @@ public class GUI extends JFrame {
         MainPanel mainPanel = new MainPanel(dim);
         this.getContentPane().add(mainPanel);
         this.pack();
-        this.setResizable(true);
+        this.setResizable(false);
         this.setVisible(true);
        
     }

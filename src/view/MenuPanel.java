@@ -28,6 +28,8 @@ public class MenuPanel extends JPanel {
 		init();
 	}
 
+	// Initialize the playButton and see if it is clicked, and if the button is clicked
+	// display the MainPanel (the game)
 	private void init() {
 		this.setLayout(null);
 		this.setSize(dim);

@@ -13,9 +13,10 @@ public class MainPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	MenuPanel menuPanel;
+	public MenuPanel menuPanel;
 	private Dimension dim;
-
+	
+	//Call the menuPanel 
 	public MainPanel(Dimension dim) {
 		super();
 		this.setLayout(null);
@@ -25,7 +26,7 @@ public class MainPanel extends JPanel {
 		this.add(menuPanel);
 
 	}
-
+// Set the background image 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

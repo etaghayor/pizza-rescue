@@ -1,16 +1,29 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JPanel;
+
 import media.Images;
 import model.*;
-
+import model.BoxType;
+import model.FruitBox;
+import model.GameBoard;
 
 public class GamePanel extends JPanel {
 
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5510463459456770171L;
+	private MainPanel mainPanel;
     private Dimension dim;
     private GameBoard board;
     private int x, y;
@@ -23,10 +36,9 @@ public class GamePanel extends JPanel {
         super();
         this.dim = dim;
         init();
-        Level level = new Level(0);
+        Level level = new Level(1);
         board = level.getBoard();
     }
-
 
     private void init() {
         this.setLayout(null);
