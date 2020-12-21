@@ -3,7 +3,7 @@ package model;
 import javax.swing.*;
 
 public class Test {
-    static GameBoard board = new GameBoard(10, 10);
+    static GameBoard board = new GameBoard(10, 10, new Level(1));
 
     public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
