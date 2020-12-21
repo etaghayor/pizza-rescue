@@ -7,14 +7,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Button extends JLabel implements MouseListener {
-    private Color bc, foregroundColor;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3174421930254768959L;
+	private Color bc, foregroundColor;
     private boolean clicked;
     private String text;
     private int x, y;
 
     public Button() {
         super();
-        this.bc = Color.white;
+        this.bc = Color.WHITE;
     }
 
     public Button(int x, int y, String text) {
@@ -63,6 +67,7 @@ public class Button extends JLabel implements MouseListener {
         Font font = new Font("Serif", Font.PLAIN, 35);
         g2.setFont(font);
         g2.drawString(text, x + 55, y + 60);
+		System.out.println("resized");
     }
 
 

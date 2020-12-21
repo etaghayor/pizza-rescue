@@ -7,9 +7,10 @@ public class GameBoard {
 	// TODO : MAIN METHODS: rearrange() and emptyPack()
 	// TODO : FIRST, IMPLEMENT emptyBox();
 	// should we have a type emptyBox or just work with null?
-
+ 
 	public GameBoard(int w, int h) {
 		board = new Box[w][h];
+		//level = l;
 		this.width = w;
 		this.height = h;
 	}

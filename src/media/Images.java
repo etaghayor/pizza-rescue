@@ -5,7 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+// This class stockes all of our images : backgroundImages, fruitsBoxImages, pizzaImage
+// With this way, we only have to call getMyImage() function to access to our images
 public class Images {
     private static BufferedImage backgroundImage;
     private static Image yellowBoxImage, redBoxImage, blueBoxImage, pinkBoxImage, greenBoxImage, orangeBoxImage;

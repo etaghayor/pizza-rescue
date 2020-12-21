@@ -1,18 +1,10 @@
 package view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.JTree;
-import javax.swing.SwingConstants;
 
-import controleur.PizzaRescue;
 import media.Images;
 
 public class GUI extends JFrame {
@@ -30,13 +22,14 @@ public class GUI extends JFrame {
         this.setPreferredSize(dim);
         this.setSize(dim);
         Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println(this.getSize());
         this.setLocation(screenDim.width / 2 - this.getSize().width / 2, screenDim.height / 2 - this.getSize().height / 2);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         MainPanel mainPanel = new MainPanel(dim);
         this.getContentPane().add(mainPanel);
         this.pack();
+        this.setResizable(true);
         this.setVisible(true);
+       
     }
 }
 

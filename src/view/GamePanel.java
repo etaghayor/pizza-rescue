@@ -152,8 +152,8 @@ public class GamePanel extends JPanel {
         g2.fillRoundRect(startX - 15, startY - 15, board.getHeight() * BOX_WIDTH + 30, board.getWidth() * BOX_WIDTH + 30, 100, 100);
         for (int j = 0; j < board.getHeight(); j++) {
             for (int i = 0; i < board.getWidth(); i++) {
-                if (board.getBox(i, j) == null)
-                    continue;
+//                if (board.getBox(i, j) == null)
+//                    continue;
                 if (board.getBox(i, j).getType() == BoxType.PIZZA) {
                     g2.drawImage(pizzaBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                 }

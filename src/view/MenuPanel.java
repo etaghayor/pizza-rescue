@@ -1,13 +1,22 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import media.Images;
+
 public class MenuPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 440684360807810628L;
 	Button playButton;
 	MainPanel mainPanel;
 	private Dimension dim;
@@ -23,10 +32,14 @@ public class MenuPanel extends JPanel {
 		this.setLayout(null);
 		this.setSize(dim);
 		this.setOpaque(false);
-		playButton = new Button(270, 500, "Play!");
+		playButton = new Button(270,500,"Play!");
+		playButton.setAlignmentX(RIGHT_ALIGNMENT);
+		
 		Color bc = Color.white;
 		Color tmp = new Color(bc.getRed(), bc.getGreen(), bc.getBlue(), 150);
 		playButton.setBackground(tmp);
+         
+
 		playButton.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent mouseEvent) {
@@ -58,7 +71,8 @@ public class MenuPanel extends JPanel {
 
 			}
 		});
-		this.add(playButton);;
+		this.add(playButton);
+		
 	}
 
 	@Override
@@ -66,6 +80,7 @@ public class MenuPanel extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		playButton.paintComponent(g);
+		
 
 	}
 ////        playButton.paint(g);
