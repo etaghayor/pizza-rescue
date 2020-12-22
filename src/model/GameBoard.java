@@ -128,6 +128,7 @@ public class GameBoard {
 						board[index][j] = new EmptyBox();
 					}
 			}
+			isPizzaDown();
 		}
 //		for(int j = 0;j<width;j++) {
 //			for (int i = height-1; i>=0; i-- ) {
@@ -155,7 +156,6 @@ public class GameBoard {
 			}
 
 		}
-		System.out.println(33);
 //		System.out.println(width);
 //		System.out.println(height);
 //		System.out.println(board[5][0].getType().getClass());

@@ -30,7 +30,7 @@ public class Level implements Serializable {
 			pizzas = 5;
 		}
 		case 2 -> {
-			initBoard2();
+//			initBoard2();
 			pizzas = 5;
 		}
 		
@@ -45,60 +45,60 @@ public class Level implements Serializable {
 		this.board = board;
 	}
 
-	private void initBoard2() {
-		board = new GameBoard(6, 7, this);
-		board.getBoard()[0][1] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[0][0] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[1][0] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[1][1] = new FruitBox(FruitBox.Color.PINK);
-
-		for (int i = 2; i < 5; i++) {
-			board.getBoard()[0][i] = new FruitBox(FruitBox.Color.GREEN);
-		}
-		board.getBoard()[0][5] = new FruitBox(FruitBox.Color.YELLOW);
-		board.getBoard()[1][5] = new FruitBox(FruitBox.Color.YELLOW);
-		board.getBoard()[0][6] = new FruitBox(FruitBox.Color.YELLOW);
-		board.getBoard()[1][6] = new FruitBox(FruitBox.Color.YELLOW);
-
-		for (int i = 1; i < 4; i++)
-			for (int j = 2; j < 5; j++)
-				board.getBoard()[i][j] = new FruitBox(FruitBox.Color.RED);
-
-		board.getBoard()[2][0] = new FruitBox(FruitBox.Color.GREEN);
-		board.getBoard()[3][0] = new FruitBox(FruitBox.Color.GREEN);
-		board.getBoard()[2][1] = new FruitBox(FruitBox.Color.GREEN);
-		board.getBoard()[3][1] = new FruitBox(FruitBox.Color.GREEN);
-
-		board.getBoard()[2][5] = new FruitBox(FruitBox.Color.BLUE);
-		board.getBoard()[2][6] = new FruitBox(FruitBox.Color.BLUE);
-		board.getBoard()[3][5] = new FruitBox(FruitBox.Color.BLUE);
-		board.getBoard()[3][6] = new FruitBox(FruitBox.Color.BLUE);
-
-		board.getBoard()[4][0] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[5][0] = new FruitBox(FruitBox.Color.PINK);
-
-		board.getBoard()[4][1] = new FruitBox(FruitBox.Color.YELLOW);
-		board.getBoard()[4][2] = new FruitBox(FruitBox.Color.YELLOW);
-		board.getBoard()[5][1] = new FruitBox(FruitBox.Color.YELLOW);
-		board.getBoard()[5][2] = new FruitBox(FruitBox.Color.YELLOW);
-
-		board.getBoard()[4][3] = new FruitBox(FruitBox.Color.GREEN);
-		board.getBoard()[5][3] = new FruitBox(FruitBox.Color.GREEN);
-
-		board.getBoard()[4][4] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[5][4] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[4][5] = new FruitBox(FruitBox.Color.PINK);
-		board.getBoard()[5][5] = new FruitBox(FruitBox.Color.PINK);
-
-		board.getBoard()[4][6] = new FruitBox(FruitBox.Color.GREEN);
-		board.getBoard()[5][6] = new FruitBox(FruitBox.Color.GREEN);
-		for (int i = 0;i<6;i++) {
-			for(int j = 0;j<6;j++) {
-				if (j == 1 || j == 3)
-					board.getBoard()[i][j] = new EmptyBox();
-			}
-		}
-	}
+//	private void initBoard2() {
+//		board = new GameBoard(6, 7, this);
+//		board.getBoard()[0][1] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[0][0] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[1][0] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[1][1] = new FruitBox(FruitBox.Color.PINK);
+//
+//		for (int i = 2; i < 5; i++) {
+//			board.getBoard()[0][i] = new FruitBox(FruitBox.Color.GREEN);
+//		}
+//		board.getBoard()[0][5] = new FruitBox(FruitBox.Color.YELLOW);
+//		board.getBoard()[1][5] = new FruitBox(FruitBox.Color.YELLOW);
+//		board.getBoard()[0][6] = new FruitBox(FruitBox.Color.YELLOW);
+//		board.getBoard()[1][6] = new FruitBox(FruitBox.Color.YELLOW);
+//
+//		for (int i = 1; i < 4; i++)
+//			for (int j = 2; j < 5; j++)
+//				board.getBoard()[i][j] = new FruitBox(FruitBox.Color.RED);
+//
+//		board.getBoard()[2][0] = new FruitBox(FruitBox.Color.GREEN);
+//		board.getBoard()[3][0] = new FruitBox(FruitBox.Color.GREEN);
+//		board.getBoard()[2][1] = new FruitBox(FruitBox.Color.GREEN);
+//		board.getBoard()[3][1] = new FruitBox(FruitBox.Color.GREEN);
+//
+//		board.getBoard()[2][5] = new FruitBox(FruitBox.Color.BLUE);
+//		board.getBoard()[2][6] = new FruitBox(FruitBox.Color.BLUE);
+//		board.getBoard()[3][5] = new FruitBox(FruitBox.Color.BLUE);
+//		board.getBoard()[3][6] = new FruitBox(FruitBox.Color.BLUE);
+//
+//		board.getBoard()[4][0] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[5][0] = new FruitBox(FruitBox.Color.PINK);
+//
+//		board.getBoard()[4][1] = new FruitBox(FruitBox.Color.YELLOW);
+//		board.getBoard()[4][2] = new FruitBox(FruitBox.Color.YELLOW);
+//		board.getBoard()[5][1] = new FruitBox(FruitBox.Color.YELLOW);
+//		board.getBoard()[5][2] = new FruitBox(FruitBox.Color.YELLOW);
+//
+//		board.getBoard()[4][3] = new FruitBox(FruitBox.Color.GREEN);
+//		board.getBoard()[5][3] = new FruitBox(FruitBox.Color.GREEN);
+//
+//		board.getBoard()[4][4] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[5][4] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[4][5] = new FruitBox(FruitBox.Color.PINK);
+//		board.getBoard()[5][5] = new FruitBox(FruitBox.Color.PINK);
+//
+//		board.getBoard()[4][6] = new FruitBox(FruitBox.Color.GREEN);
+//		board.getBoard()[5][6] = new FruitBox(FruitBox.Color.GREEN);
+//		for (int i = 0;i<6;i++) {
+// 			for(int j = 0;j<6;j++) {
+//				if (j == 1 || j == 3)
+//					board.getBoard()[i][j] = new EmptyBox();
+//			}
+//		}
+//	}
 
 	private void initBoard1() {
 		board = new GameBoard(6, 7, this);
