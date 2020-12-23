@@ -1,6 +1,9 @@
-package model;
+package model.boxes;
 
-public class EmptyBox extends Box  {
+import model.boxes.Box;
+import model.boxes.BoxType;
+
+public class EmptyBox extends Box {
 
     /**
 	 * 

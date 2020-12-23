@@ -1,29 +1,18 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
-
 import media.Images;
 import model.*;
-import model.BoxType;
-import model.FruitBox;
-import model.GameBoard;
+import model.boxes.BoxType;
+import model.boxes.FruitBox;
+
 
 public class GamePanel extends JPanel {
 
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5510463459456770171L;
-	private MainPanel mainPanel;
     private Dimension dim;
     private GameBoard board;
     private int x, y;
@@ -40,6 +29,7 @@ public class GamePanel extends JPanel {
         board = level.getBoard();
     }
 
+
     private void init() {
         this.setLayout(null);
         this.setLayout(null);
@@ -51,7 +41,10 @@ public class GamePanel extends JPanel {
                 x = (mouseEvent.getX() - startX) / BOX_WIDTH;
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
                 board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
-                board.isPizzaDown();
+
+//                while (board.isPizzaDown()) {
+//                    board.savePizza();
+//                }
                 if (board.hasWon())
                     board = new Level(board.getLevelNumber() + 1).getBoard();
                 repaint();
@@ -85,13 +78,6 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        Image redBox = Images.getRedBoxImage();
-        Image blueBox = Images.getBlueBoxImage();
-        Image yellowBox = Images.getYellowBoxImage();
-        Image pinkBoxImage = Images.getPinkBoxImage();
-        Image greenBoxImage = Images.getGreenBoxImage();
-        Image orangeBoxImage = Images.getOrangeBoxImage();
-        Image pizzaBoxImage = Images.getPizzaImage();
         startX = (dim.width - board.getHeight() * BOX_WIDTH) / 2;
         startY = (dim.height - board.getWidth() * BOX_WIDTH) / 2;
         g2.setColor(new Color(125, 125, 125, 150));
@@ -100,18 +86,19 @@ public class GamePanel extends JPanel {
             for (int i = 0; i < board.getWidth(); i++) {
                 if (board.getBox(i, j) == null)
                     continue;
+//                g2.fillRect(startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, BOX_WIDTH, BOX_WIDTH);
                 if (board.getBox(i, j).getType() == BoxType.PIZZA) {
-                    g2.drawImage(pizzaBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                    g2.drawImage(Images.getPizzaImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                 }
                 if (board.getBox(i, j).getType() == BoxType.FRUIT) {
                     FruitBox box = (FruitBox) board.getBox(i, j);
                     switch (box.getColor()) {
-                        case RED -> g2.drawImage(redBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                        case BLUE -> g2.drawImage(blueBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                        case PINK -> g2.drawImage(pinkBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                        case GREEN -> g2.drawImage(greenBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                        case ORANGE -> g2.drawImage(orangeBoxImage, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                        case YELLOW -> g2.drawImage(yellowBox, startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case RED -> g2.drawImage(Images.getRedBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case BLUE -> g2.drawImage(Images.getBlueBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case PINK -> g2.drawImage(Images.getPinkBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case GREEN -> g2.drawImage(Images.getGreenBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case ORANGE -> g2.drawImage(Images.getOrangeBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                        case YELLOW -> g2.drawImage(Images.getYellowBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                     }
                 }
             }

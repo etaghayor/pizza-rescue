@@ -1,4 +1,7 @@
-package model;
+package model.boxes;
+
+import model.boxes.Box;
+import model.boxes.BoxType;
 
 public class ObstacleBox extends Box {
 

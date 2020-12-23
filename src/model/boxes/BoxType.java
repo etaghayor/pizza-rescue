@@ -1,4 +1,4 @@
-package model;
+package model.boxes;
 
 import java.io.Serializable;
 

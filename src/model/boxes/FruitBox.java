@@ -1,14 +1,17 @@
-package model;
+package model.boxes;
 
-public class FruitBox extends Box   {
+import model.boxes.Box;
+import model.boxes.BoxType;
+
+public class FruitBox extends Box {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3331793081734295256L;
+     *
+     */
+    private static final long serialVersionUID = 3331793081734295256L;
 
-	public enum Color {
-        YELLOW, ORANGE, RED, GREEN, BLUE, PINK;
+    public enum Color {
+        YELLOW, ORANGE, RED, GREEN, BLUE, PINK
     }
 
     private Color color;
