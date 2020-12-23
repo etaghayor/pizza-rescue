@@ -90,6 +90,9 @@ public class GamePanel extends JPanel {
                 if (board.getBox(i, j).getType() == BoxType.PIZZA) {
                     g2.drawImage(Images.getPizzaImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
                 }
+                if (board.getBox(i, j).getType() == BoxType.OBSTACLE) {
+                    g2.drawImage(Images.getObstacleImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
+                }
                 if (board.getBox(i, j).getType() == BoxType.FRUIT) {
                     FruitBox box = (FruitBox) board.getBox(i, j);
                     switch (box.getColor()) {

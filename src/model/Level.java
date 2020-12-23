@@ -35,6 +35,10 @@ public class Level implements Serializable {
                 initBoard2();
                 pizzas = 5;
             }
+            case 3 -> {
+                initBoard3();
+                pizzas = 3;
+            }
 
         }
     }
@@ -45,6 +49,86 @@ public class Level implements Serializable {
 
     public void setBoard(GameBoard board) {
         this.board = board;
+    }
+
+    private void initBoard3() {
+        board = new GameBoard(9, 7, this);
+        board.getBoard()[0][2] = new PizzaBox();
+        board.getBoard()[0][4] = new PizzaBox();
+        board.getBoard()[0][6] = new PizzaBox();
+
+        board.getBoard()[1][2] = new FruitBox(FruitBox.Color.PINK);
+        board.getBoard()[2][2] = new FruitBox(FruitBox.Color.PINK);
+
+        board.getBoard()[1][3] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[2][3] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[1][4] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[2][4] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[1][5] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[2][5] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[1][6] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[2][6] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[3][2] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[4][2] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[3][3] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[4][3] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[3][4] = new FruitBox(FruitBox.Color.PINK);
+        board.getBoard()[4][4] = new FruitBox(FruitBox.Color.PINK);
+
+        board.getBoard()[3][5] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[4][5] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[3][6] = new FruitBox(FruitBox.Color.PINK);
+        board.getBoard()[4][6] = new FruitBox(FruitBox.Color.PINK);
+
+        board.getBoard()[4][0] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[4][1] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[5][0] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[6][0] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[5][1] = new FruitBox(FruitBox.Color.PINK);
+        board.getBoard()[6][1] = new FruitBox(FruitBox.Color.PINK);
+
+        board.getBoard()[5][2] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[6][2] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[5][3] = new FruitBox(FruitBox.Color.PINK);
+        board.getBoard()[6][3] = new FruitBox(FruitBox.Color.PINK);
+
+        board.getBoard()[5][4] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[6][4] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[5][5] = new FruitBox(FruitBox.Color.PINK);
+        board.getBoard()[6][5] = new FruitBox(FruitBox.Color.PINK);
+
+        board.getBoard()[5][6] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[6][6] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[7][0] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[8][0] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[7][1] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[8][1] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[7][2] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[8][2] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[7][3] = new FruitBox(FruitBox.Color.GREEN);
+        board.getBoard()[8][3] = new FruitBox(FruitBox.Color.GREEN);
+
+        board.getBoard()[7][4] = new FruitBox(FruitBox.Color.YELLOW);
+        board.getBoard()[8][4] = new FruitBox(FruitBox.Color.YELLOW);
+
+        board.getBoard()[7][5] = new ObstacleBox();
+        board.getBoard()[8][5] = new ObstacleBox();
+        board.getBoard()[7][6] = new ObstacleBox();
+        board.getBoard()[8][6] = new ObstacleBox();
     }
 
     private void initBoard2() {

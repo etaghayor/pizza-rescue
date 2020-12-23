@@ -5,12 +5,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 // This class stockes all of our images : backgroundImages, fruitsBoxImages, pizzaImage
 // With this way, we only have to call getMyImage() function to access to our images
 public class Images {
     private static BufferedImage backgroundImage;
     private static Image yellowBoxImage, redBoxImage, blueBoxImage, pinkBoxImage, greenBoxImage, orangeBoxImage;
-    private static Image pizzaImage;
+    private static Image pizzaImage, obstacleImage;
 
     public static Image getBackgroundImage() {
         if (backgroundImage == null) {
@@ -111,5 +112,18 @@ public class Images {
 
         }
         return pizzaImage;
+    }
+
+    public static Image getObstacleImage() {
+        if (obstacleImage == null) {
+            try {
+                BufferedImage tmp = ImageIO.read(new File("images/obstacle.jpg"));
+                obstacleImage = tmp.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return obstacleImage;
     }
 }
