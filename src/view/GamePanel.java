@@ -24,7 +24,7 @@ public class GamePanel extends JPanel {
 		super();
 		this.dim = dim;
 		init();
-		Level level = new Level(3);
+		Level level = new Level(0);
 		board = level.getBoard();
 	}
 
@@ -43,15 +43,25 @@ public class GamePanel extends JPanel {
 //                while (board.isPizzaDown()) {
 //                    board.savePizza();
 //                }
+				repaint();
+				revalidate();
 				if (board.hasWon()) {
-					board = new Level(board.getLevelNumber() + 1).getBoard();
+					String options[] = { "Next level", "Retry" };
+					int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
+							"Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+					if (option == 0)
+						board = new Level(board.getLevelNumber() + 1).getBoard();
+					if (option == 1)
+						board = new Level(board.getLevelNumber()).getBoard();
+
 					repaint();
 					revalidate();
 				}
 				if (board.hasLost()) {
 					repaint();
 					revalidate();
-					if (JOptionPane.showConfirmDialog(null, "Vous avez perdu, voulez-vous recommencer ?") == 0) {
+					if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
+							"Finished level", JOptionPane.YES_NO_OPTION) == 0) {
 						board = new Level(board.getLevelNumber()).getBoard();
 					}
 				}

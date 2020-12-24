@@ -127,8 +127,8 @@ public class GameBoard {
 
 	// THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
 	public void rearrange() {
+		vertical_rearranging();
 		for (int i = 0; i < width - 1; i++) {
-			vertical_rearranging();
 			horizontal_rearranging();
 		}
 
@@ -159,11 +159,18 @@ public class GameBoard {
 
 	public void horizontal_rearranging() {
 		for (int i = height - 1; i >= 0; i--) {
+			boolean b = false;
 			for (int j = 1; j < width; j++) {
-				if (board[i][j].getType() == BoxType.EMPTY)
-					;
+				if (board[i][j - 1].getType() == BoxType.EMPTY && board[i][j].getType() == BoxType.OBSTACLE) {
+					if (!b) {
+						board[i][j - 1] = board[i][j];
+						board[i][j - 1] = new EmptyBox();
+					}
+//                  vertical_rearranging();
+				}
 			}
 		}
+	}
 //    	 for (int h = 0; h < width; h++) {
 //             for (int i = 0; i < width - 1; i++) {
 //                 if (board[height - 1][i].getType() == BoxType.EMPTY ) {
@@ -183,7 +190,6 @@ public class GameBoard {
 
 //         }
 
-	}
 
 	public void printBoard() {
 		for (int i = 0; i < height; i++) {
