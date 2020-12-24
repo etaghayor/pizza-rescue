@@ -2,13 +2,14 @@ package model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import model.boxes.*;
+import model.boxes.EmptyBox;
+import model.boxes.FruitBox;
+import model.boxes.ObstacleBox;
+import model.boxes.PizzaBox;
 
 public class Level implements Serializable {
 	private static final long serialVersionUID = -6578584791683082932L;

@@ -52,8 +52,6 @@ public class GameBoard {
 	}
 
 	public void emptyPack(int x, int y) {
-		if (board[x][y] == null)
-			return;
 		if (board[x][y].getType() != BoxType.FRUIT)
 			return;
 		FruitBox clickedBox = (FruitBox) board[x][y];
@@ -73,6 +71,26 @@ public class GameBoard {
 		emptyPackAux(x, y);
 		rearrange();
 
+	}
+
+	private boolean isDeletable(int x, int y) {
+		if (board[x][y].getType() != BoxType.FRUIT)
+			return false;
+		FruitBox clickedBox = (FruitBox) board[x][y];
+		int count = 1;
+
+		if (isDeletable(x + 1, y, clickedBox))
+			count++;
+		if (isDeletable(x - 1, y, clickedBox))
+			count++;
+		if (isDeletable(x, y + 1, clickedBox))
+			count++;
+		if (isDeletable(x, y - 1, clickedBox))
+			count++;
+
+		if (count < 2)
+			return false;
+		return true;
 	}
 
 	private void emptyPackAux(int x, int y) {
@@ -100,7 +118,7 @@ public class GameBoard {
 	}
 
 	private boolean isDeletable(int x, int y, FruitBox clickedBox) {
-		if (!outOfRange(x, y) && board[x][y] != null && board[x][y].getType() == BoxType.FRUIT) {
+		if (!outOfRange(x, y) && board[x][y].getType() == BoxType.FRUIT) {
 			FruitBox box = (FruitBox) board[x][y];
 			return (box.getColor() == clickedBox.getColor());
 		}
@@ -125,7 +143,7 @@ public class GameBoard {
 				while (!outOfRange(index, j) && board[index][j].getType() == BoxType.EMPTY) {
 					index--;
 				}
-				if (!outOfRange(index, j)  && index != i)
+				if (!outOfRange(index, j) && index != i)
 					if (board[index][j].getType() == BoxType.PIZZA || board[index][j].getType() == BoxType.FRUIT) {
 						board[i][j] = board[index][j];
 						board[index][j] = new EmptyBox();
@@ -140,9 +158,10 @@ public class GameBoard {
 	}
 
 	public void horizontal_rearranging() {
-		for (int i = height-1 ; i>=0 ; i--) {
+		for (int i = height - 1; i >= 0; i--) {
 			for (int j = 1; j < width; j++) {
-				 if(board[i][j].getType() == BoxType.EMPTY) System.out.println(1);
+				if (board[i][j].getType() == BoxType.EMPTY)
+					;
 			}
 		}
 //    	 for (int h = 0; h < width; h++) {
@@ -203,8 +222,13 @@ public class GameBoard {
 	}
 
 	public boolean hasLost() {
-		// TODO
-		return false;
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (isDeletable(i, j))
+					return false;
+			}
+		}
+		return true;
 	}
 
 	public Box[][] getBoard() {
@@ -220,9 +244,5 @@ public class GameBoard {
 //        }
 //        return copy;
 		return board;
-	}
-
-	public void reset() {
-		// TODO : restart the level
 	}
 }
