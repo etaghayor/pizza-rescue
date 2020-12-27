@@ -94,6 +94,7 @@ public class GameBoard {
     }
 
     private void emptyPackAux(int x, int y) {
+
         // EMPTY ALL BOXES IN A PACK WITH THE SAME COLOR AND REARANGE THE BOARD
         FruitBox clickedBox = null;
         try {
@@ -159,8 +160,6 @@ public class GameBoard {
 
     public void horizontal_rearrange() {
         boolean shouldMove, moved = false;
-
-//        System.out.println("width " + width + " h " + height);
         for (int j = 1; j < width; j++) {
             shouldMove = false;
             for (int i = height - 1; i >= 0; i--) {
@@ -181,13 +180,12 @@ public class GameBoard {
                 }
             }
             vertical_rearrange();
-            if (moved) {
+            if (moved && j > 1) {
                 j -= 2;
                 moved = false;
             }
         }
     }
-
 
 
     public void printBoard() {
