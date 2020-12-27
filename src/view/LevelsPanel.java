@@ -12,14 +12,16 @@ import java.awt.event.MouseListener;
 
 public class LevelsPanel extends JPanel {
     private int LastLevel = 0;
-    private Dimension dim;
+    private final Dimension dim;
     private MainPanel mainPanel;
-    private JButton[] levels = new JButton[10];
+    private MenuPanel menuPanel;
+    private final JButton[] levels = new JButton[10];
     private int index;
 
-    public LevelsPanel(MainPanel mainPanel, Dimension dim) {
+    public LevelsPanel(MainPanel mainPanel, MenuPanel menuPanel, Dimension dim) {
         super();
         this.mainPanel = mainPanel;
+        this.menuPanel = menuPanel;
         this.dim = dim;
         init();
     }
@@ -28,6 +30,7 @@ public class LevelsPanel extends JPanel {
         this.setLayout(null);
         this.setSize(dim);
         this.setOpaque(false);
+        LevelsPanel lp = this;
 //        this.add(Box.createRigidArea(new Dimension(200, 100)));
         for (int i = 0; i < 10; i++) {
 //            this.add(Box.createRigidArea(new Dimension(250, 30)));
@@ -35,16 +38,18 @@ public class LevelsPanel extends JPanel {
             index = i;
             levels[i].addMouseListener(new MouseListener() {
                 private int myIndex;
+                private LevelsPanel levelsPanel;
 
                 {
                     this.myIndex = index;
+                    this.levelsPanel = lp;
                 }
 
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
                     levels[myIndex].setForeground(Color.BLACK);
                     mainPanel.removeAll();
-                    mainPanel.add(new GamePanel(dim, myIndex));
+                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim, myIndex));
                     mainPanel.repaint();
                     mainPanel.revalidate();
                 }
@@ -83,6 +88,21 @@ public class LevelsPanel extends JPanel {
         levels[8].setBounds(180, 740, 70, 70);
         levels[9].setBounds(80, 760, 70, 70);
 
+        initOptionBar();
+
+    }
+
+    private void initOptionBar() {
+        OptionPanel op = new OptionPanel();
+        op.setBounds(0, 0, 250, 250);
+        op.setVisible(true);
+        op.getBackButton().addActionListener(actionEvent -> {
+            mainPanel.removeAll();
+            mainPanel.add(menuPanel);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        });
+        this.add(op);
     }
 
     private JButton makeButton(String text) {
@@ -96,6 +116,7 @@ public class LevelsPanel extends JPanel {
         b.setFont(Fonts.getCevicheFont());
         return b;
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {

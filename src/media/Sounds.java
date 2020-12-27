@@ -15,7 +15,6 @@ public class Sounds {
             mainSong = AudioSystem.getClip();
             mainSong.open(audioIn);
         }
-//        mainSong.start();
         mainSong.loop(100);
     }
 

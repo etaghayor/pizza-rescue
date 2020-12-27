@@ -1,0 +1,21 @@
+
+
+
+
+1. Making a thread that repaints our gameBoard around every 0.04 seconds.
+	1.1. Making a moveTo method that changes the location of fruits.
+
+2. implement (1) coins,  (2) score, (3) life, (*4) It would be so nice if we implement the rocket and hammer. 
+
+3. Saving the user data. (Last level, Score, Coins, number of rockets, ...)
+	3.1. make a reset option that resets the user data, OR we can be smarter and have multiUser option.
+
+4. implement all 10 levels. (We have 4)
+	4.1. should we make more complex levels like the original game? If we have time.
+
+5. make hint option. It shouldn't be hard.
+
+6. implement the bot. It shouldn't be hard.
+
+7. make a build file.
+

@@ -24,14 +24,16 @@ public class GamePanel extends JPanel {
     private int x, y;
     private static int startX, startY;
     private final static int BOX_WIDTH = 60;
-    private JButton gearButton, musicButton, backButton;
-    private boolean gearClicked = false, musicCLicked = false;
+    private MainPanel mainPanel;
+    private LevelsPanel levelsPanel;
 
     // TODO It'd be nice if we pass mainPanel to this constructor, right now I just
     // get a new instance, it's not convenient
-    public GamePanel(Dimension dim, int l) {
+    public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, int l) {
         super();
         this.dim = dim;
+        this.mainPanel = mainPanel;
+        this.levelsPanel = levelsPanel;
         init();
         System.out.println(l);
         Level level = new Level(l);
@@ -39,7 +41,6 @@ public class GamePanel extends JPanel {
     }
 
     private void init() {
-//        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.setLayout(null);
         this.setSize(dim);
         this.setOpaque(false);
@@ -50,9 +51,6 @@ public class GamePanel extends JPanel {
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
                 board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
 
-//                while (board.isPizzaDown()) {
-//                    board.savePizza();
-//                }
                 repaint();
                 revalidate();
                 if (board.hasWon()) {
@@ -99,81 +97,20 @@ public class GamePanel extends JPanel {
 
             }
         });
-
-        gearButton = makeButton("gear");
-        gearButton.setBounds(30, 30, 60, 60);
-        gearButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                gearClicked = !gearClicked;
-                musicButton.setVisible(gearClicked);
-                backButton.setVisible(gearClicked);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-                gearButton.setBounds(33, 33, 60, 60);
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-                gearButton.setBounds(30, 30, 60, 60);
-            }
-        });
-//        this.add(Box.createRigidArea(new Dimension(5, 40)));
-
-        musicButton = makeButton("music");
-        musicButton.setBounds(100, 30, 60, 60);
-        musicButton.setVisible(false);
-        musicButton.addActionListener(actionEvent -> {
-            if (!musicCLicked) {
-                Sounds.stopSong();
-                musicButton.setIcon(Images.getMusicOffImage());
-            } else {
-                try {
-                    Sounds.playSong();
-                    musicButton.setIcon(Images.getMusicImage());
-                } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                }
-
-            }
-            musicCLicked = !musicCLicked;
-
-        });
-
-        backButton = makeButton("back");
-        backButton.setBounds(35, 100, 60, 60);
-        backButton.setVisible(false);
-
-        this.add(musicButton);
-        this.add(backButton);
-        this.add(gearButton);
+        initOptionBar();
     }
 
-    private JButton makeButton(String name) {
-        JButton b;
-        switch (name) {
-            case "gear" -> b = new JButton(Images.getGearImage());
-            case "music" -> b = new JButton(Images.getMusicImage());
-            default -> b = new JButton(Images.getBackImage());
-
-        }
-        b.setContentAreaFilled(false);
-        Border emptyBorder = BorderFactory.createEmptyBorder();
-        b.setBorder(emptyBorder);
-        return b;
+    private void initOptionBar() {
+        OptionPanel op = new OptionPanel();
+        op.setBounds(0, 0, 250, 250);
+        op.setVisible(true);
+        op.getBackButton().addActionListener(actionEvent -> {
+            mainPanel.removeAll();
+            mainPanel.add(levelsPanel);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+        });
+        this.add(op);
     }
 
     @Override

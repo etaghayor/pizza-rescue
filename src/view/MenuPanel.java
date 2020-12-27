@@ -42,30 +42,28 @@ public class MenuPanel extends JPanel {
 
         playButton = makeButton("Play!");
 
+        MenuPanel mp = this;
         playButton.addMouseListener(new MouseListener() {
+            private MenuPanel menuPanel;
+
+            {
+                menuPanel = mp;
+            }
+
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-//                playButton.setBackground(Colors.TRANSPARENT);
                 playButton.setForeground(Color.BLACK);
                 playButton.repaint();
                 mainPanel.removeAll();
 
-                mainPanel.add(new LevelsPanel(mainPanel, dim));
+                mainPanel.add(new LevelsPanel(mainPanel, menuPanel, dim));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-//                playButton.setBackground(Colors.TRANSPARENT);
                 playButton.setForeground(Color.BLACK);
-//                playButton.repaint();
-//                mainPanel.removeAll();
-//
-//                mainPanel.add(new GamePanel(dim));
-//                mainPanel.repaint();
-//                mainPanel.revalidate();
-
             }
 
             @Override
@@ -76,7 +74,6 @@ public class MenuPanel extends JPanel {
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
                 playButton.setForeground(Color.WHITE);
-//                playButton.repaint();
             }
 
             @Override
@@ -130,10 +127,7 @@ public class MenuPanel extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-//                exitButton.setForeground(Color.BLACK);
-//                exitButton.repaint();
-//                System.out.println("why");
-//                System.exit(0);
+                exitButton.setForeground(Color.BLACK);
             }
 
             @Override
@@ -184,19 +178,6 @@ public class MenuPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-//        int height = g.getClipBounds().height;
-//        int width = g.getClipBounds().width;
-//        g2.drawImage(Images.getBackgroundImage(), 0, 0, width, height, null);
-
-//        playButton.paintComponent(g);
-//        exitButton.paintComponent(g);
-//        if (entered)
-//            playButton.setBounds(300, 400, 200, 100);
-//        playButton.paintComponent(g);
-//        g2.drawImage(Images.getAvocadoImage(), 270, 500, null);
-//        Font font = new Font("Purisa", Font.BOLD, 25);
-//        g2.setFont(font);
-//        g2.drawString("Play", 390, 570);
     }
 
 }
