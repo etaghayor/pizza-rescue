@@ -29,11 +29,12 @@ public class GamePanel extends JPanel {
 
     // TODO It'd be nice if we pass mainPanel to this constructor, right now I just
     // get a new instance, it's not convenient
-    public GamePanel(Dimension dim) {
+    public GamePanel(Dimension dim, int l) {
         super();
         this.dim = dim;
         init();
-        Level level = new Level(0);
+        System.out.println(l);
+        Level level = new Level(l);
         board = level.getBoard();
     }
 

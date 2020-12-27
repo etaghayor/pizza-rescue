@@ -50,7 +50,7 @@ public class MenuPanel extends JPanel {
                 playButton.repaint();
                 mainPanel.removeAll();
 
-                mainPanel.add(new GamePanel(dim));
+                mainPanel.add(new LevelsPanel(mainPanel, dim));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
@@ -170,7 +170,6 @@ public class MenuPanel extends JPanel {
     private JButton makeButton(String text) {
         JButton b = new JButton(text, Images.getWoodImage());
         b.setPreferredSize(new Dimension(Images.getWoodImage().getIconWidth(), Images.getWoodImage().getIconHeight()));
-        b.setBackground(Colors.TRANSPARENT);
         b.setContentAreaFilled(false);
         b.setForeground(Colors.B_GRAY);
         Border emptyBorder = BorderFactory.createEmptyBorder();

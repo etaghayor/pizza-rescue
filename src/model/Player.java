@@ -4,6 +4,7 @@ public class Player {
     private String name;
     private GameBoard gameBoard;
     private int score, life, coin;
+    private int lastLevel;
 
     public Player(String name) {
         this.name = name;
@@ -23,5 +24,9 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getLastLevel() {
+        return lastLevel;
     }
 }

@@ -15,7 +15,7 @@ public class Images {
     private static Image pizzaImage, obstacleImage;
     private static ImageIcon gearImage, musicImage, musicOffImage, backImage;
     private static Icon avocadoImage, appleImage;
-    private static Icon woodButtonImage;
+    private static Icon woodButtonImage, woodLevelImage;
 
     public static Image getBackgroundImage() {
         if (backgroundImage == null) {
@@ -224,5 +224,18 @@ public class Images {
             }
         }
         return woodButtonImage;
+    }
+
+    public static Icon getWoodLevelImage() {
+        if (woodLevelImage == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/woodLevel.png"));
+                tmp = tmp.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                woodLevelImage = new ImageIcon(tmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return woodLevelImage;
     }
 }
