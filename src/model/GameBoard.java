@@ -47,20 +47,13 @@ public class GameBoard {
     }
 
     public int getWidth() {
-        return height;
-    }
-
-    public int getHeight() {
         return width;
     }
 
-    public void emptyBox(int x, int y) {
-        double xPos = board[x][y].getX();
-        double yPos = board[x][y].getY();
-        board[x][y] = new EmptyBox();
-        board[x][y].setLastPos(xPos, yPos);
-        board[x][y].setPos(xPos, yPos);
+    public int getHeight() {
+        return height;
     }
+
 
     public void emptyPack(int x, int y) {
         if (board[x][y].getType() != BoxType.FRUIT)
@@ -137,9 +130,18 @@ public class GameBoard {
         return false;
     }
 
+
+    public void emptyBox(int i, int j) {
+        double xPos = board[i][j].getX();
+        double yPos = board[i][j].getY();
+        board[i][j] = new EmptyBox();
+        board[i][j].setLastPos(xPos, yPos);
+        board[i][j].setPos(xPos, yPos);
+    }
+
     // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
     public void rearrange() {
-//        vertical_rearrange();
+        vertical_rearrange();
 //        for (int i = 0; i < width - 1; i++) {
         horizontal_rearrange();
 //        }
@@ -164,25 +166,15 @@ public class GameBoard {
                         double x2 = board[i][j].getX();
                         double y2 = board[i][j].getY();
 
-//                        try {
-//                            board[i][j] = board[index][j].clone();
-//                        } catch (CloneNotSupportedException e) {
-//                            e.printStackTrace();
-//                        }
 
                         board[i][j] = board[index][j];
                         board[i][j].setLastPos(x1, y1);
                         board[i][j].setPos(x2, y2);
-//                        System.out.println(board[i][j].getX() + " , " + board[i][j].getY());
 
-                        emptyBox(index, j);
-//                        board[index][j] = new EmptyBox();
-//                        board[index][j].setPos(x1, y1);
-//                        board[index][j].setLastPos(x1, y1);
-
-//                        board[index][j].getCloseTo(board[i][j].getPos().x, board[i][j].getPos().y, i, j);
-//                        board[i][j] = new EmptyBox();
-//                        this.initLocations();
+                        board[index][j] = new EmptyBox();
+                        board[index][j].setPos(x1, y1);
+                        board[index][j].setLastPos(x1, y1);
+//                        emptyBox(index, j);
                     }
             }
         }
@@ -212,25 +204,17 @@ public class GameBoard {
                         double x2 = board[i][j - 1].getX();
                         double y2 = board[i][j - 1].getY();
 
-//                        try {
-//                            board[i][j - 1] = board[i][j].clone();
-//                        } catch (CloneNotSupportedException e) {
-//                            e.printStackTrace();
-//                        }
 
                         board[i][j - 1] = board[i][j];
                         board[i][j - 1].setLastPos(x1, y1);
                         board[i][j - 1].setPos(x2, y2);
 
 
-                        emptyBox(i, j);
-//                        board[i][j] = new EmptyBox();
-//                        board[i][j].setPos(x1, y1);
-//                        board[i][j].setPos(x2, y2);
+                        board[i][j] = new EmptyBox();
+                        board[i][j].setPos(x1, y1);
+                        board[i][j].setPos(x1, y1);
+//                        emptyBox(i, j);
 
-//                        board[i][j].getCloseTo(board[i][j - 1].getPos().x, board[i][j - 1].getPos().y, i, j - 1);
-//                        board[i][j - 1] = new EmptyBox();
-//                        initLocations();
                         moved = true;
                     } else
                         shouldMove = false;
@@ -260,8 +244,8 @@ public class GameBoard {
     }
 
     public boolean isPizzaDown() {
-        for (int i = 0; i < getHeight(); i++) {
-            if (board[getWidth() - 1][i] instanceof PizzaBox) {
+        for (int i = 0; i < getWidth(); i++) {
+            if (board[getHeight() - 1][i] instanceof PizzaBox) {
                 return true;
             }
         }
@@ -269,9 +253,9 @@ public class GameBoard {
     }
 
     public void savePizza() {
-        for (int i = 0; i < getHeight(); i++) {
-            if (board[getWidth() - 1][i] instanceof PizzaBox) {
-                emptyBox(getWidth() - 1, i);
+        for (int i = 0; i < getWidth(); i++) {
+            if (board[getHeight() - 1][i] instanceof PizzaBox) {
+                emptyBox(getHeight() - 1, i);
                 savedPizza++;
             }
         }

@@ -1,5 +1,6 @@
 package controleur;
 
+import model.GameBoard;
 import model.Level;
 import model.boxes.Animatable;
 import model.boxes.Box;
@@ -38,24 +39,12 @@ public class Game {
                     for (int i = 0; i < board.length; i++) {
                         for (int j = 0; j < board[0].length; j++) {
                             Animatable anim = board[i][j];
-//                            System.out.print(board[i][j].getType() + " ");
-//                            System.out.println("* " + anim.getPos().x + "<X +    y> " + board[i][j].getPos().y);
                             anim.getCloseToTarget();
                             anim.move(0.013);
-                            if (anim.isMoving())
-                                System.out.println("x " + anim.getLastX() + " y " + anim.getLastY());
-//                            if (anim.reachedTarget()) {
-//                                board[anim.getTargetI()][anim.getTargetJ()] = board[i][j];
-//                                board[i][j] = new EmptyBox();
-//                            }
+
 
                         }
-//                        System.out.println();
                     }
-//                    for (Animatable[] animLine : board)
-//                        for (Animatable anim : animLine) {
-//                            anim.move(0.007);
-//                        }
 
                 }
                 gamePanel.repaint();
@@ -69,5 +58,9 @@ public class Game {
 
             }
         });
+    }
+
+    public GameBoard getBoard() {
+        return level.getGameBoard();
     }
 }

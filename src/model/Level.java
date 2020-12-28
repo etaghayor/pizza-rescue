@@ -166,7 +166,7 @@ public class Level implements Serializable {
         board.getBoard()[2][4] = new FruitBox(FruitBox.Color.YELLOW);
         board.getBoard()[3][4] = new FruitBox(FruitBox.Color.YELLOW);
 
-        for (int i = 3; i < board.getWidth(); i++)
+        for (int i = 3; i < board.getHeight(); i++)
             board.getBoard()[i][2] = new FruitBox(FruitBox.Color.YELLOW);
 
         board.getBoard()[4][0] = new FruitBox(FruitBox.Color.BLUE);
@@ -259,8 +259,8 @@ public class Level implements Serializable {
     private void initBoard0() {
         board = new GameBoard(11, 10, this);
 
-        for (int i = 0; i < board.getWidth(); i++) {
-            for (int j = 0; j < board.getHeight(); j++) {
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
                 if (i == 0)
                     if (j % 2 == 1 && j != 9)
                         board.getBoard()[i][j] = new PizzaBox();
@@ -282,8 +282,8 @@ public class Level implements Serializable {
 // With emptyBox() instead, in that way, we never have to handle
 // NullPointerException
     private void validateLevel() {
-        for (int i = 0; i < board.getWidth(); i++) {
-            for (int j = 0; j < board.getHeight(); j++) {
+        for (int j = 0; j < board.getWidth(); j++) {
+            for (int i = 0; i < board.getHeight(); i++) {
                 if (board.getBoard()[i][j] == null) board.getBoard()[i][j] = new EmptyBox();
             }
         }

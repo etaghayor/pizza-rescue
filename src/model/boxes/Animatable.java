@@ -13,16 +13,17 @@ public abstract class Animatable implements Cloneable {
     public void move(double time) {
         this.isMoving = xSpeed != 0 || ySpeed != 0;
 
-        if (xSpeed != 0)
+        if (xSpeed != 0) {
+//            moveVertical(time);
             moveHorizontal(time);
-        else
+        } else
             moveVertical(time);
     }
 
     private void moveHorizontal(double time) {
         if (isMovable) {
             this.lastX += (xSpeed * time);
-            if (Math.abs(x - lastX) < 5) {
+            if (Math.abs(x - lastX) < 10) {
                 this.lastX = x;
                 xSpeed = 0;
             }
@@ -33,7 +34,7 @@ public abstract class Animatable implements Cloneable {
         if (isMovable) {
 
             this.lastY += (ySpeed * time);
-            if (Math.abs(y - lastY) < 5) {
+            if (Math.abs(y - lastY) < 10) {
                 this.lastY = y;
                 ySpeed = 0;
             }
@@ -57,14 +58,16 @@ public abstract class Animatable implements Cloneable {
         if (isMovable && (x != lastX || y != lastY)) {
             double distanceX = x - lastX;
             double distanceY = y - lastY;
+            double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
             if (distanceX == 0)
                 xSpeed = 0;
             else
-                this.xSpeed = distanceX / Math.abs(distanceX) * 100;
+                this.xSpeed += distanceX / distance * 50;
+//            this.xSpeed = distanceX / Math.abs(distanceX) * 100;
             if (distanceY == 0)
                 ySpeed = 0;
             else
-                this.ySpeed = distanceY / Math.abs(distanceY) * 300;
+                this.ySpeed += distanceY / distance * 50;
         }
     }
 

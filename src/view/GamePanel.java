@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
+import controleur.Game;
 import media.Colors;
 import media.Fonts;
 import media.Images;
@@ -48,7 +49,8 @@ public class GamePanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 x = (mouseEvent.getX() - startX) / BOX_WIDTH;
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
-                board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
+                if (!board.outOfRange(y, x))
+                    board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
 
 //                repaint();
 //                revalidate();
@@ -56,11 +58,20 @@ public class GamePanel extends JPanel {
                     String options[] = {"Next level", "Retry"};
                     int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
                             "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-                    if (option == 0)
-                        board = new Level(board.getLevelNumber() + 1).getGameBoard();
-                    if (option == 1)
-                        board = new Level(board.getLevelNumber()).getGameBoard();
-
+                    if (option == 0) {
+                        mainPanel.removeAll();
+                        Game game = new Game(mainPanel, levelsPanel, board.getLevelNumber() + 1);
+                        board = game.getBoard();
+                        mainPanel.repaint();
+                        mainPanel.revalidate();
+                    }
+                    if (option == 1) {
+                        mainPanel.removeAll();
+                        Game game = new Game(mainPanel, levelsPanel, board.getLevelNumber());
+                        board = game.getBoard();
+                        mainPanel.repaint();
+                        mainPanel.revalidate();
+                    }
 //                    repaint();
 //                    revalidate();
                 }
@@ -116,11 +127,11 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        startX = (dim.width - board.getHeight() * BOX_WIDTH) / 2;
-        startY = (dim.height - board.getWidth() * BOX_WIDTH) / 2;
+        startX = (dim.width - board.getWidth() * BOX_WIDTH) / 2;
+        startY = (dim.height - board.getHeight() * BOX_WIDTH) / 2;
         g2.setColor(new Color(125, 125, 125, 150));
-        g2.fillRoundRect(startX - 15, startY - 15, board.getHeight() * BOX_WIDTH + 30,
-                board.getWidth() * BOX_WIDTH + 30, 100, 100);
+        g2.fillRoundRect(startX - 15, startY - 15, board.getWidth() * BOX_WIDTH + 30,
+                board.getHeight() * BOX_WIDTH + 30, 100, 100);
 
         for (int i = 0; i < board.getBoard().length; i++) {
             for (int j = 0; j < board.getBoard()[0].length; j++) {
