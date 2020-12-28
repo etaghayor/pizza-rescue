@@ -12,6 +12,7 @@ import media.Fonts;
 import media.Images;
 import media.Sounds;
 import model.*;
+import model.boxes.Animatable;
 import model.boxes.BoxType;
 import model.boxes.FruitBox;
 
@@ -120,11 +121,11 @@ public class GamePanel extends JPanel {
         g2.setColor(new Color(125, 125, 125, 150));
         g2.fillRoundRect(startX - 15, startY - 15, board.getHeight() * BOX_WIDTH + 30,
                 board.getWidth() * BOX_WIDTH + 30, 100, 100);
-        for (int j = 0; j < board.getHeight(); j++) {
-            for (int i = 0; i < board.getWidth(); i++) {
-                if (board.getBox(i, j) == null)
-                    continue;
-                board.getBox(i, j).paint(g2, startX, startY);
+
+        for (int i = 0; i < board.getBoard().length; i++) {
+            for (int j = 0; j < board.getBoard()[0].length; j++) {
+                Animatable anim = board.getBoard()[i][j];
+                anim.paint(g2, startX, startY);
             }
         }
     }

@@ -42,6 +42,8 @@ public class Game {
 //                            System.out.println("* " + anim.getPos().x + "<X +    y> " + board[i][j].getPos().y);
                             anim.getCloseToTarget();
                             anim.move(0.013);
+                            if (anim.isMoving())
+                                System.out.println("x " + anim.getLastX() + " y " + anim.getLastY());
 //                            if (anim.reachedTarget()) {
 //                                board[anim.getTargetI()][anim.getTargetJ()] = board[i][j];
 //                                board[i][j] = new EmptyBox();

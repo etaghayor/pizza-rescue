@@ -55,8 +55,8 @@ public class GameBoard {
     }
 
     public void emptyBox(int x, int y) {
-        double xPos = board[x][y].getPos().x;
-        double yPos = board[x][y].getPos().y;
+        double xPos = board[x][y].getX();
+        double yPos = board[x][y].getY();
         board[x][y] = new EmptyBox();
         board[x][y].setLastPos(xPos, yPos);
         board[x][y].setPos(xPos, yPos);
@@ -139,7 +139,7 @@ public class GameBoard {
 
     // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
     public void rearrange() {
-        vertical_rearrange();
+//        vertical_rearrange();
 //        for (int i = 0; i < width - 1; i++) {
         horizontal_rearrange();
 //        }
@@ -159,16 +159,21 @@ public class GameBoard {
                 }
                 if (!outOfRange(index, j) && index != i)
                     if (board[index][j].getType() == BoxType.PIZZA || board[index][j].getType() == BoxType.FRUIT) {
-                        double x1 = board[index][j].getPos().x;
-                        double y1 = board[index][j].getPos().y;
-//                        System.out.println(board[i][j].getType() + " i " + i + " j " + j);
-//                        System.out.println(board[index][j].getType() + " i " + i + " j " + j);
-                        double x2 = board[i][j].getPos().x;
-                        double y2 = board[i][j].getPos().y;
+                        double x1 = board[index][j].getX();
+                        double y1 = board[index][j].getY();
+                        double x2 = board[i][j].getX();
+                        double y2 = board[i][j].getY();
+
+//                        try {
+//                            board[i][j] = board[index][j].clone();
+//                        } catch (CloneNotSupportedException e) {
+//                            e.printStackTrace();
+//                        }
 
                         board[i][j] = board[index][j];
                         board[i][j].setLastPos(x1, y1);
                         board[i][j].setPos(x2, y2);
+//                        System.out.println(board[i][j].getX() + " , " + board[i][j].getY());
 
                         emptyBox(index, j);
 //                        board[index][j] = new EmptyBox();
@@ -202,16 +207,23 @@ public class GameBoard {
                     shouldMove = true;
                 if (shouldMove && (board[i][j] instanceof PizzaBox || board[i][j] instanceof FruitBox)) {
                     if (board[i][j - 1] instanceof EmptyBox) {
-                        double x1 = board[i][j].getPos().x;
-                        double y1 = board[i][j].getPos().y;
-                        double x2 = board[i][j - 1].getPos().x;
-                        double y2 = board[i][j - 1].getPos().y;
+                        double x1 = board[i][j].getX();
+                        double y1 = board[i][j].getY();
+                        double x2 = board[i][j - 1].getX();
+                        double y2 = board[i][j - 1].getY();
+
+//                        try {
+//                            board[i][j - 1] = board[i][j].clone();
+//                        } catch (CloneNotSupportedException e) {
+//                            e.printStackTrace();
+//                        }
 
                         board[i][j - 1] = board[i][j];
                         board[i][j - 1].setLastPos(x1, y1);
                         board[i][j - 1].setPos(x2, y2);
 
-                        emptyBox(i,j);
+
+                        emptyBox(i, j);
 //                        board[i][j] = new EmptyBox();
 //                        board[i][j].setPos(x1, y1);
 //                        board[i][j].setPos(x2, y2);
