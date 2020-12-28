@@ -1,5 +1,6 @@
 package model.boxes;
 
+import media.Images;
 import model.boxes.Box;
 import model.boxes.BoxType;
 
@@ -18,6 +19,14 @@ public class FruitBox extends Box {
 
     public FruitBox(Color c) {
         this.color = c;
+        switch (color) {
+            case RED -> this.setImage(Images.getRedBoxImage());
+            case BLUE -> this.setImage(Images.getBlueBoxImage());
+            case PINK -> this.setImage(Images.getPinkBoxImage());
+            case GREEN -> this.setImage(Images.getGreenBoxImage());
+            case ORANGE -> this.setImage(Images.getOrangeBoxImage());
+            case YELLOW -> this.setImage(Images.getYellowBoxImage());
+        }
     }
 
     public void setColor(Color c) {

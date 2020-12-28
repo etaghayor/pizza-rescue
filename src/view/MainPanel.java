@@ -40,4 +40,8 @@ public class MainPanel extends JPanel {
         int height = (int) dim.getHeight();
         g2.drawImage(Images.getBackgroundImage(), 0, 0, width, height, null);
     }
+
+    public Dimension getDim() {
+        return dim;
+    }
 }

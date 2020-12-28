@@ -1,7 +1,5 @@
 package view;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -25,19 +23,19 @@ public class GamePanel extends JPanel {
     private static int startX, startY;
     private final static int BOX_WIDTH = 60;
     private MainPanel mainPanel;
+
     private LevelsPanel levelsPanel;
 
     // TODO It'd be nice if we pass mainPanel to this constructor, right now I just
     // get a new instance, it's not convenient
-    public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, int l) {
+    public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, Level level) {
         super();
         this.dim = dim;
         this.mainPanel = mainPanel;
         this.levelsPanel = levelsPanel;
         init();
-        System.out.println(l);
-        Level level = new Level(l);
-        board = level.getBoard();
+//        System.out.println(l);
+        board = level.getGameBoard();
     }
 
     private void init() {
@@ -51,26 +49,26 @@ public class GamePanel extends JPanel {
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
                 board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
 
-                repaint();
-                revalidate();
+//                repaint();
+//                revalidate();
                 if (board.hasWon()) {
                     String options[] = {"Next level", "Retry"};
                     int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
                             "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                     if (option == 0)
-                        board = new Level(board.getLevelNumber() + 1).getBoard();
+                        board = new Level(board.getLevelNumber() + 1).getGameBoard();
                     if (option == 1)
-                        board = new Level(board.getLevelNumber()).getBoard();
+                        board = new Level(board.getLevelNumber()).getGameBoard();
 
-                    repaint();
-                    revalidate();
+//                    repaint();
+//                    revalidate();
                 }
                 if (board.hasLost()) {
                     repaint();
                     revalidate();
                     if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
                             "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
-                        board = new Level(board.getLevelNumber()).getBoard();
+                        board = new Level(board.getLevelNumber()).getGameBoard();
                     }
                 }
                 repaint();
@@ -126,30 +124,7 @@ public class GamePanel extends JPanel {
             for (int i = 0; i < board.getWidth(); i++) {
                 if (board.getBox(i, j) == null)
                     continue;
-//                g2.fillRect(startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, BOX_WIDTH, BOX_WIDTH);
-                if (board.getBox(i, j).getType() == BoxType.PIZZA) {
-                    g2.drawImage(Images.getPizzaImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                }
-                if (board.getBox(i, j).getType() == BoxType.OBSTACLE) {
-                    g2.drawImage(Images.getObstacleImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH, null);
-                }
-                if (board.getBox(i, j).getType() == BoxType.FRUIT) {
-                    FruitBox box = (FruitBox) board.getBox(i, j);
-                    switch (box.getColor()) {
-                        case RED -> g2.drawImage(Images.getRedBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH,
-                                null);
-                        case BLUE -> g2.drawImage(Images.getBlueBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH,
-                                null);
-                        case PINK -> g2.drawImage(Images.getPinkBoxImage(), startX + j * BOX_WIDTH, startY + i * BOX_WIDTH,
-                                null);
-                        case GREEN -> g2.drawImage(Images.getGreenBoxImage(), startX + j * BOX_WIDTH,
-                                startY + i * BOX_WIDTH, null);
-                        case ORANGE -> g2.drawImage(Images.getOrangeBoxImage(), startX + j * BOX_WIDTH,
-                                startY + i * BOX_WIDTH, null);
-                        case YELLOW -> g2.drawImage(Images.getYellowBoxImage(), startX + j * BOX_WIDTH,
-                                startY + i * BOX_WIDTH, null);
-                    }
-                }
+                board.getBox(i, j).paint(g2, startX, startY);
             }
         }
     }

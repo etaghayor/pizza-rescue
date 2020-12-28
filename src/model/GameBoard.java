@@ -9,6 +9,7 @@ public class GameBoard {
     private int height, width;
     private int savedPizza = 0;
     private Level level;
+    private static final int BOX_WIDTH = 60;
 
     // TODO : MAIN METHODS: rearrange() and emptyPack()
     // TODO : FIRST, IMPLEMENT emptyBox();
@@ -19,6 +20,7 @@ public class GameBoard {
         this.height = w;
         this.width = h;
         this.level = l;
+//        initLocations();
     }
 
     public boolean outOfRange(int x, int y) {
@@ -26,13 +28,18 @@ public class GameBoard {
     }
 
     public Box getBox(int x, int y) {
-//        try {
-//            return board[x][y].clone();
-//        } catch (CloneNotSupportedException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
         return board[x][y];
+    }
+
+    public void initLocations() {
+//        System.out.println("*");
+        for (int j = 0; j < width; j++) {
+            for (int i = 0; i < height; i++) {
+                board[i][j].setPos(j * BOX_WIDTH, i * BOX_WIDTH);
+                board[i][j].setLastPos(j * BOX_WIDTH, i * BOX_WIDTH);
+//                System.out.println(board[i][j].getPos().x + "<X +    y> " + board[i][j].getPos().y);
+            }
+        }
     }
 
     public int getLevelNumber() {
@@ -48,7 +55,11 @@ public class GameBoard {
     }
 
     public void emptyBox(int x, int y) {
+        double xPos = board[x][y].getPos().x;
+        double yPos = board[x][y].getPos().y;
         board[x][y] = new EmptyBox();
+        board[x][y].setLastPos(xPos, yPos);
+        board[x][y].setPos(xPos, yPos);
     }
 
     public void emptyPack(int x, int y) {
@@ -140,14 +151,33 @@ public class GameBoard {
     public void vertical_rearrange() {
         for (int j = 0; j < width; j++) {
             for (int i = height - 1; i >= 0; i--) {
+//                System.out.println("* " + board[i][j].getPos().x + "<X +    y> " + board[i][j].getPos().y);
+
                 int index = i;
                 while (!outOfRange(index, j) && board[index][j].getType() == BoxType.EMPTY) {
                     index--;
                 }
                 if (!outOfRange(index, j) && index != i)
                     if (board[index][j].getType() == BoxType.PIZZA || board[index][j].getType() == BoxType.FRUIT) {
+                        double x1 = board[index][j].getPos().x;
+                        double y1 = board[index][j].getPos().y;
+//                        System.out.println(board[i][j].getType() + " i " + i + " j " + j);
+//                        System.out.println(board[index][j].getType() + " i " + i + " j " + j);
+                        double x2 = board[i][j].getPos().x;
+                        double y2 = board[i][j].getPos().y;
+
                         board[i][j] = board[index][j];
-                        board[index][j] = new EmptyBox();
+                        board[i][j].setLastPos(x1, y1);
+                        board[i][j].setPos(x2, y2);
+
+                        emptyBox(index, j);
+//                        board[index][j] = new EmptyBox();
+//                        board[index][j].setPos(x1, y1);
+//                        board[index][j].setLastPos(x1, y1);
+
+//                        board[index][j].getCloseTo(board[i][j].getPos().x, board[i][j].getPos().y, i, j);
+//                        board[i][j] = new EmptyBox();
+//                        this.initLocations();
                     }
             }
         }
@@ -172,8 +202,23 @@ public class GameBoard {
                     shouldMove = true;
                 if (shouldMove && (board[i][j] instanceof PizzaBox || board[i][j] instanceof FruitBox)) {
                     if (board[i][j - 1] instanceof EmptyBox) {
+                        double x1 = board[i][j].getPos().x;
+                        double y1 = board[i][j].getPos().y;
+                        double x2 = board[i][j - 1].getPos().x;
+                        double y2 = board[i][j - 1].getPos().y;
+
                         board[i][j - 1] = board[i][j];
-                        board[i][j] = new EmptyBox();
+                        board[i][j - 1].setLastPos(x1, y1);
+                        board[i][j - 1].setPos(x2, y2);
+
+                        emptyBox(i,j);
+//                        board[i][j] = new EmptyBox();
+//                        board[i][j].setPos(x1, y1);
+//                        board[i][j].setPos(x2, y2);
+
+//                        board[i][j].getCloseTo(board[i][j - 1].getPos().x, board[i][j - 1].getPos().y, i, j - 1);
+//                        board[i][j - 1] = new EmptyBox();
+//                        initLocations();
                         moved = true;
                     } else
                         shouldMove = false;

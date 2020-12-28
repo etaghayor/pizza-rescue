@@ -1,5 +1,6 @@
 package view;
 
+import controleur.Game;
 import media.Colors;
 import media.Fonts;
 import media.Images;
@@ -49,7 +50,8 @@ public class LevelsPanel extends JPanel {
                 public void mouseClicked(MouseEvent mouseEvent) {
                     levels[myIndex].setForeground(Color.BLACK);
                     mainPanel.removeAll();
-                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim, myIndex));
+//                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim));
+                    new Game(mainPanel, levelsPanel, myIndex);
                     mainPanel.repaint();
                     mainPanel.revalidate();
                 }

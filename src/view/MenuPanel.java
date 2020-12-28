@@ -164,8 +164,8 @@ public class MenuPanel extends JPanel {
     private JButton makeButton(String text) {
         JButton b = new JButton(text, Images.getWoodImage());
         b.setPreferredSize(new Dimension(Images.getWoodImage().getIconWidth(), Images.getWoodImage().getIconHeight()));
-        b.setContentAreaFilled(false);
         b.setForeground(Colors.B_GRAY);
+        b.setContentAreaFilled(false);
         Border emptyBorder = BorderFactory.createEmptyBorder();
         b.setBorder(emptyBorder);
         b.setHorizontalTextPosition(SwingConstants.CENTER);
