@@ -1,7 +1,12 @@
 package model;
 
+import media.Sounds;
 import model.boxes.*;
 
+import javax.sound.midi.Soundbank;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class GameBoard {
@@ -72,6 +77,13 @@ public class GameBoard {
 
         if (count < 2)
             return;
+
+        try {
+            Sounds.playPackRemovedSound();
+            System.out.println("sound played");
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        }
         emptyPackAux(x, y);
         rearrange();
 

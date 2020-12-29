@@ -1,5 +1,7 @@
 package view;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -52,9 +54,12 @@ public class GamePanel extends JPanel {
                 if (!board.outOfRange(y, x))
                     board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
 
-//                repaint();
-//                revalidate();
                 if (board.hasWon()) {
+                    try {
+                        Sounds.playWonSound();
+                    } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+                        e.printStackTrace();
+                    }
                     String options[] = {"Next level", "Retry"};
                     int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
                             "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
