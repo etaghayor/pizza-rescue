@@ -278,6 +278,7 @@ public class GameBoard {
     }
 
     public boolean hasLost() {
+    	if (level.getBonuses() != 0) return false;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (isDeletable(i, j))
