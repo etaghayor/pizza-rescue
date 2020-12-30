@@ -12,7 +12,15 @@ public class FruitBox extends Box {
     private static final long serialVersionUID = 3331793081734295256L;
 
     public enum Color {
-        YELLOW, ORANGE, RED, GREEN, BLUE, PINK
+        YELLOW(0), ORANGE(1), RED(2), GREEN(3), BLUE(4), PINK(5);
+    	int value;
+    	 Color(int value){
+    		this.value = value;
+    	}
+ 
+		public int getValue() {
+			return value;
+		}
     }
 
     private Color color;
@@ -28,8 +36,11 @@ public class FruitBox extends Box {
             case YELLOW -> this.setImage(Images.getYellowBoxImage());
         }
     }
+   
 
-    public void setColor(Color c) {
+
+
+	public void setColor(Color c) {
         color = c;
     }
 

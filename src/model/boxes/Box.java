@@ -17,4 +17,5 @@ public abstract class Box extends Animatable implements Cloneable, Serializable 
     public Box clone() throws CloneNotSupportedException {
         return (Box) super.clone();
     }
+
 }

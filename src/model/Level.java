@@ -5,11 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.Random;
 
+import model.boxes.BoxType;
 import model.boxes.EmptyBox;
 import model.boxes.FruitBox;
 import model.boxes.ObstacleBox;
 import model.boxes.PizzaBox;
+import model.boxes.FruitBox.Color;
 
 public class Level implements Serializable {
 	private static final long serialVersionUID = -6578584791683082932L;
@@ -36,15 +39,16 @@ public class Level implements Serializable {
 		case 8 -> initBoard8();
 		case 9 -> initBoard9();
 		}
+		
 		validateLevel();
 		board.initLocations();
 		// board.initLocations();
 //        System.out.println("true");
+//		changeColorRandomly();
 	}
-
-
+	
 	private void initBoard9() {
-		//TODO : implement ballon and explain how it works
+		// TODO : implement ballon and explain how it works
 		board = new GameBoard(8, 9, this);
 		pizzas = 5;
 		bonuses = 3;
@@ -114,16 +118,10 @@ public class Level implements Serializable {
 		board.getBoard()[3][7] = new FruitBox(FruitBox.Color.PINK);
 		board.getBoard()[3][5] = new FruitBox(FruitBox.Color.PINK);
 
-
-
-
-
-
-
 	}
 
 	private void initBoard8() {
-		//Let the player use hammer
+		// Let the player use hammer
 		board = new GameBoard(7, 7, this);
 		pizzas = 3;
 		bonuses = 1;
@@ -158,9 +156,6 @@ public class Level implements Serializable {
 		board.getBoard()[4][4] = new FruitBox(FruitBox.Color.GREEN);
 		board.getBoard()[5][4] = new FruitBox(FruitBox.Color.GREEN);
 		board.getBoard()[5][5] = new FruitBox(FruitBox.Color.GREEN);
-
-
-
 
 	}
 
@@ -308,6 +303,7 @@ public class Level implements Serializable {
 		board.getBoard()[7][2] = new FruitBox(FruitBox.Color.GREEN);
 		board.getBoard()[7][1] = new FruitBox(FruitBox.Color.GREEN);
 	}
+
 	// Show the player how to use rockets
 	private void initBoard5() {
 		board = new GameBoard(9, 9, this);
@@ -755,5 +751,23 @@ public class Level implements Serializable {
 
 	public int getBonuses() {
 		return bonuses;
+	}
+
+	private void changeColorRandomly() {
+		int number = new Random().nextInt(5) + 1;
+		for (int j = 0; j < board.getWidth(); j++) {
+			for (int i = 0; i < board.getHeight(); i++) {
+				if (board.getBoard()[i][j].getType() == BoxType.FRUIT) {
+					try {
+						FruitBox tmp = (FruitBox) board.getBoard()[i][j].clone();
+//						tmp = new FruitBox(tmp.getColor().getValue());
+//						board.getBoard()[i][j] = new 
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 }
