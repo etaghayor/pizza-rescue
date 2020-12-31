@@ -110,6 +110,14 @@ public abstract class Animatable implements Cloneable {
         this.y = y;
     }
 
+    public double getXSpeed() {
+        return xSpeed;
+    }
+
+    public double getYSpeed() {
+        return ySpeed;
+    }
+
     public void setLastPos(double x, double y) {
         this.lastX = x;
         this.lastY = y;

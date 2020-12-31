@@ -3,11 +3,9 @@ package model;
 import media.Sounds;
 import model.boxes.*;
 
-import javax.sound.midi.Soundbank;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class GameBoard {
     private Box[][] board;
@@ -37,12 +35,10 @@ public class GameBoard {
     }
 
     public void initLocations() {
-//        System.out.println("*");
         for (int j = 0; j < width; j++) {
             for (int i = 0; i < height; i++) {
                 board[i][j].setPos(j * BOX_WIDTH, i * BOX_WIDTH);
                 board[i][j].setLastPos(j * BOX_WIDTH, i * BOX_WIDTH);
-//                System.out.println(board[i][j].getPos().x + "<X +    y> " + board[i][j].getPos().y);
             }
         }
     }
@@ -240,6 +236,9 @@ public class GameBoard {
         }
     }
 
+    public boolean fruitHasReachedTarget(int i, int j) {
+        return board[i][j].getXSpeed() == 0 && board[i][j].getYSpeed() == 0;
+    }
 
     public void printBoard() {
         for (int i = 0; i < height; i++) {

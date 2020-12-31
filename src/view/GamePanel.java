@@ -3,21 +3,15 @@ package view;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import controleur.Game;
-import media.Colors;
-import media.Fonts;
-import media.Images;
 import media.Sounds;
 import model.*;
 import model.boxes.Animatable;
-import model.boxes.BoxType;
-import model.boxes.FruitBox;
 
 public class GamePanel extends JPanel {
 
@@ -51,8 +45,8 @@ public class GamePanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 x = (mouseEvent.getX() - startX) / BOX_WIDTH;
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
-                if (!board.outOfRange(y, x))
-                    board.emptyPack(y, x); // TODO We should change this kind of parameters I fucked up actually
+                if (!board.outOfRange(y, x) && board.fruitHasReachedTarget(y, x)) // to avoid deleting a fruit that hasn't reached its target
+                    board.emptyPack(y, x);
 
                 if (board.hasWon()) {
                     try {
@@ -60,7 +54,7 @@ public class GamePanel extends JPanel {
                     } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                         e.printStackTrace();
                     }
-                    String options[] = {"Next level", "Retry"};
+                    String[] options = {"Next level", "Retry"};
                     int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
                             "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                     if (option == 0) {
@@ -77,8 +71,6 @@ public class GamePanel extends JPanel {
                         mainPanel.repaint();
                         mainPanel.revalidate();
                     }
-//                    repaint();
-//                    revalidate();
                 }
                 if (board.hasLost()) {
                     repaint();
