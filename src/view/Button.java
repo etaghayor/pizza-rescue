@@ -49,7 +49,6 @@ public class Button extends JButton implements MouseListener {
     public void setBackground(Color bc) {
         this.bc = bc;
     }
-
 //    @Override
 //    protected void paintComponent(Graphics g) {
 //        super.paintComponent(g);
