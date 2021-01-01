@@ -307,8 +307,7 @@ public class GameBoard {
         if (!hasWon() && !hasWon()) {
             synchronized (level.getGame().getThread()) { // TODO make this work
                 try {
-                    this.notify();
-                    this.wait(40);
+                    wait(40);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

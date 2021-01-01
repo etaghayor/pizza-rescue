@@ -761,21 +761,13 @@ public class Level implements Serializable {
     }
 
     private void changeColorRandomly() {
-//        int number = new Random().nextInt(5) + 1;
+        int number = new Random().nextInt(6);
         for (int j = 0; j < board.getWidth(); j++) {
             for (int i = 0; i < board.getHeight(); i++) {
                 if (board.getBoard()[i][j].getType() == BoxType.FRUIT) {
-                    int number = new Random().nextInt(6);
-//                    ((FruitBox) board.getBoard()[i][j]).setColor(number);
-                    FruitBox tmp = new FruitBox(Color.YELLOW);
+                    FruitBox tmp = new FruitBox(((FruitBox) board.getBoard()[i][j]).getColor());
                     tmp.setColor(number);
                     board.getBoard()[i][j] = tmp;
-
-                    System.out.println(number);
-//                    FruitBox tmp = (FruitBox) board.getBoard()[i][j];
-//						tmp = new FruitBox(tmp.getColor().getValue());
-//						board.getBoard()[i][j] = new 
-
                 }
             }
         }

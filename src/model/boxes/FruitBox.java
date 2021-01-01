@@ -44,10 +44,12 @@ public class FruitBox extends Box {
     }
 
     public void setColor(int i) {
+        int tmp = (i + this.color.getValue()) % 6;
         for (Color c : Color.values()) {
-            if (c.getValue() == i) {
+            if (c.getValue() == tmp) {
                 this.color = c;
                 updateImage(c);
+                break;
             }
         }
     }
