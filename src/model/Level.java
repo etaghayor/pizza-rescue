@@ -44,6 +44,7 @@ public class Level implements Serializable {
         }
 
         validateLevel();
+        changeColorRandomly();
         board.initLocations();
         // board.initLocations();
 //        System.out.println("true");
@@ -383,9 +384,6 @@ public class Level implements Serializable {
         board.getBoard()[7][7] = new FruitBox(FruitBox.Color.PINK);
         board.getBoard()[8][8] = new FruitBox(FruitBox.Color.PINK);
 
-        validateLevel();
-        board.initLocations();
-        changeColorRandomly();
 
     }
 
@@ -569,9 +567,6 @@ public class Level implements Serializable {
         board.getBoard()[7][6] = new ObstacleBox();
         board.getBoard()[8][6] = new ObstacleBox();
 
-        validateLevel();
-        board.initLocations();
-
     }
 
     private void initBoard1() {
@@ -627,10 +622,6 @@ public class Level implements Serializable {
 
         board.getBoard()[6][4] = new FruitBox(FruitBox.Color.PINK);
         board.getBoard()[7][4] = new FruitBox(FruitBox.Color.PINK);
-
-        validateLevel();
-        board.initLocations();
-
     }
 
     private void initBoard0() {
@@ -685,35 +676,8 @@ public class Level implements Serializable {
 
         board.getBoard()[5][6] = new FruitBox(FruitBox.Color.GREEN);
         board.getBoard()[6][6] = new FruitBox(FruitBox.Color.GREEN);
-
-        validateLevel();
-
-        board.initLocations();
-
     }
 
-//    private void initBoard0() {
-//        board = new GameBoard(11, 10, this);
-//        pizzas = 4;
-//
-//        for (int i = 0; i < board.getHeight(); i++) {
-//            for (int j = 0; j < board.getWidth(); j++) {
-//                if (i == 0)
-//                    if (j % 2 == 1 && j != 9)
-//                        board.getBoard()[i][j] = new PizzaBox();
-//                    else
-//                        board.getBoard()[i][j] = new EmptyBox();
-//                else if (i % 2 == 1)
-//                    board.getBoard()[i][j] = new FruitBox(FruitBox.Color.YELLOW);
-//                else
-//                    board.getBoard()[i][j] = new FruitBox(FruitBox.Color.BLUE);
-//            }
-//        }
-//        validateLevel();
-//
-//        board.initLocations();
-//
-//  }
 
     // This function is here to make sure there is no case null
 // With emptyBox() instead, in that way, we never have to handle
@@ -776,4 +740,6 @@ public class Level implements Serializable {
     public Game getGame() {
         return game;
     }
+
+
 }
