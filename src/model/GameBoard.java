@@ -6,6 +6,7 @@ import model.boxes.*;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class GameBoard {
@@ -292,6 +293,29 @@ public class GameBoard {
         return board;
     }
 
+    long last = System.currentTimeMillis();
+
+    public void botPlay() {
+        int j = new Random().nextInt(width);
+        int i = new Random().nextInt(height);
+        long now = System.currentTimeMillis();
+        if (board[i][j].getType() == BoxType.FRUIT && now - last > 50) {
+            emptyPack(i, j);
+            last = now;
+//            botPlay();
+        }
+        if (!hasWon() && !hasWon()) {
+            synchronized (level.getGame().getThread()) { // TODO make this work
+                try {
+                    this.notify();
+                    this.wait(40);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                botPlay();
+            }
+        }
+    }
 
     public void printBoard() {
         for (int i = 0; i < height; i++) {

@@ -3,12 +3,14 @@ package view;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import controller.Game;
+import media.Colors;
 import media.Fonts;
 import media.Images;
 import media.Sounds;
@@ -26,6 +28,7 @@ public class GamePanel extends JPanel {
     private MainPanel mainPanel;
     private Game game;
     private LevelsPanel levelsPanel;
+    private JButton botPlay;
 
     public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, Game game) {
         super();
@@ -109,6 +112,43 @@ public class GamePanel extends JPanel {
 
             }
         });
+
+        botPlay = new JButton("Let bot play!", Images.getWoodIcon());
+        botPlay.setContentAreaFilled(false);
+        Border emptyBorder = BorderFactory.createEmptyBorder();
+        botPlay.setBorder(emptyBorder);
+        botPlay.setHorizontalTextPosition(SwingConstants.CENTER);
+        botPlay.setVerticalTextPosition(SwingConstants.CENTER);
+        botPlay.setFont(Fonts.getBlueberryFont());
+        botPlay.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                botPlay.setForeground(Color.BLACK);
+                board.botPlay();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                botPlay.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+                botPlay.setForeground(Colors.B_GRAY);
+            }
+        });
+        botPlay.setBounds(400, 50, 300, 100);
+        this.add(botPlay);
         initOptionBar();
     }
 

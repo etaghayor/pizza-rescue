@@ -25,7 +25,6 @@ public class Game {
         this.gamePanel = new GamePanel(mainPanel, levelsPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
 
-
         initAnimationThread();
         thread.start();
     }
@@ -36,18 +35,18 @@ public class Game {
         thread = new Thread(() -> {
 
             while (true) {
-                synchronized (board) {
+//                synchronized (board) {
 //                    update:
 
-                    for (int i = 0; i < board.length; i++) {
-                        for (int j = 0; j < board[0].length; j++) {
-                            Animatable anim = board[i][j];
-                            anim.getCloseToTarget();
-                            anim.move(0.013);
-                        }
+                for (int i = 0; i < board.length; i++) {
+                    for (int j = 0; j < board[0].length; j++) {
+                        Animatable anim = board[i][j];
+                        anim.getCloseToTarget();
+                        anim.move(0.013);
                     }
-
                 }
+
+//                }
                 gamePanel.repaint();
                 gamePanel.revalidate();
 
@@ -69,6 +68,10 @@ public class Game {
 
     }
 
+    public Thread getThread() {
+        return thread;
+    }
+
     public Level getLevel() {
         return level;
     }
@@ -76,4 +79,6 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
+
+
 }
