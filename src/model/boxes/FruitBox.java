@@ -13,20 +13,26 @@ public class FruitBox extends Box {
 
     public enum Color {
         YELLOW(0), ORANGE(1), RED(2), GREEN(3), BLUE(4), PINK(5);
-    	int value;
-    	 Color(int value){
-    		this.value = value;
-    	}
- 
-		public int getValue() {
-			return value;
-		}
+        int value;
+
+        Color(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
     }
 
     private Color color;
 
     public FruitBox(Color c) {
         this.color = c;
+        updateImage(c);
+    }
+
+    private void updateImage(Color color) {
         switch (color) {
             case RED -> this.setImage(Images.getRedBoxImage());
             case BLUE -> this.setImage(Images.getBlueBoxImage());
@@ -36,12 +42,14 @@ public class FruitBox extends Box {
             case YELLOW -> this.setImage(Images.getYellowBoxImage());
         }
     }
-   
 
-
-
-	public void setColor(Color c) {
-        color = c;
+    public void setColor(int i) {
+        for (Color c : Color.values()) {
+            if (c.getValue() == i) {
+                this.color = c;
+                updateImage(c);
+            }
+        }
     }
 
     public Color getColor() {
