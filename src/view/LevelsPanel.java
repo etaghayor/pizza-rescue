@@ -1,6 +1,6 @@
 package view;
 
-import controleur.Game;
+import controller.Game;
 import media.Colors;
 import media.Fonts;
 import media.Images;
@@ -51,7 +51,7 @@ public class LevelsPanel extends JPanel {
                     levels[myIndex].setForeground(Color.BLACK);
                     mainPanel.removeAll();
 //                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim));
-                    new Game(mainPanel, levelsPanel, myIndex);
+                    new Game(mainPanel, levelsPanel, myIndex, null);
                     mainPanel.repaint();
                     mainPanel.revalidate();
                 }
@@ -108,7 +108,7 @@ public class LevelsPanel extends JPanel {
     }
 
     private JButton makeButton(String text) {
-        JButton b = new JButton(text, Images.getWoodLevelImage());
+        JButton b = new JButton(text, Images.getWoodLevelIcon());
         b.setContentAreaFilled(false);
         b.setForeground(Colors.B_GRAY);
         Border emptyBorder = BorderFactory.createEmptyBorder();

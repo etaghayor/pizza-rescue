@@ -15,7 +15,8 @@ public class Images {
     private static Image pizzaImage, obstacleImage;
     private static ImageIcon gearImage, musicImage, musicOffImage, backImage;
     private static Icon avocadoImage, appleImage;
-    private static Icon woodButtonImage, woodLevelImage;
+    private static Image woodImage;
+    private static Icon woodButtonIcon, woodLevelIcon;
 
     public static Image getBackgroundImage() {
         if (backgroundImage == null) {
@@ -213,29 +214,42 @@ public class Images {
         return avocadoImage;
     }
 
-    public static Icon getWoodImage() {
-        if (woodButtonImage == null) {
+    public static Icon getWoodIcon() {
+        if (woodButtonIcon == null) {
             try {
                 Image tmp = ImageIO.read(new File("resources/images/wood.png"));
                 tmp = tmp.getScaledInstance(300, 100, Image.SCALE_SMOOTH);
-                woodButtonImage = new ImageIcon(tmp);
+                woodButtonIcon = new ImageIcon(tmp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return woodButtonImage;
+        return woodButtonIcon;
     }
 
-    public static Icon getWoodLevelImage() {
-        if (woodLevelImage == null) {
+    public static Image getWoodImage() {
+        if (woodImage == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/wood.png"));
+                woodImage = tmp.getScaledInstance(660, 100, Image.SCALE_SMOOTH);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return woodImage;
+    }
+
+    public static Icon getWoodLevelIcon() {
+        if (woodLevelIcon == null) {
             try {
                 Image tmp = ImageIO.read(new File("resources/images/woodLevel.png"));
                 tmp = tmp.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-                woodLevelImage = new ImageIcon(tmp);
+                woodLevelIcon = new ImageIcon(tmp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return woodLevelImage;
+        return woodLevelIcon;
     }
 }

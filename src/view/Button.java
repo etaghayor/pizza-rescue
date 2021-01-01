@@ -5,7 +5,6 @@ import media.Images;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -30,7 +29,7 @@ public class Button extends JButton implements MouseListener {
     }
 
     public Button(String text) {
-        super(text, Images.getWoodImage());
+        super(text, Images.getWoodIcon());
 //        this.text = text;
 //        this.x = x;
 //        this.y = y;

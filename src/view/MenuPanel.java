@@ -2,12 +2,9 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 import media.Colors;
 import media.Fonts;
@@ -162,8 +159,8 @@ public class MenuPanel extends JPanel {
     }
 
     private JButton makeButton(String text) {
-        JButton b = new JButton(text, Images.getWoodImage());
-        b.setPreferredSize(new Dimension(Images.getWoodImage().getIconWidth(), Images.getWoodImage().getIconHeight()));
+        JButton b = new JButton(text, Images.getWoodIcon());
+        b.setPreferredSize(new Dimension(Images.getWoodIcon().getIconWidth(), Images.getWoodIcon().getIconHeight()));
         b.setForeground(Colors.B_GRAY);
         b.setContentAreaFilled(false);
         Border emptyBorder = BorderFactory.createEmptyBorder();

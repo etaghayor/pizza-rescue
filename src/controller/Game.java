@@ -1,28 +1,31 @@
-package controleur;
+package controller;
 
 import model.GameBoard;
 import model.Level;
+import model.Player;
 import model.boxes.Animatable;
 import model.boxes.Box;
-import model.boxes.EmptyBox;
 import view.GamePanel;
 import view.LevelsPanel;
 import view.MainPanel;
 
 public class Game {
-    private GamePanel gamePanel;
-    private MainPanel mainPanel;
-    private LevelsPanel levelsPanel;
-    private Level level;
+    private final GamePanel gamePanel;
+    private final Level level;
     private Box[][] board;
     private Thread thread;
+    private final Player player;
 
-    public Game(MainPanel mainPanel, LevelsPanel levelsPanel, int lNumber) {
-        this.level = new Level(lNumber);
-        this.levelsPanel = levelsPanel;
-        this.mainPanel = mainPanel;
-        this.gamePanel = new GamePanel(mainPanel, levelsPanel, mainPanel.getDim(), level);
+    public Game(MainPanel mainPanel, LevelsPanel levelsPanel, int lNumber, Player player) {
+        this.level = new Level(lNumber, this);
+        if (player == null)
+            this.player = new Player(); //TODO read from file
+        else
+            this.player = player;
+        this.gamePanel = new GamePanel(mainPanel, levelsPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
+
+
         initAnimationThread();
         thread.start();
     }
@@ -41,8 +44,6 @@ public class Game {
                             Animatable anim = board[i][j];
                             anim.getCloseToTarget();
                             anim.move(0.013);
-
-
                         }
                     }
 
@@ -62,5 +63,17 @@ public class Game {
 
     public GameBoard getBoard() {
         return level.getGameBoard();
+    }
+
+    public void deletePack() {
+
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

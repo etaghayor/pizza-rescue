@@ -8,7 +8,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-import controleur.Game;
+import controller.Game;
+import media.Fonts;
+import media.Images;
 import media.Sounds;
 import model.*;
 import model.boxes.Animatable;
@@ -17,23 +19,24 @@ public class GamePanel extends JPanel {
 
     private Dimension dim;
     private GameBoard board;
+    private Player player;
     private int x, y;
     private static int startX, startY;
     private final static int BOX_WIDTH = 60;
     private MainPanel mainPanel;
-
+    private Game game;
     private LevelsPanel levelsPanel;
 
-    // TODO It'd be nice if we pass mainPanel to this constructor, right now I just
-    // get a new instance, it's not convenient
-    public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, Level level) {
+    public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, Game game) {
         super();
         this.dim = dim;
         this.mainPanel = mainPanel;
         this.levelsPanel = levelsPanel;
+        this.game = game;
+        this.player = game.getPlayer();
+        System.out.println(player);
+        board = game.getBoard();
         init();
-//        System.out.println(l);
-        board = level.getGameBoard();
     }
 
     private void init() {
@@ -45,12 +48,13 @@ public class GamePanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 x = (mouseEvent.getX() - startX) / BOX_WIDTH;
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
-                if (!board.outOfRange(y, x) && board.fruitHasReachedTarget(y, x)) // to avoid deleting a fruit that hasn't reached its target
+                if (!board.outOfRange(y, x) && board.boxHasReachedTarget(y, x)) // to avoid deleting a fruit that hasn't reached its target
                     board.emptyPack(y, x);
 
                 if (board.hasWon()) {
                     try {
-                        Sounds.playWonSound();
+                        if (Sounds.musicOn)
+                            Sounds.playWonSound();
                     } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                         e.printStackTrace();
                     }
@@ -59,25 +63,26 @@ public class GamePanel extends JPanel {
                             "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                     if (option == 0) {
                         mainPanel.removeAll();
-                        Game game = new Game(mainPanel, levelsPanel, board.getLevelNumber() + 1);
+                        game = new Game(mainPanel, levelsPanel, board.getLevelNumber() + 1, game.getPlayer());
                         board = game.getBoard();
                         mainPanel.repaint();
                         mainPanel.revalidate();
                     }
                     if (option == 1) {
                         mainPanel.removeAll();
-                        Game game = new Game(mainPanel, levelsPanel, board.getLevelNumber());
+                        game = new Game(mainPanel, levelsPanel, board.getLevelNumber(), game.getPlayer());
                         board = game.getBoard();
                         mainPanel.repaint();
                         mainPanel.revalidate();
                     }
                 }
                 if (board.hasLost()) {
+                    game.getPlayer().updateLife(-1);
                     repaint();
                     revalidate();
                     if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
                             "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
-                        board = new Level(board.getLevelNumber()).getGameBoard();
+                        board = new Level(board.getLevelNumber(), game).getGameBoard();
                     }
                 }
                 repaint();
@@ -126,6 +131,11 @@ public class GamePanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         startX = (dim.width - board.getWidth() * BOX_WIDTH) / 2;
         startY = (dim.height - board.getHeight() * BOX_WIDTH) / 2;
+        g2.drawImage(Images.getWoodImage(), 30, dim.height - 180, null);
+        g2.setFont(Fonts.getCevicheFont());
+        String score = "Score: " + player.getScore();
+        g2.drawString(score, 70, dim.height - 130);
+        g2.drawString("Life: " + player.getLife(), 300, dim.height - 130);
         g2.setColor(new Color(125, 125, 125, 150));
         g2.fillRoundRect(startX - 15, startY - 15, board.getWidth() * BOX_WIDTH + 30,
                 board.getHeight() * BOX_WIDTH + 30, 100, 100);

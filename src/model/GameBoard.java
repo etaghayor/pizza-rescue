@@ -6,12 +6,16 @@ import model.boxes.*;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class GameBoard {
-    private Box[][] board;
-    private int height, width;
+    private final Box[][] board;
+    private final int height;
+    private final int width;
     private int savedPizza = 0;
-    private Level level;
+    private int fruitCount = 0;
+    private final Level level;
+    //    private Player playe;
     private static final int BOX_WIDTH = 60;
 
     // TODO : MAIN METHODS: rearrange() and emptyPack()
@@ -57,6 +61,7 @@ public class GameBoard {
 
 
     public void emptyPack(int x, int y) {
+        fruitCount = 0;
         if (board[x][y].getType() != BoxType.FRUIT)
             return;
         FruitBox clickedBox = (FruitBox) board[x][y];
@@ -75,15 +80,44 @@ public class GameBoard {
             return;
 
         try {
-            Sounds.playPackRemovedSound();
-            System.out.println("sound played");
+            if (Sounds.musicOn)
+                Sounds.playPackRemovedSound();
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
-        emptyPackAux(x, y);
+        fruitCount = emptyPackAux(x, y, 1);
+        level.getGame().getPlayer().updateScore((int) Math.min(Math.pow(2, fruitCount), 2000));
         rearrange();
 
     }
+
+
+    private int emptyPackAux(int x, int y, int count) {
+
+        // EMPTY ALL BOXES IN A PACK WITH THE SAME COLOR AND REARANGE THE BOARD
+        FruitBox clickedBox = null;
+        try {
+            clickedBox = (FruitBox) board[x][y].clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        emptyBox(x, y);
+
+        if (isDeletable(x + 1, y, clickedBox))
+            count = emptyPackAux(x + 1, y, ++count);
+
+        if (isDeletable(x - 1, y, clickedBox))
+            count = emptyPackAux(x - 1, y, ++count);
+
+        if (isDeletable(x, y + 1, clickedBox))
+            count = emptyPackAux(x, y + 1, ++count);
+
+        if (isDeletable(x, y - 1, clickedBox))
+            count = emptyPackAux(x, y - 1, ++count);
+
+        return count;
+    }
+
 
     private boolean isDeletable(int x, int y) {
         if (board[x][y].getType() != BoxType.FRUIT)
@@ -100,34 +134,7 @@ public class GameBoard {
         if (isDeletable(x, y - 1, clickedBox))
             count++;
 
-        if (count < 2)
-            return false;
-        return true;
-    }
-
-    private void emptyPackAux(int x, int y) {
-
-        // EMPTY ALL BOXES IN A PACK WITH THE SAME COLOR AND REARANGE THE BOARD
-        FruitBox clickedBox = null;
-        try {
-            clickedBox = (FruitBox) board[x][y].clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        emptyBox(x, y);
-
-        if (isDeletable(x + 1, y, clickedBox))
-            emptyPackAux(x + 1, y);
-
-        if (isDeletable(x - 1, y, clickedBox))
-            emptyPackAux(x - 1, y);
-
-        if (isDeletable(x, y + 1, clickedBox))
-            emptyPackAux(x, y + 1);
-
-        if (isDeletable(x, y - 1, clickedBox))
-            emptyPackAux(x, y - 1);
-
+        return count >= 2;
     }
 
     private boolean isDeletable(int x, int y, FruitBox clickedBox) {
@@ -150,8 +157,15 @@ public class GameBoard {
     // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
     public void rearrange() {
         vertical_rearrange();
+
 //        for (int i = 0; i < width - 1; i++) {
         horizontal_rearrange();
+//        vertical_rearrange();
+
+        while (isPizzaDown()) {
+            savePizza();
+            rearrange();
+        }
 //        }
 //
         // TODO Horizontal rearranging:
@@ -186,11 +200,7 @@ public class GameBoard {
                     }
             }
         }
-        while (isPizzaDown()) {
-//           TimeUnit.SECONDS.sleep(1);
-            savePizza();
-            rearrange();
-        }
+
     }
 
     public void horizontal_rearrange() {
@@ -198,6 +208,8 @@ public class GameBoard {
         for (int j = 1; j < width; j++) {
             shouldMove = false;
             for (int i = height - 1; i >= 0; i--) {
+//                shouldMove = false;
+
                 while ((board[i][j] instanceof ObstacleBox /*|| i == height - 1*/)
                         && (board[i][j - 1] instanceof EmptyBox || board[i][j - 1] instanceof ObstacleBox)) {
                     i--;
@@ -228,6 +240,7 @@ public class GameBoard {
                         shouldMove = false;
                 }
             }
+
             vertical_rearrange();
             if (moved && j > 1) {
                 j -= 2;
@@ -236,23 +249,10 @@ public class GameBoard {
         }
     }
 
-    public boolean fruitHasReachedTarget(int i, int j) {
+    public boolean boxHasReachedTarget(int i, int j) {
         return board[i][j].getXSpeed() == 0 && board[i][j].getYSpeed() == 0;
     }
 
-    public void printBoard() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (board[i][j].getType() == BoxType.EMPTY)
-                    System.out.print("n ");
-                else {
-                    FruitBox cb = (FruitBox) board[i][j];
-                    System.out.print(cb.getColor().toString().charAt(0) + " ");
-                }
-            }
-            System.out.println();
-        }
-    }
 
     public boolean isPizzaDown() {
         for (int i = 0; i < getWidth(); i++) {
@@ -270,6 +270,7 @@ public class GameBoard {
                 savedPizza++;
             }
         }
+
     }
 
     public boolean hasWon() {
@@ -277,7 +278,7 @@ public class GameBoard {
     }
 
     public boolean hasLost() {
-    	if (level.getBonuses() != 0) return false;
+        if (level.getBonuses() != 0) return false;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (isDeletable(i, j))
@@ -289,5 +290,28 @@ public class GameBoard {
 
     public Box[][] getBoard() {
         return board;
+    }
+
+
+    public void printBoard() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (board[i][j].getType() == BoxType.EMPTY)
+                    System.out.print("n ");
+                else {
+                    FruitBox cb = (FruitBox) board[i][j];
+                    System.out.print(cb.getColor().toString().charAt(0) + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public int getFruitCount() {
+        return fruitCount;
+    }
+
+    public void setFruitCount(int fruitCount) {
+        this.fruitCount = fruitCount;
     }
 }

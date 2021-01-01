@@ -14,7 +14,8 @@ import java.io.IOException;
 public class OptionPanel extends JPanel {
 
     private JButton gearButton, musicButton, backButton;
-    private boolean gearClicked = false, musicCLicked = false;
+    private boolean gearClicked = false;
+    public static boolean musicCLicked = false;
 
     public OptionPanel() {
         super();
@@ -61,13 +62,18 @@ public class OptionPanel extends JPanel {
         musicButton = makeButton("music");
         musicButton.setBounds(100, 30, 60, 60);
         musicButton.setVisible(false);
+        if (musicCLicked)
+            musicButton.setIcon(Images.getMusicOffImage());
+        else
+            musicButton.setIcon(Images.getMusicImage());
         musicButton.addActionListener(actionEvent -> {
             if (!musicCLicked) {
-                Sounds.stopSong();
+                Sounds.stopAllSounds();
                 musicButton.setIcon(Images.getMusicOffImage());
             } else {
                 try {
-                    Sounds.playSong();
+                    Sounds.playMainSong();
+                    Sounds.musicOn = true;
                     musicButton.setIcon(Images.getMusicImage());
                 } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
                     e.printStackTrace();

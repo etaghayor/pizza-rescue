@@ -7,8 +7,9 @@ import java.net.MalformedURLException;
 
 public class Sounds {
     private static Clip mainSong, packRemovedSound, wonSound;
+    public static boolean musicOn = true;
 
-    public static void playSong() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
+    public static void playMainSong() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         if (mainSong == null) {
             File f = new File("resources/sounds/forest.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
@@ -18,8 +19,9 @@ public class Sounds {
         mainSong.loop(100);
     }
 
-    public static void stopSong() {
+    public static void stopAllSounds() {
         if (mainSong != null) mainSong.stop();
+        musicOn = false;
     }
 
     public static void playPackRemovedSound() throws IOException, LineUnavailableException, UnsupportedAudioFileException {

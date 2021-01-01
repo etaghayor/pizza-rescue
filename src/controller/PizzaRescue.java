@@ -1,4 +1,4 @@
-package controleur;
+package controller;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;

@@ -36,7 +36,7 @@ public class GUI extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
         try {
-            Sounds.playSong();
+            Sounds.playMainSong();
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
