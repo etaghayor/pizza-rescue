@@ -34,6 +34,7 @@ public class Sounds {
         packRemovedSound.stop();
         packRemovedSound.setMicrosecondPosition(0);
         packRemovedSound.start();
+        packRemovedSound.flush();
     }
 
     public static void playWonSound() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
@@ -44,7 +45,7 @@ public class Sounds {
             wonSound.open(audioIn);
         }
         wonSound.stop();
-        wonSound.setMicrosecondPosition(0);
+//        wonSound.setMicrosecondPosition(0);
         wonSound.start();
     }
 }

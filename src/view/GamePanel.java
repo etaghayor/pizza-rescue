@@ -54,40 +54,7 @@ public class GamePanel extends JPanel {
                 if (!board.outOfRange(y, x) && board.boxHasReachedTarget(y, x)) // to avoid deleting a fruit that hasn't reached its target
                     board.emptyPack(y, x);
 
-                if (board.hasWon()) {
-                    try {
-                        if (Sounds.musicOn)
-                            Sounds.playWonSound();
-                    } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-                        e.printStackTrace();
-                    }
-                    String[] options = {"Next level", "Retry"};
-                    int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
-                            "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-                    if (option == 0) {
-                        mainPanel.removeAll();
-                        game = new Game(mainPanel, levelsPanel, board.getLevelNumber() + 1, game.getPlayer());
-                        board = game.getBoard();
-                        mainPanel.repaint();
-                        mainPanel.revalidate();
-                    }
-                    if (option == 1) {
-                        mainPanel.removeAll();
-                        game = new Game(mainPanel, levelsPanel, board.getLevelNumber(), game.getPlayer());
-                        board = game.getBoard();
-                        mainPanel.repaint();
-                        mainPanel.revalidate();
-                    }
-                }
-                if (board.hasLost()) {
-                    game.getPlayer().updateLife(-1);
-                    repaint();
-                    revalidate();
-                    if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
-                            "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
-                        board = new Level(board.getLevelNumber(), game).getGameBoard();
-                    }
-                }
+
                 repaint();
                 revalidate();
             }
@@ -124,7 +91,7 @@ public class GamePanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 botPlay.setForeground(Color.BLACK);
-                board.botPlay();
+                game.setBotMode(true);
             }
 
             @Override
@@ -150,6 +117,42 @@ public class GamePanel extends JPanel {
         botPlay.setBounds(400, 50, 300, 100);
         this.add(botPlay);
         initOptionBar();
+    }
+
+    public void showOptionWindow(boolean hasWon) {
+        if (hasWon) {
+            try {
+                if (Sounds.musicOn)
+                    Sounds.playWonSound();
+            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            }
+            String[] options = {"Next level", "Retry"};
+            int option = JOptionPane.showOptionDialog(null, "Level " + " completed ! What do you want to do ?",
+                    "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (option == 0) {
+                mainPanel.removeAll();
+                game = new Game(mainPanel, levelsPanel, board.getLevelNumber() + 1, game.getPlayer());
+                board = game.getBoard();
+                mainPanel.repaint();
+                mainPanel.revalidate();
+            }
+            if (option == 1) {
+                mainPanel.removeAll();
+                game = new Game(mainPanel, levelsPanel, board.getLevelNumber(), game.getPlayer());
+                board = game.getBoard();
+                mainPanel.repaint();
+                mainPanel.revalidate();
+            }
+        } else {
+            game.getPlayer().updateLife(-1);
+            repaint();
+            revalidate();
+            if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
+                    "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
+                board = new Level(board.getLevelNumber(), game).getGameBoard();
+            }
+        }
     }
 
     private void initOptionBar() {
