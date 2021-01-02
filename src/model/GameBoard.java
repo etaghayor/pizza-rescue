@@ -16,7 +16,7 @@ public class GameBoard {
     private int savedPizza = 0;
     private int fruitCount = 0;
     private final Level level;
-    private Player player;
+    //    private Player playe;
     private static final int BOX_WIDTH = 60;
 
     // TODO : MAIN METHODS: rearrange() and emptyPack()
@@ -87,7 +87,7 @@ public class GameBoard {
             e.printStackTrace();
         }
         fruitCount = emptyPackAux(x, y, 1);
-        player.updateScore((int) Math.min(Math.pow(2, fruitCount), 2000));
+        level.getGame().getPlayer().updateScore((int) Math.min(Math.pow(2, fruitCount), 2000));
         rearrange();
 
     }
@@ -305,14 +305,14 @@ public class GameBoard {
 //            botPlay();
         }
         if (!hasWon() && !hasWon()) {
-//            synchronized (level.getGame().getThread()) { // TODO make this work
-            try {
-                wait(40);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            synchronized (level.getGame().getThread()) { // TODO make this work
+                try {
+                    wait(40);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                botPlay();
             }
-            botPlay();
-//            }
         }
     }
 
@@ -336,13 +336,5 @@ public class GameBoard {
 
     public void setFruitCount(int fruitCount) {
         this.fruitCount = fruitCount;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 }

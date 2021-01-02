@@ -85,11 +85,7 @@ public class GamePanel extends JPanel {
                     revalidate();
                     if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
                             "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
-                        mainPanel.removeAll();
-                        game = new Game(mainPanel, levelsPanel, board.getLevelNumber(), game.getPlayer());
-                        board = game.getBoard();
-                        mainPanel.repaint();
-                        mainPanel.revalidate();
+                        board = new Level(board.getLevelNumber(), game).getGameBoard();
                     }
                 }
                 repaint();

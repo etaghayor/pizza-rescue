@@ -11,15 +11,13 @@ import view.MainPanel;
 
 public class Game {
     private final GamePanel gamePanel;
-    //    private final Level level;
+    private final Level level;
     private Box[][] board;
     private Thread thread;
     private final Player player;
-    private GameBoard gameBoard; //TODO read its level from file
 
     public Game(MainPanel mainPanel, LevelsPanel levelsPanel, int lNumber, Player player) {
-//        this.level = new Level(lNumber);
-
+        this.level = new Level(lNumber, this);
         if (player == null)
             this.player = new Player(); //TODO read from file
         else
@@ -32,7 +30,7 @@ public class Game {
     }
 
     synchronized private void initAnimationThread() {
-        board = gameBoard.getBoard();
+        board = level.getGameBoard().getBoard();
 
         thread = new Thread(() -> {
 
@@ -63,7 +61,7 @@ public class Game {
     }
 
     public GameBoard getBoard() {
-        return gameBoard;
+        return level.getGameBoard();
     }
 
     public void deletePack() {
@@ -74,6 +72,9 @@ public class Game {
         return thread;
     }
 
+    public Level getLevel() {
+        return level;
+    }
 
     public Player getPlayer() {
         return player;
