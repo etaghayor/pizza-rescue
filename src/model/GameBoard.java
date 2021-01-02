@@ -20,13 +20,11 @@ public class GameBoard {
     private static final int BOX_WIDTH = 60;
 
     // TODO : MAIN METHODS: rearrange() and emptyPack()
-    // TODO : FIRST, IMPLEMENT emptyBox();
-    // should we have a type emptyBox or just work with null?
 
-    public GameBoard(int w, int h, Level l) {
-        board = new Box[w][h];
-        this.height = w;
-        this.width = h;
+    public GameBoard(Box[][] board, Level l) {
+        this.board = board;
+        this.width = board[0].length;
+        this.height = board.length;
         this.level = l;
 //        initLocations();
     }
