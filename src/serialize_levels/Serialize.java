@@ -26,7 +26,7 @@ public class Serialize {
 
     public static void main(String[] args) {
         int[][] t1;
-        Level l1 = new Level(null);
+//        Level l1 = new Level(null);
         serialize(null);
         serialize(null);
     }

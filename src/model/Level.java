@@ -21,14 +21,8 @@ public class Level implements Serializable {
     private int pizzas;
     private int number;
     private int bonuses = 0;
-    private Game game;
 
-    public Level(GameBoard b) {
-        setBoard(b);
-    }
-
-    public Level(int l, Game game) {
-        this.game = game;
+    public Level(int l) {
         this.number = l;
         switch (l) {
             case 0 -> initBoard0();
@@ -735,10 +729,6 @@ public class Level implements Serializable {
                 }
             }
         }
-    }
-
-    public Game getGame() {
-        return game;
     }
 
 
