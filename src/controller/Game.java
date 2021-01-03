@@ -10,9 +10,13 @@ import view.GamePanel;
 import view.LevelsPanel;
 import view.MainPanel;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class Game {
@@ -112,11 +116,16 @@ public class Game {
     }
 
     public void serializePlayerData() {
+        File directory = new File("user");
+
+        if (!directory.exists()) {
+            directory.mkdir();
+            System.out.println("user directory created");
+        }
         try (FileOutputStream fos = new FileOutputStream("user/player_data");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-//                while(serializable_levels)
             oos.writeObject(player);
-            System.out.println("The file user/player_data has been serialize in user directory");
+            System.out.println("The file user/player_data has been serialized in user directory");
 
         } catch (IOException e) {
             e.printStackTrace();

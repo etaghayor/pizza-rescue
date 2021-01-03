@@ -134,9 +134,18 @@ public class MenuPanel extends JPanel {
         aboutUsButton = makeButton("About Us");
 
         aboutUsButton.addMouseListener(new MouseListener() {
+            MenuPanel menuPanel;
+
+            {
+                this.menuPanel = mp;
+            }
+
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                aboutUsButton.setForeground(Color.BLACK);
+//                aboutUsButton.setForeground(Color.BLACK);
+                mainPanel.removeAll();
+                mainPanel.add(new AboutUsWindow(mainPanel, menuPanel));
+                mainPanel.revalidate();
             }
 
             @Override

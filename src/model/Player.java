@@ -25,7 +25,6 @@ public class Player implements Serializable {
         if (!(new File(path).exists())) {
             return null;
         }
-//        Level deserializableLevel = null;
         Player deserializablePlayer = null;
         try (FileInputStream fis = new FileInputStream(path); ObjectInputStream ois = new ObjectInputStream(fis)) {
             deserializablePlayer = (Player) ois.readObject();

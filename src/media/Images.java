@@ -16,6 +16,7 @@ public class Images {
     private static ImageIcon gearImage, musicImage, musicOffImage, backImage;
     private static Icon avocadoImage, appleImage;
     private static Image woodImage, smallWoodImage;
+    private static Image aboutUsTextImage;
     private static Icon woodButtonIcon, woodLevelIcon, greyWoodLevelIcon, smallWoodIcon;
 
     public static Image getBackgroundImage() {
@@ -278,5 +279,18 @@ public class Images {
             }
         }
         return greyWoodLevelIcon;
+    }
+
+    public static Image getAboutUsTextImage() {
+        if (aboutUsTextImage == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/about_us.png"));
+                aboutUsTextImage = tmp.getScaledInstance(669, 639, Image.SCALE_SMOOTH);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return aboutUsTextImage;
     }
 }
