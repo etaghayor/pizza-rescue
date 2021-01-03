@@ -116,7 +116,7 @@ public class Game {
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 //                while(serializable_levels)
             oos.writeObject(player);
-            System.out.println("The file user/player_data has been serialize in Levels directory");
+            System.out.println("The file user/player_data has been serialize in user directory");
 
         } catch (IOException e) {
             e.printStackTrace();

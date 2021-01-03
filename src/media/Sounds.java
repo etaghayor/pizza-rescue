@@ -45,7 +45,8 @@ public class Sounds {
             wonSound.open(audioIn);
         }
         wonSound.stop();
-//        wonSound.setMicrosecondPosition(0);
+        wonSound.setMicrosecondPosition(0);
         wonSound.start();
+        packRemovedSound.flush();
     }
 }

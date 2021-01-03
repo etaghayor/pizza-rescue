@@ -6,6 +6,7 @@ import java.io.File;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.plaf.ColorUIResource;
 
 import media.Colors;
 import media.Fonts;
@@ -18,8 +19,9 @@ public class MenuPanel extends JPanel {
      */
     private static final long serialVersionUID = 440684360807810628L;
     private final MainPanel mainPanel;
-    private Dimension dim;
-    private boolean entered = false, clicked = false;
+    private final Dimension dim;
+    private final boolean entered = false;
+    private final boolean clicked = false;
     //    private Button playButton, exitButton;
     private JButton playButton, exitButton, aboutUsButton, resetButton;
 
@@ -35,7 +37,8 @@ public class MenuPanel extends JPanel {
     // Initialize the playButton and see if it is clicked, and if the button is clicked
     // display the MainPanel (the game)
     private void init() {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+//        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setLayout(null);
         this.setSize(dim);
         this.setOpaque(false);
 
@@ -45,14 +48,20 @@ public class MenuPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 resetButton.setForeground(Color.BLACK);
-                // TODO delete user Files
-                File userData = new File("user/player_data");
-                if (userData.exists()) {
-                    if (userData.delete())
-                        System.out.println("game has been reset!");
-                    else
-                        System.out.println("can't reset");
+                String[] options = {"Yes!", "Cancel"};
+                int option = JOptionPane.showOptionDialog(null, "Are you sure you want to reset? You will lose all your data.",
+                        "Reset Data", 0, JOptionPane.PLAIN_MESSAGE, Images.getAvocadoImage(), options, options[0]);
+                if (option == 0) {
+
+                    File userData = new File("user/player_data");
+                    if (userData.exists()) {
+                        if (userData.delete())
+                            System.out.println("game has been reset!");
+                        else
+                            System.out.println("can't reset");
+                    }
                 }
+
 
             }
 
@@ -83,7 +92,7 @@ public class MenuPanel extends JPanel {
 
         MenuPanel mp = this;
         playButton.addMouseListener(new MouseListener() {
-            private MenuPanel menuPanel;
+            private final MenuPanel menuPanel;
 
             {
                 menuPanel = mp;
@@ -187,26 +196,16 @@ public class MenuPanel extends JPanel {
         });
 
 
-//        this.add(Box.createRigidArea(new Dimension(450, 50)));
-//        JPanel resetContainer = new JPanel();
-//        resetContainer.setOpaque(false);
-//        resetContainer.setLayout(new BoxLayout(resetContainer, BoxLayout.X_AXIS));
-////        resetButton.setBounds( 120, 120);
-//        resetContainer.add(Box.createRigidArea(new Dimension((int) dim.getWidth() - 150, 20)));
-//        resetContainer.add(resetButton);
-//        resetContainer.setBounds(0, 0, (int) dim.getWidth(), 50);
-//        this.add(resetContainer);
-
-        this.add(Box.createRigidArea(new Dimension(300, 200)));
+        resetButton.setBounds((int) dim.getWidth() - 140, 20, 120, 120);
         this.add(resetButton);
 
-        this.add(Box.createRigidArea(new Dimension(250, 50)));
+        playButton.setBounds((int) dim.getWidth() / 2 - 150, 400, 300, 100);
         this.add(playButton);
 
-        this.add(Box.createRigidArea(new Dimension(250, 50)));
+        aboutUsButton.setBounds((int) dim.getWidth() / 2 - 150, 550, 300, 100);
         this.add(aboutUsButton);
 
-        this.add(Box.createRigidArea(new Dimension(250, 200)));
+        exitButton.setBounds((int) dim.getWidth() / 2 - 150, 870, 300, 100);
         this.add(exitButton);
 
 
