@@ -5,7 +5,7 @@ import java.awt.*;
 public abstract class Animatable implements Cloneable {
     private double xSpeed, ySpeed;
     //    private Position pos, lastPos;
-    private Image image;
+    protected Image image;
     private double x, y, lastX, lastY;
     private boolean isMovable = true, isMoving = false;
 

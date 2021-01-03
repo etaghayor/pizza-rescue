@@ -15,7 +15,7 @@ public class ObstacleBox extends Box {
 
     public ObstacleBox() {
         this.setMovable(false);
-        this.setImage(Images.getObstacleImage());
+        this.image = Images.getObstacleImage();
     }
 
 

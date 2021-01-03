@@ -8,7 +8,7 @@ public class PizzaBox extends Box {
 
 
     public PizzaBox() {
-        this.setImage(Images.getPizzaImage());
+        this.image = Images.getPizzaImage();
     }
 
     public String toString() {

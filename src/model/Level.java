@@ -27,44 +27,44 @@ public class Level implements Serializable {
         this.game = game;
         this.number = l;
         switch (l) { // TODO read from File
-            case 0 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_0"), this);
-                this.pizzas = 2;
-            }
             case 1 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_1"), this);
-                this.pizzas = 5;
+                this.pizzas = 2;
             }
             case 2 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_2"), this);
-                this.pizzas = 3;
+                this.pizzas = 5;
             }
             case 3 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_3"), this);
-                this.pizzas = 4;
+                this.pizzas = 3;
             }
             case 4 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_4"), this);
-                this.pizzas = 2;
+                this.pizzas = 4;
             }
             case 5 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_5"), this);
-                this.pizzas = 6;
+                this.pizzas = 2;
             }
             case 6 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_6"), this);
-                this.pizzas = 2;
+                this.pizzas = 6;
             }
             case 7 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_7"), this);
-                this.pizzas = 5;
+                this.pizzas = 2;
             }
             case 8 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_8"), this);
-                this.pizzas = 3;
+                this.pizzas = 5;
             }
             case 9 -> {
                 gameBoard = new GameBoard(deserialize("Levels/level_9"), this);
+                this.pizzas = 3;
+            }
+            case 10 -> {
+                gameBoard = new GameBoard(deserialize("Levels/level_10"), this);
                 this.pizzas = 5;
             }
         }
@@ -103,7 +103,7 @@ public class Level implements Serializable {
         Box[][] deserializableBoard = null;
         try (FileInputStream fis = new FileInputStream(path); ObjectInputStream ois = new ObjectInputStream(fis)) {
             deserializableBoard = (Box[][]) ois.readObject();
-            System.out.println("The level " + path.charAt(5) + " has been deserialize");
+            System.out.println("The level " + path.substring(13) + " has been deserialize");
         } catch (FileNotFoundException e) {
             System.err.println("The file : " + path + " cannot be found.");
             e.printStackTrace();

@@ -10,6 +10,9 @@ import view.GamePanel;
 import view.LevelsPanel;
 import view.MainPanel;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Random;
 
 public class Game {
@@ -23,14 +26,14 @@ public class Game {
     private boolean allBoxesAreStill = true;
     boolean allBoxesReachedTarget;
 
-    public Game(MainPanel mainPanel, LevelsPanel levelsPanel, int lNumber, Player player) {
+    public Game(MainPanel mainPanel, int lNumber, Player player) {
         this.level = new Level(lNumber, this);
         this.gameBoard = level.getGameBoard();
         if (player == null)
             this.player = new Player(); //TODO read from file
         else
             this.player = player;
-        this.gamePanel = new GamePanel(mainPanel, levelsPanel, mainPanel.getDim(), this);
+        this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
 
         initAnimationThread();
@@ -95,22 +98,9 @@ public class Game {
             j = new Random().nextInt(gameBoard.getWidth());
             i = new Random().nextInt(gameBoard.getHeight());
         }
-//        long now = System.currentTimeMillis();
         if (board[i][j].getType() == BoxType.FRUIT) {
             gameBoard.emptyPack(i, j);
-//            last = now;
-//            botPlay();
         }
-//        if (!hasWon() && !hasWon()) {
-//            synchronized (level.getGame().getThread()) { // TODO make this work
-//                try {
-//                    wait(40);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                botPlay();
-//            }
-//        }
     }
 
     public GameBoard getBoard() {
@@ -121,8 +111,16 @@ public class Game {
 
     }
 
-    public Thread getThread() {
-        return thread;
+    public void serializePlayerData() {
+        try (FileOutputStream fos = new FileOutputStream("user/player_data");
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+//                while(serializable_levels)
+            oos.writeObject(player);
+            System.out.println("The file user/player_data has been serialize in Levels directory");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Level getLevel() {

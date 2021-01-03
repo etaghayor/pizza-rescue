@@ -2,6 +2,7 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,6 +10,7 @@ import javax.swing.border.Border;
 import media.Colors;
 import media.Fonts;
 import media.Images;
+import model.Player;
 
 public class MenuPanel extends JPanel {
     /**
@@ -19,7 +21,7 @@ public class MenuPanel extends JPanel {
     private Dimension dim;
     private boolean entered = false, clicked = false;
     //    private Button playButton, exitButton;
-    private JButton playButton, exitButton, aboutUsButton;
+    private JButton playButton, exitButton, aboutUsButton, resetButton;
 
     private static final int XMOVE = 10, YMOVE = 10;
 
@@ -33,9 +35,49 @@ public class MenuPanel extends JPanel {
     // Initialize the playButton and see if it is clicked, and if the button is clicked
     // display the MainPanel (the game)
     private void init() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.setSize(dim);
         this.setOpaque(false);
+
+
+        resetButton = makeButton("Reset");
+        resetButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                resetButton.setForeground(Color.BLACK);
+                // TODO delete user Files
+                File userData = new File("user/player_data");
+                if (userData.exists()) {
+                    if (userData.delete())
+                        System.out.println("game has been reset!");
+                    else
+                        System.out.println("can't reset");
+                }
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                resetButton.setForeground(Color.WHITE);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+                resetButton.setForeground(Colors.B_GRAY);
+
+            }
+        });
 
         playButton = makeButton("Play!");
 
@@ -52,8 +94,8 @@ public class MenuPanel extends JPanel {
                 playButton.setForeground(Color.BLACK);
                 playButton.repaint();
                 mainPanel.removeAll();
-
-                mainPanel.add(new LevelsPanel(mainPanel, menuPanel, dim));
+                Player player = new Player();
+                mainPanel.add(new LevelsPanel(mainPanel, menuPanel, dim, player));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
@@ -144,7 +186,21 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        this.add(Box.createRigidArea(new Dimension(250, 350)));
+
+//        this.add(Box.createRigidArea(new Dimension(450, 50)));
+//        JPanel resetContainer = new JPanel();
+//        resetContainer.setOpaque(false);
+//        resetContainer.setLayout(new BoxLayout(resetContainer, BoxLayout.X_AXIS));
+////        resetButton.setBounds( 120, 120);
+//        resetContainer.add(Box.createRigidArea(new Dimension((int) dim.getWidth() - 150, 20)));
+//        resetContainer.add(resetButton);
+//        resetContainer.setBounds(0, 0, (int) dim.getWidth(), 50);
+//        this.add(resetContainer);
+
+        this.add(Box.createRigidArea(new Dimension(300, 200)));
+        this.add(resetButton);
+
+        this.add(Box.createRigidArea(new Dimension(250, 50)));
         this.add(playButton);
 
         this.add(Box.createRigidArea(new Dimension(250, 50)));
@@ -159,7 +215,11 @@ public class MenuPanel extends JPanel {
     }
 
     private JButton makeButton(String text) {
-        JButton b = new JButton(text, Images.getWoodIcon());
+        JButton b;
+        if (text.equals("Reset"))
+            b = new JButton(text, Images.getSmallWoodIcon());
+        else
+            b = new JButton(text, Images.getWoodIcon());
         b.setPreferredSize(new Dimension(Images.getWoodIcon().getIconWidth(), Images.getWoodIcon().getIconHeight()));
         b.setForeground(Colors.B_GRAY);
         b.setContentAreaFilled(false);

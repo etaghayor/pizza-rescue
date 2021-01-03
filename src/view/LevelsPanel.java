@@ -4,6 +4,7 @@ import controller.Game;
 import media.Colors;
 import media.Fonts;
 import media.Images;
+import model.Player;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,18 +13,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class LevelsPanel extends JPanel {
-    private int LastLevel = 0;
+    private final int LastLevel = 0;
     private final Dimension dim;
-    private MainPanel mainPanel;
-    private MenuPanel menuPanel;
-    private final JButton[] levels = new JButton[10];
+    private final MainPanel mainPanel;
+    private final MenuPanel menuPanel;
+    private final JButton[] levels = new JButton[11];
     private int index;
+    private boolean c;
+    private final Player player;
 
-    public LevelsPanel(MainPanel mainPanel, MenuPanel menuPanel, Dimension dim) {
+    public LevelsPanel(MainPanel mainPanel, MenuPanel menuPanel, Dimension dim, Player player) {
         super();
         this.mainPanel = mainPanel;
         this.menuPanel = menuPanel;
         this.dim = dim;
+        this.player = player;
         init();
     }
 
@@ -33,27 +37,32 @@ public class LevelsPanel extends JPanel {
         this.setOpaque(false);
         LevelsPanel lp = this;
 //        this.add(Box.createRigidArea(new Dimension(200, 100)));
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
 //            this.add(Box.createRigidArea(new Dimension(250, 30)));
             levels[i] = makeButton((i) + "");
             index = i;
+            c = index <= player.getLastLevel();
             levels[i].addMouseListener(new MouseListener() {
-                private int myIndex;
-                private LevelsPanel levelsPanel;
+                private final int myIndex;
+                private final LevelsPanel levelsPanel;
+                private final boolean clickable;
 
                 {
                     this.myIndex = index;
                     this.levelsPanel = lp;
+                    this.clickable = c;
                 }
 
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
-                    levels[myIndex].setForeground(Color.BLACK);
-                    mainPanel.removeAll();
+                    if (clickable) {
+                        levels[myIndex].setForeground(Color.BLACK);
+                        mainPanel.removeAll();
 //                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim));
-                    new Game(mainPanel, levelsPanel, myIndex, null);
-                    mainPanel.repaint();
-                    mainPanel.revalidate();
+                        new Game(mainPanel, myIndex, null);
+                        mainPanel.repaint();
+                        mainPanel.revalidate();
+                    }
                 }
 
                 @Override
@@ -68,27 +77,29 @@ public class LevelsPanel extends JPanel {
 
                 @Override
                 public void mouseEntered(MouseEvent mouseEvent) {
-                    levels[myIndex].setForeground(Color.WHITE);
+                    if (clickable)
+                        levels[myIndex].setForeground(Color.WHITE);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent mouseEvent) {
-                    levels[myIndex].setForeground(Colors.B_GRAY);
+                    if (clickable)
+                        levels[myIndex].setForeground(Colors.B_GRAY);
 
                 }
             });
             this.add(levels[index]);
         }
-        levels[0].setBounds(400, 100, 70, 70);
-        levels[1].setBounds(410, 200, 70, 70);
-        levels[2].setBounds(430, 300, 70, 70);
-        levels[3].setBounds(450, 400, 70, 70);
-        levels[4].setBounds(475, 500, 70, 70);
-        levels[5].setBounds(465, 600, 70, 70);
-        levels[6].setBounds(380, 660, 70, 70);
-        levels[7].setBounds(280, 690, 70, 70);
-        levels[8].setBounds(180, 740, 70, 70);
-        levels[9].setBounds(80, 760, 70, 70);
+        levels[1].setBounds(400, 100, 70, 70);
+        levels[2].setBounds(410, 200, 70, 70);
+        levels[3].setBounds(430, 300, 70, 70);
+        levels[4].setBounds(450, 400, 70, 70);
+        levels[5].setBounds(475, 500, 70, 70);
+        levels[6].setBounds(465, 600, 70, 70);
+        levels[7].setBounds(380, 660, 70, 70);
+        levels[8].setBounds(280, 690, 70, 70);
+        levels[9].setBounds(180, 740, 70, 70);
+        levels[10].setBounds(80, 760, 70, 70);
 
         initOptionBar();
 
@@ -107,8 +118,13 @@ public class LevelsPanel extends JPanel {
         this.add(op);
     }
 
+
     private JButton makeButton(String text) {
-        JButton b = new JButton(text, Images.getWoodLevelIcon());
+        JButton b;
+        if (Integer.parseInt(text) > player.getLastLevel())
+            b = new JButton(text, Images.getGreyWoodLevelIcon());
+        else
+            b = new JButton(text, Images.getWoodLevelIcon());
         b.setContentAreaFilled(false);
         b.setForeground(Colors.B_GRAY);
         Border emptyBorder = BorderFactory.createEmptyBorder();

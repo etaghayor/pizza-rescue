@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Fonts {
 
-    private static Font blueberryFont, cevicheFont;
+    private static Font blueberryFont, blueberrySmallFont, cevicheFont;
 
     public static Font getBlueberryFont() {
         if (blueberryFont == null) {
@@ -21,6 +21,21 @@ public class Fonts {
             }
         }
         return blueberryFont;
+    }
+
+    public static Font getBlueberrySmallFont() {
+        if (blueberrySmallFont == null) {
+            try {
+                //create the font to use. Specify the size!
+                blueberrySmallFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/Blueberry.ttf")).deriveFont(20f);
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                //register the font
+                ge.registerFont(blueberrySmallFont);
+            } catch (IOException | FontFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return blueberrySmallFont;
     }
 
     public static Font getCevicheFont() {

@@ -15,8 +15,8 @@ public class Images {
     private static Image pizzaImage, obstacleImage;
     private static ImageIcon gearImage, musicImage, musicOffImage, backImage;
     private static Icon avocadoImage, appleImage;
-    private static Image woodImage;
-    private static Icon woodButtonIcon, woodLevelIcon;
+    private static Image woodImage, smallWoodImage;
+    private static Icon woodButtonIcon, woodLevelIcon, greyWoodLevelIcon, smallWoodIcon;
 
     public static Image getBackgroundImage() {
         if (backgroundImage == null) {
@@ -164,7 +164,7 @@ public class Images {
     public static ImageIcon getBackImage() {
         if (backImage == null) {
             try {
-                Image tmp = ImageIO.read(new File("resources/images/back.png"));
+                Image tmp = ImageIO.read(new File("resources/images/backButton.png"));
                 tmp = tmp.getScaledInstance(57, 57, Image.SCALE_SMOOTH);
                 backImage = new ImageIcon(tmp);
             } catch (IOException e) {
@@ -227,6 +227,20 @@ public class Images {
         return woodButtonIcon;
     }
 
+
+    public static Icon getSmallWoodIcon() {
+        if (smallWoodIcon == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/woodLevel.png"));
+                tmp = tmp.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                smallWoodIcon = new ImageIcon(tmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return smallWoodIcon;
+    }
+
     public static Image getWoodImage() {
         if (woodImage == null) {
             try {
@@ -251,5 +265,18 @@ public class Images {
             }
         }
         return woodLevelIcon;
+    }
+
+    public static Icon getGreyWoodLevelIcon() {
+        if (greyWoodLevelIcon == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/greyWoodLevel.png"));
+                tmp = tmp.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                greyWoodLevelIcon = new ImageIcon(tmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return greyWoodLevelIcon;
     }
 }

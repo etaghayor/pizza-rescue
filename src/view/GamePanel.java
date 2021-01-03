@@ -26,15 +26,14 @@ public class GamePanel extends JPanel {
     private static int startX, startY;
     private final static int BOX_WIDTH = 60;
     private MainPanel mainPanel;
+    private MenuPanel menuPanel;
     private Game game;
-    private LevelsPanel levelsPanel;
     private JButton botPlay;
 
-    public GamePanel(MainPanel mainPanel, LevelsPanel levelsPanel, Dimension dim, Game game) {
+    public GamePanel(MainPanel mainPanel, Dimension dim, Game game) {
         super();
         this.dim = dim;
         this.mainPanel = mainPanel;
-        this.levelsPanel = levelsPanel;
         this.game = game;
         this.player = game.getPlayer();
         System.out.println(player);
@@ -80,13 +79,13 @@ public class GamePanel extends JPanel {
             }
         });
 
-        botPlay = new JButton("Let bot play!", Images.getWoodIcon());
+        botPlay = new JButton("PlayBot", Images.getSmallWoodIcon());
         botPlay.setContentAreaFilled(false);
         Border emptyBorder = BorderFactory.createEmptyBorder();
         botPlay.setBorder(emptyBorder);
         botPlay.setHorizontalTextPosition(SwingConstants.CENTER);
         botPlay.setVerticalTextPosition(SwingConstants.CENTER);
-        botPlay.setFont(Fonts.getBlueberryFont());
+        botPlay.setFont(Fonts.getBlueberrySmallFont());
         botPlay.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -114,7 +113,7 @@ public class GamePanel extends JPanel {
                 botPlay.setForeground(Colors.B_GRAY);
             }
         });
-        botPlay.setBounds(400, 50, 300, 100);
+        botPlay.setBounds(500, 20, 120, 120);
         this.add(botPlay);
         initOptionBar();
     }
@@ -132,14 +131,15 @@ public class GamePanel extends JPanel {
                     "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
             if (option == 0) {
                 mainPanel.removeAll();
-                game = new Game(mainPanel, levelsPanel, board.getLevelNumber() + 1, game.getPlayer());
+                game.getPlayer().setLastLevel(game.getPlayer().getLastLevel() + 1);
+                game = new Game(mainPanel, board.getLevelNumber() + 1, game.getPlayer());
                 board = game.getBoard();
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
             if (option == 1) {
                 mainPanel.removeAll();
-                game = new Game(mainPanel, levelsPanel, board.getLevelNumber(), game.getPlayer());
+                game = new Game(mainPanel, board.getLevelNumber(), game.getPlayer());
                 board = game.getBoard();
                 mainPanel.repaint();
                 mainPanel.revalidate();
@@ -160,10 +160,17 @@ public class GamePanel extends JPanel {
         op.setBounds(0, 0, 250, 250);
         op.setVisible(true);
         op.getBackButton().addActionListener(actionEvent -> {
-            mainPanel.removeAll();
-            mainPanel.add(levelsPanel);
-            mainPanel.repaint();
-            mainPanel.revalidate();
+            String[] options = {"Yes!", "Cancel"};
+            int option = JOptionPane.showOptionDialog(null, "Are you sure you want to exit? Your game will be saved.",
+                    "Exit Game", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (option == 0) {
+                game.serializePlayerData();
+                mainPanel.removeAll();
+                mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, dim), dim, player));
+                mainPanel.repaint();
+                mainPanel.revalidate();
+            }
+
         });
         this.add(op);
     }

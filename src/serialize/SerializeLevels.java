@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import model.Level;
 
 public class SerializeLevels {
-    public static int num_file = 0;
+    public static int num_file = 1;
     private LevelsResource serializable_levels;
 
     //TODO : after making sure that our both method to stock levels work
