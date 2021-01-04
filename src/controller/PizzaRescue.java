@@ -59,7 +59,7 @@ public class PizzaRescue {
     public PizzaRescue() {
     }
 
-    public PizzaRescue(boolean b) {
+    public PizzaRescue(boolean b, int n) {
         if (b) {
 //            Time.deserializeLastTime();
             SwingUtilities.invokeLater(() -> {
@@ -67,7 +67,7 @@ public class PizzaRescue {
                 gui.setVisible(true);
             });
         } else {
-            textUI = new TUI();
+            textUI = new TUI(n);
         }
     }
 
@@ -100,22 +100,21 @@ public class PizzaRescue {
             if (commandLine.hasOption("h"))
                 displayHelpAndExit();
             if (isValidLevel(commandLine.getOptionValue("l"))) {
+            	int n = Integer.parseInt(commandLine.getOptionValue("l"));
                 if (commandLine.hasOption("t")) {
-                    PizzaRescue p = new PizzaRescue(false);
+                    PizzaRescue p = new PizzaRescue(false, n);
                     if (new File("user/player_data").exists()) {
                         System.out.println("player data exists");
                         System.out.println(Player.deserialize().getLastLevel());
                         System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
                         if (Player.deserialize().getLastLevel() >= Integer.parseInt(commandLine.getOptionValue("l"))) {
                             System.out.println("ok");
-                            p.textUI.setLevel(Integer.parseInt(commandLine.getOptionValue("l")));
-                            //TODO : Call the text user interface and select the good level
                         }
                     }
                 }
                 if (commandLine.hasOption("g")) {
                     System.out.println("graphical method");
-                    new PizzaRescue(true);
+                    new PizzaRescue(true, n);
                     if (new File("user/player_data").exists()) {
 //                    	System.out.println(Player.deserialize().getLastLevel());
 //                    	System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
@@ -125,7 +124,7 @@ public class PizzaRescue {
                     }
                 }
                 if (args.length == 2) {
-                    new PizzaRescue(false);
+                    new PizzaRescue(false, n);
                 }
             } else {
                 System.err.println("You must declare an int between 1 and 10");

@@ -12,7 +12,7 @@ public class PizzaBox extends Box {
     }
 
     public String toString() {
-        return "PizzaBox";
+        return "$";
     }
 
     @Override

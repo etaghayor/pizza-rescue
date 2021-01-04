@@ -324,12 +324,7 @@ public class GameBoard {
     public void printBoard() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (board[i][j].getType() == BoxType.EMPTY)
-                    System.out.print("n ");
-                else {
-                    FruitBox cb = (FruitBox) board[i][j];
-                    System.out.print(cb.getColor().toString().charAt(0) + " ");
-                }
+              System.out.print(board[i][j]+" ");
             }
             System.out.println();
         }

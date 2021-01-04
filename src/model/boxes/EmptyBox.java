@@ -1,8 +1,5 @@
 package model.boxes;
 
-import model.boxes.Box;
-import model.boxes.BoxType;
-
 public class EmptyBox extends Box {
 
     /**
@@ -14,4 +11,7 @@ public class EmptyBox extends Box {
     public BoxType getType() {
         return BoxType.EMPTY;
     }
+	public String toString() {
+		return " ";
+	}
 }

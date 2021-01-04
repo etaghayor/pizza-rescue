@@ -10,7 +10,7 @@ public class ObstacleBox extends Box {
 
 
     public String toString() {
-        return "Obstacle";
+        return "#";
     }
 
     public ObstacleBox() {
