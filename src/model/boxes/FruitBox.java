@@ -59,7 +59,7 @@ public class FruitBox extends Box {
     }
 
     public String toString() {
-        return Character.toString(color.toString().charAt(0));
+        return color.toString().charAt(0) + "";
     }
 
     @Override

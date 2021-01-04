@@ -10,8 +10,9 @@ public abstract class Box extends Animatable implements Cloneable, Serializable 
     protected BoxType type;
 
 
-
     public abstract BoxType getType();
+
+    public abstract String toString();
 
     @Override
     public Box clone() throws CloneNotSupportedException {

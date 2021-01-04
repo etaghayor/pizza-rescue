@@ -32,14 +32,13 @@ public class GameBoard {
 
 //        initLocations();
     }
-   
 
 
     public void updateData() {
-//        if (level.getNumber() == 6) {
-//            level6Color1 = ((FruitBox) board[8][4]).getColor();
-//            level6Color2 = ((FruitBox) board[8][8]).getColor();
-//        }
+        if (level.getNumber() == 6) {
+            level6Color1 = ((FruitBox) board[8][4]).getColor();
+            level6Color2 = ((FruitBox) board[8][8]).getColor();
+        }
         initLocations();
     }
 
@@ -73,10 +72,10 @@ public class GameBoard {
     }
 
 
-    public void emptyPack(int x, int y) {
+    public boolean emptyPack(int x, int y) {
         fruitCount = 0;
         if (board[x][y].getType() != BoxType.FRUIT)
-            return;
+            return false;
         FruitBox clickedBox = (FruitBox) board[x][y];
         int count = 1;
 
@@ -90,7 +89,7 @@ public class GameBoard {
             count++;
 
         if (count < 2)
-            return;
+            return false;
 
         try {
             if (Sounds.musicOn)
@@ -99,9 +98,10 @@ public class GameBoard {
             e.printStackTrace();
         }
         fruitCount = emptyPackAux(x, y, 1);
-        level.getGame().getPlayer().updateScore((int) Math.min(Math.pow(2, fruitCount), 2000));
+        if (level.getGame() != null)
+            level.getGame().getPlayer().updateScore((int) Math.min(Math.pow(2, fruitCount), 2000));
         rearrange();
-
+        return true;
     }
 
 
@@ -210,8 +210,8 @@ public class GameBoard {
                     }
             }
         }
-//        if (level.getNumber() == 6)
-//            infiniteBoxesForLevel6();
+        if (level.getNumber() == 6)
+            infiniteBoxesForLevel6();
 
     }
 
@@ -258,8 +258,8 @@ public class GameBoard {
                 moved = false;
             }
         }
-//        if (level.getNumber() == 6)
-//            infiniteBoxesForLevel6();
+        if (level.getNumber() == 6)
+            infiniteBoxesForLevel6();
     }
 
     private void infiniteBoxesForLevel6() {
@@ -322,9 +322,20 @@ public class GameBoard {
 
 
     public void printBoard() {
+        System.out.print("   ");
+        for (int i = 0; i < width; i++) {
+            System.out.print((i + 1) + " ");
+        }
+        System.out.println();
+//        for (int i = 0; i < width; i++) {
+//            System.out.print("---");
+//        }
+//        System.out.println();
         for (int i = 0; i < height; i++) {
+            System.out.print((i + 1) + " |");
+
             for (int j = 0; j < width; j++) {
-              System.out.print(board[i][j]+" ");
+                System.out.print(board[i][j] + " ");
             }
             System.out.println();
         }
@@ -337,6 +348,7 @@ public class GameBoard {
     public void setFruitCount(int fruitCount) {
         this.fruitCount = fruitCount;
     }
-	public void setLevel(int optionValue) {
-	}
+
+    public void setLevel(int optionValue) {
+    }
 }

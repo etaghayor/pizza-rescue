@@ -21,16 +21,16 @@ import view.MenuPanel;
 import javax.swing.*;
 
 public class Game {
-    private final GamePanel gamePanel;
-    private final Level level;
+    private GamePanel gamePanel = null;
+    private  Level level = null;
     private Box[][] board;
-    private final GameBoard gameBoard;
+    private  GameBoard gameBoard = null;
     private Thread thread;
     private final Player player;
     private boolean botMode = false;
     private boolean allBoxesAreStill = true;
     boolean allBoxesReachedTarget;
-    private final MainPanel mainPanel;
+    private MainPanel mainPanel = null;
 
     public Game(MainPanel mainPanel, int lNumber, Player player) {
         this.level = new Level(lNumber, this);
@@ -38,12 +38,7 @@ public class Game {
         this.gameBoard = level.getGameBoard();
         this.player = player;
 
-        int playersLastLife = player.getLife();
-        int l = Time.calcAddableLife();
-        System.out.println(l + " lives should be added");
-        player.updateLife(playersLastLife + l);
-        if (playersLastLife < player.getLife())
-            Time.serializeTime();
+        respawnLife();
 
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
@@ -53,6 +48,14 @@ public class Game {
 
     }
 
+    public Game(Player player) {
+//        this.level = new Level(lNumber, this);
+//        this.gameBoard = level.getGameBoard();
+        this.player = player;
+
+        respawnLife();
+    }
+
     synchronized private void initAnimationThread() {
         board = gameBoard.getBoard();
 
@@ -60,10 +63,9 @@ public class Game {
             while (true) {
 //                synchronized (board) {
 //                    update:
-                int playersLastLife = player.getLife();
-                player.updateLife(playersLastLife + Time.calcAddableLife());
-                if (playersLastLife < player.getLife())
-                    Time.serializeTime();
+
+                respawnLife();
+
                 allBoxesReachedTarget = true;
                 allBoxesAreStill = true;
                 for (Box[] boxes : board) {
@@ -150,12 +152,12 @@ public class Game {
 
         if (!directory.exists()) {
             directory.mkdir();
-            System.out.println("user directory created");
+//            System.out.println("user directory created");
         }
         try (FileOutputStream fos = new FileOutputStream("user/player_data");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(player);
-            System.out.println("The file user/player_data has been serialized in user directory");
+//            System.out.println("The file user/player_data has been serialized in user directory");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -174,5 +176,12 @@ public class Game {
         return player;
     }
 
+    public void respawnLife() {
+        int playersLastLife = player.getLife();
+        int l = Time.calcAddableLife();
+        player.updateLife(playersLastLife + l);
+        if (playersLastLife < player.getLife())
+            Time.serializeTime();
+    }
 
 }

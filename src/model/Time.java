@@ -48,15 +48,15 @@ public class Time {
     public static void serializeTime() {
         File directory = new File("user");
         calcNow();
-        System.out.println(currentTime);
+//        System.out.println(currentTime);
         if (!directory.exists()) {
             directory.mkdir();
-            System.out.println("user directory created");
+//            System.out.println("user directory created");
         }
         try (FileOutputStream fos = new FileOutputStream("user/last_time_played");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(currentTime);
-            System.out.println("The file user/last_time_played has been serialized in user directory");
+//            System.out.println("The file user/last_time_played has been serialized in user directory");
 
         } catch (IOException e) {
             e.printStackTrace();
