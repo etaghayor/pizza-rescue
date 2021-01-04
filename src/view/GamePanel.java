@@ -133,6 +133,7 @@ public class GamePanel extends JPanel {
                 mainPanel.removeAll();
                 if (game.getPlayer().getLastLevel() == game.getLevel().getNumber()) {
                 game.getPlayer().setLastLevel(game.getPlayer().getLastLevel() + 1);
+//                game.serializePlayerData();
                 }
                 game = new Game(mainPanel, board.getLevelNumber() + 1, game.getPlayer());
                 board = game.getBoard();
@@ -147,16 +148,21 @@ public class GamePanel extends JPanel {
                 mainPanel.revalidate();
             }
         } else {
+        	if(game.getPlayer().getLife() > 0) {
             game.getPlayer().updateLife(-1);
+        	}
             repaint();
             revalidate();
             if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
                     "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
-                board = new Level(board.getLevelNumber(), game).getGameBoard();
+            	mainPanel.removeAll();
+                game = new Game(mainPanel, board.getLevelNumber(), game.getPlayer());
+                board = game.getBoard();
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
         }
+        game.serializePlayerData();
     }
 
     private void initOptionBar() {

@@ -18,11 +18,14 @@ public class Level implements Serializable {
     private int number;
     private int bonuses = 0;
     private Game game;
+    
 
     public Level(GameBoard b) {
         setGameBoard(b);
     }
-
+    public Box[][] getBoard() {
+    	return this.gameBoard.getBoard();
+    }
     public Level(int l, Game game) {
         this.game = game;
         this.number = l;
@@ -68,11 +71,11 @@ public class Level implements Serializable {
                 this.pizzas = 5;
             }
         }
-        
-
+       
         updateImageAndColor();
         gameBoard.initLocations();
     }
+    
 
 
     public GameBoard getGameBoard() {

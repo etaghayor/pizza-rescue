@@ -98,16 +98,17 @@ public class PizzaRescue {
                 displayHelpAndExit();
             if (isValidLevel(commandLine.getOptionValue("l"))) {
                 if (commandLine.hasOption("t")) {
-                    new PizzaRescue(false);
+                    PizzaRescue p = new PizzaRescue(false);
                     if (new File("user/player_data").exists()) {
                     	System.out.println("player data exists");
                     	System.out.println(Player.deserialize().getLastLevel());
                     	System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
                     	if (Player.deserialize().getLastLevel() >= Integer.parseInt(commandLine.getOptionValue("l"))) {
                     	System.out.println("ok");
+                    	p.textUI.setLevel(Integer.parseInt(commandLine.getOptionValue("l")));
+                    	//TODO : Call the text user interface and select the good level
                     	}
                     }
-                    //Call the text user interface and select the good level
                 }
                 if (commandLine.hasOption("g")) {
                     System.out.println("graphical method");

@@ -28,6 +28,13 @@ public class GameBoard {
         this.level = l;
 //        initLocations();
     }
+    public GameBoard(Level l) {
+        this.board = l.getBoard();
+        this.width = board[0].length;
+        this.height = board.length;
+        this.level = l;
+//        initLocations();
+    }
 
     public boolean outOfRange(int x, int y) {
         return x < 0 || x >= height || y < 0 || y >= width;
@@ -315,4 +322,6 @@ public class GameBoard {
     public void setFruitCount(int fruitCount) {
         this.fruitCount = fruitCount;
     }
+	public void setLevel(int optionValue) {
+	}
 }

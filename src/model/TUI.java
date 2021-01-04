@@ -14,9 +14,14 @@ public class TUI {
 //		Level l1 = new Level(0, new Game(null, 1, new Player()));
 //		board = new GameBoard();
 //		board = new Level(board.getLevelNumber(), game).getGameBoard();
+//		board = new GameBoard(new Level(0, null)) ;
 		
 	}
 	private void setGame(Game game) {
 		this.game = game;
+	}
+	public void setLevel(int optionValue) {
+//		board.setLevel(optionValue);
+		//TODO setLevel in GameBoard hasn't been written
 	}
 }
