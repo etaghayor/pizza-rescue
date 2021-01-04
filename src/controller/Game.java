@@ -38,8 +38,10 @@ public class Game {
 //            player.updateLife(player.getLife() - 1);
 //        }
         this.player = player;
-        player.updateLife(player.getLife() + Time.calcDistance());
-        Time.serializeTime();
+        int playersLastLife = player.getLife();
+        player.updateLife(playersLastLife + Time.calcDistance());
+        if (playersLastLife != player.getLife())
+            Time.serializeTime();
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
 
