@@ -5,12 +5,14 @@ import media.Colors;
 import media.Fonts;
 import media.Images;
 import model.Player;
+import model.Player.Life;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Timer;
 
 public class LevelsPanel extends JPanel {
     private final int LastLevel = 0;
@@ -28,10 +30,16 @@ public class LevelsPanel extends JPanel {
         this.menuPanel = menuPanel;
         this.dim = dim;
         this.player = player;
-        init();
+//        TODO : if u have an idea of where I can put this...
+//        if (player.getLife() <5) {
+//    		Timer timer = new Timer();
+//    		timer.schedule(player.new Life(), 5000, 5000);
+//    	}	
+//        init();
     }
 
     private void init() {
+    	
         this.setLayout(null);
         this.setSize(dim);
         this.setOpaque(false);

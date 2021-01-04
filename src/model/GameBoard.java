@@ -1,12 +1,14 @@
 package model;
 
 import media.Sounds;
+import model.Player.Life;
 import model.boxes.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 public class GameBoard {
@@ -28,13 +30,7 @@ public class GameBoard {
         this.level = l;
 //        initLocations();
     }
-    public GameBoard(Level l) {
-        this.board = l.getBoard();
-        this.width = board[0].length;
-        this.height = board.length;
-        this.level = l;
-//        initLocations();
-    }
+   
 
     public boolean outOfRange(int x, int y) {
         return x < 0 || x >= height || y < 0 || y >= width;

@@ -1,5 +1,12 @@
 package controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Random;
+import java.util.Timer;
+
 import model.GameBoard;
 import model.Level;
 import model.Player;
@@ -7,17 +14,7 @@ import model.boxes.Animatable;
 import model.boxes.Box;
 import model.boxes.BoxType;
 import view.GamePanel;
-import view.LevelsPanel;
 import view.MainPanel;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Random;
 
 public class Game {
     private final GamePanel gamePanel;
@@ -33,22 +30,29 @@ public class Game {
     public Game(MainPanel mainPanel, int lNumber, Player player) {
         this.level = new Level(lNumber, this);
         this.gameBoard = level.getGameBoard();
-        if (player == null)
-            this.player = new Player(); //TODO read from file
-        else
-            this.player = player;
+        if (player == null) {
+        	if (new File("user/player_data").exists()) 
+        		this.player = Player.deserialize();
+        	 else
+        	this.player = new Player(); 
+        }
+        else {
+        	this.player = player;
+        	player.updateLife(player.getLife()-1);
+        }
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
 
         initAnimationThread();
         thread.start();
+
     }
 
     synchronized private void initAnimationThread() {
         board = gameBoard.getBoard();
-
+        System.out.println(player.getLife());
+        
         thread = new Thread(() -> {
-
             while (true) {
 //                synchronized (board) {
 //                    update:
@@ -70,6 +74,7 @@ public class Game {
                         }
                     }
                 }
+                
                 if (botMode && (allBoxesReachedTarget || allBoxesAreStill)) {
                     botPlay();
                 }
@@ -85,11 +90,18 @@ public class Game {
                     gamePanel.showOptionWindow(false);
                     return;
                 }
+//                if (player.getLife() <=5) {
+//                	Timer timer = new Timer();
+//                	timer.schedule(player.new Life(), 5000, 5000);
+//                	
+//                } 
                 try {
                     Thread.sleep(7);
+                   
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                
 
             }
         });

@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.Timer;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,6 +13,7 @@ import media.Colors;
 import media.Fonts;
 import media.Images;
 import model.Player;
+import model.Player.Life;
 
 public class MenuPanel extends JPanel {
     /**
@@ -104,6 +106,10 @@ public class MenuPanel extends JPanel {
                 playButton.repaint();
                 mainPanel.removeAll();
                 Player player = new Player();
+                	if (new File("user/player_data").exists()) 
+                		player = Player.deserialize();
+                	 else
+                	player = new Player(); 
                 mainPanel.add(new LevelsPanel(mainPanel, menuPanel, dim, player));
                 mainPanel.repaint();
                 mainPanel.revalidate();

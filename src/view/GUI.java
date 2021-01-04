@@ -41,7 +41,6 @@ public class GUI extends JFrame {
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
-
     }
 }
 

@@ -16,7 +16,7 @@ public class Level implements Serializable {
     private GameBoard gameBoard;
     private int pizzas;
     private int number;
-    private int bonuses = 0;
+    private int bonuses;
     private Game game;
     
 
@@ -26,6 +26,8 @@ public class Level implements Serializable {
     public Box[][] getBoard() {
     	return this.gameBoard.getBoard();
     }
+    //TODO : Don't remember we have to set the bonuses for the impossible levels
+    // In this way the user won't lose the game until he hasn't used his bonuses
     public Level(int l, Game game) {
         this.game = game;
         this.number = l;
@@ -86,18 +88,6 @@ public class Level implements Serializable {
         this.gameBoard = gameBoard;
     }
 
-
-//    // This function is here to make sure there is no case null
-//// With emptyBox() instead, in that way, we never have to handle
-//// NullPointerException
-//    private void validateLevel() {
-//        for (int j = 0; j < board.getWidth(); j++) {
-//            for (int i = 0; i < board.getHeight(); i++) {
-//                if (board.getBoard()[i][j] == null)
-//                    board.getBoard()[i][j] = new EmptyBox();
-//            }
-//        }
-//    }
 
     // We will create many levels and add each of them in different
     // files and the only thing we would have to do is recover the

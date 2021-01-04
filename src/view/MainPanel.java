@@ -1,12 +1,13 @@
 package view;
 
-import media.Images;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.image.ImageObserver;
+import javax.swing.JPanel;
+
+import media.Images;
 
 public class MainPanel extends JPanel {
     /**

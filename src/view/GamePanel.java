@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.Timer;
 
 import controller.Game;
 import media.Colors;
@@ -15,6 +16,7 @@ import media.Fonts;
 import media.Images;
 import media.Sounds;
 import model.*;
+import model.Player.Life;
 import model.boxes.Animatable;
 
 public class GamePanel extends JPanel {
@@ -39,6 +41,7 @@ public class GamePanel extends JPanel {
         System.out.println(player);
         board = game.getBoard();
         init();
+        
     }
 
     private void init() {
@@ -113,6 +116,7 @@ public class GamePanel extends JPanel {
                 botPlay.setForeground(Colors.B_GRAY);
             }
         });
+        
         botPlay.setBounds(500, 20, 120, 120);
         this.add(botPlay);
         initOptionBar();
@@ -148,9 +152,6 @@ public class GamePanel extends JPanel {
                 mainPanel.revalidate();
             }
         } else {
-        	if(game.getPlayer().getLife() > 0) {
-            game.getPlayer().updateLife(-1);
-        	}
             repaint();
             revalidate();
             if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
@@ -187,6 +188,8 @@ public class GamePanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+    	
+
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         startX = (dim.width - board.getWidth() * BOX_WIDTH) / 2;

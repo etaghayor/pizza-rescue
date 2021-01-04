@@ -1,13 +1,20 @@
 package model;
 
-import model.boxes.Box;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.TimerTask;
 
 public class Player implements Serializable {
-    private int score, life = 5, coin;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5440700875333587811L;
+	private int score, life = 5, coin;
     private int lastLevel = 1;
-
 
     public Player() {
         super();
@@ -68,6 +75,21 @@ public class Player implements Serializable {
     }
 
     public void updateLife(int l) {
-        this.life += l;
+    	if(l<=5 && l>=0) {
+        this.life = l;
+    	}
     }
+    
+    public class Life extends TimerTask {
+
+    	@Override
+    	public void run() {
+    	getPlayer().updateLife(getLife()+1);
+    	System.out.println(getPlayer().getLife());
+    	}
+    	public Player getPlayer() {
+    		   return Player.this;
+    		}
+    }
+
 }
