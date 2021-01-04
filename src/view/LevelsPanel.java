@@ -6,6 +6,7 @@ import media.Fonts;
 import media.Images;
 import model.Player;
 import model.Player.Life;
+import model.Time;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -66,8 +67,16 @@ public class LevelsPanel extends JPanel {
                     if (clickable) {
                         levels[myIndex].setForeground(Color.BLACK);
                         Player player = new Player();
+
+                        int playersLastLife = player.getLife();
+                        int l = Time.calcDistance();
+                        System.out.println(l + " lives should be added");
+                        player.updateLife(playersLastLife + l);
+                        if (playersLastLife < player.getLife())
+                            Time.serializeTime();
+
                         if (player.getLife() < 1) {
-                            JOptionPane.showConfirmDialog(null, "You can't play with 0 lives!");
+                            JOptionPane.showMessageDialog(null, "You can't play with 0 lives!");
                         } else {
                             mainPanel.removeAll();
 //                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim));

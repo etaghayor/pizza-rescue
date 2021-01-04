@@ -37,7 +37,7 @@ public class Player implements Serializable {
         Player deserializablePlayer = null;
         try (FileInputStream fis = new FileInputStream(path); ObjectInputStream ois = new ObjectInputStream(fis)) {
             deserializablePlayer = (Player) ois.readObject();
-            System.out.println("Player has been deserialize");
+            System.out.println("Player has been deserialized");
         } catch (FileNotFoundException e) {
             System.err.println("The file : " + path + " cannot be found.");
             e.printStackTrace();

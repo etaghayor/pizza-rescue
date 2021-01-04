@@ -15,35 +15,37 @@ import model.boxes.Animatable;
 import model.boxes.Box;
 import model.boxes.BoxType;
 import view.GamePanel;
+import view.LevelsPanel;
 import view.MainPanel;
+import view.MenuPanel;
+
+import javax.swing.*;
 
 public class Game {
     private final GamePanel gamePanel;
     private final Level level;
     private Box[][] board;
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
     private Thread thread;
     private final Player player;
     private boolean botMode = false;
     private boolean allBoxesAreStill = true;
     boolean allBoxesReachedTarget;
+    private final MainPanel mainPanel;
 
     public Game(MainPanel mainPanel, int lNumber, Player player) {
         this.level = new Level(lNumber, this);
+        this.mainPanel = mainPanel;
         this.gameBoard = level.getGameBoard();
-//        if (player == null) {
-//            this.player = new Player();
-//        } else {
-//            this.player = player;
-//            player.updateLife(player.getLife() - 1);
-//        }
         this.player = player;
+
         int playersLastLife = player.getLife();
         int l = Time.calcDistance();
         System.out.println(l + " lives should be added");
         player.updateLife(playersLastLife + l);
         if (playersLastLife < player.getLife())
             Time.serializeTime();
+
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
 
@@ -54,7 +56,6 @@ public class Game {
 
     synchronized private void initAnimationThread() {
         board = gameBoard.getBoard();
-        System.out.println("player's life:" + player.getLife());
 
         thread = new Thread(() -> {
             while (true) {
@@ -94,8 +95,17 @@ public class Game {
                     return;
                 }
                 if (gameBoard.hasLost()) {
-                    gamePanel.showOptionWindow(false);
                     player.updateLife(player.getLife() - 1);
+                    if (player.getLife() <= 0) {
+                        JOptionPane.showMessageDialog(null, "You can't play with 0 lives!");
+                        serializePlayerData();
+                        mainPanel.removeAll();
+                        mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, mainPanel.getDim()), mainPanel.getDim(), player));
+                        mainPanel.repaint();
+                        mainPanel.revalidate();
+                    } else {
+                        gamePanel.showOptionWindow(false);
+                    }
                     return;
                 }
 //                if (player.getLife() <=5) {

@@ -96,7 +96,7 @@ public class Level implements Serializable {
         Box[][] deserializableBoard = null;
         try (FileInputStream fis = new FileInputStream(path); ObjectInputStream ois = new ObjectInputStream(fis)) {
             deserializableBoard = (Box[][]) ois.readObject();
-            System.out.println("The level " + path.substring(13) + " has been deserialize");
+            System.out.println("The level " + path.substring(13) + " has been deserialized");
         } catch (FileNotFoundException e) {
             System.err.println("The file : " + path + " cannot be found.");
             e.printStackTrace();
