@@ -12,7 +12,9 @@ public class TUI {
     public TUI() {
         System.out.println("Pizza Rescue Saga Game in textual interface");
         Scanner in = new Scanner(System.in);
-		
+        System.out.println("");
+        int level = in.nextInt();
+
 //		Level l1 = new Level(0, new Game(null, 1, new Player()));
 //		board = new GameBoard();
 //		board = new Level(board.getLevelNumber(), game).getGameBoard();

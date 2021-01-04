@@ -83,7 +83,7 @@ public class Game {
                     return;
                 }
                 if (gameBoard.hasLost()) {
-                    gamePanel.showOptionWindow(false);
+                    gamePanel.showOptionWindow(true);
                     return;
                 }
 //                if (player.getLife() <=5) {

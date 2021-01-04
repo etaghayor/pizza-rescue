@@ -36,10 +36,10 @@ public class GameBoard {
 
 
     public void updateData() {
-        if (level.getNumber() == 6) {
-            level6Color1 = ((FruitBox) board[8][4]).getColor();
-            level6Color2 = ((FruitBox) board[8][8]).getColor();
-        }
+//        if (level.getNumber() == 6) {
+//            level6Color1 = ((FruitBox) board[8][4]).getColor();
+//            level6Color2 = ((FruitBox) board[8][8]).getColor();
+//        }
         initLocations();
     }
 
@@ -210,8 +210,8 @@ public class GameBoard {
                     }
             }
         }
-        if (level.getNumber() == 6)
-            infiniteBoxesForLevel6();
+//        if (level.getNumber() == 6)
+//            infiniteBoxesForLevel6();
 
     }
 
@@ -258,8 +258,8 @@ public class GameBoard {
                 moved = false;
             }
         }
-        if (level.getNumber() == 6)
-            infiniteBoxesForLevel6();
+//        if (level.getNumber() == 6)
+//            infiniteBoxesForLevel6();
     }
 
     private void infiniteBoxesForLevel6() {
