@@ -17,6 +17,7 @@ public class GameBoard {
     private final int width;
     private int savedPizza = 0;
     private int fruitCount = 0;
+    private FruitBox.Color level6Color1, level6Color2;
     private final Level level;
     //    private Player playe;
     private static final int BOX_WIDTH = 60;
@@ -28,9 +29,19 @@ public class GameBoard {
         this.width = board[0].length;
         this.height = board.length;
         this.level = l;
+
 //        initLocations();
     }
    
+
+
+    public void updateData() {
+        if (level.getNumber() == 6) {
+            level6Color1 = ((FruitBox) board[8][4]).getColor();
+            level6Color2 = ((FruitBox) board[8][8]).getColor();
+        }
+        initLocations();
+    }
 
     public boolean outOfRange(int x, int y) {
         return x < 0 || x >= height || y < 0 || y >= width;
@@ -159,10 +170,7 @@ public class GameBoard {
     // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
     public void rearrange() {
         vertical_rearrange();
-
-//        for (int i = 0; i < width - 1; i++) {
         horizontal_rearrange();
-//        vertical_rearrange();
 
         while (isPizzaDown()) {
             savePizza();
@@ -202,6 +210,8 @@ public class GameBoard {
                     }
             }
         }
+        if (level.getNumber() == 6)
+            infiniteBoxesForLevel6();
 
     }
 
@@ -210,7 +220,6 @@ public class GameBoard {
         for (int j = 1; j < width; j++) {
             shouldMove = false;
             for (int i = height - 1; i >= 0; i--) {
-//                shouldMove = false;
 
                 while ((board[i][j] instanceof ObstacleBox /*|| i == height - 1*/)
                         && (board[i][j - 1] instanceof EmptyBox || board[i][j - 1] instanceof ObstacleBox)) {
@@ -248,6 +257,23 @@ public class GameBoard {
                 j -= 2;
                 moved = false;
             }
+        }
+        if (level.getNumber() == 6)
+            infiniteBoxesForLevel6();
+    }
+
+    private void infiniteBoxesForLevel6() {
+        for (int i = 0; i < height; i++) {
+            if (board[i][getWidth() - 1].getType() == BoxType.EMPTY) {
+                int r = new Random().nextInt(2);
+                if (r == 0)
+                    board[i][getHeight() - 1] = new FruitBox(level6Color1);
+                else
+                    board[i][getHeight() - 1] = new FruitBox(level6Color2);
+                board[i][getHeight() - 1].setPos((getHeight() - 1) * BOX_WIDTH, i * BOX_WIDTH);
+                board[i][getHeight() - 1].setLastPos((getHeight() - 1) * BOX_WIDTH, -BOX_WIDTH);
+            } else
+                return;
         }
     }
 
@@ -293,8 +319,6 @@ public class GameBoard {
     public Box[][] getBoard() {
         return board;
     }
-
-    long last = System.currentTimeMillis();
 
 
     public void printBoard() {

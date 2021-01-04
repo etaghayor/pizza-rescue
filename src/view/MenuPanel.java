@@ -106,10 +106,6 @@ public class MenuPanel extends JPanel {
                 playButton.repaint();
                 mainPanel.removeAll();
                 Player player = new Player();
-                	if (new File("user/player_data").exists()) 
-                		player = Player.deserialize();
-                	 else
-                	player = new Player(); 
                 mainPanel.add(new LevelsPanel(mainPanel, menuPanel, dim, player));
                 mainPanel.repaint();
                 mainPanel.revalidate();

@@ -3,6 +3,7 @@ package media;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 
 public class Sounds {
@@ -26,15 +27,17 @@ public class Sounds {
 
     public static void playPackRemovedSound() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         if (packRemovedSound == null) {
-            File f = new File("resources/sounds/pack_removed.wav");
+            String path = "resources/sounds/pack_removed.wav";
+            File f = new File(path);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
             packRemovedSound = AudioSystem.getClip();
             packRemovedSound.open(audioIn);
         }
-        packRemovedSound.stop();
+        if (packRemovedSound.isRunning())
+            packRemovedSound.stop();
         packRemovedSound.setMicrosecondPosition(0);
         packRemovedSound.start();
-        packRemovedSound.flush();
+//        packRemovedSound.flush();
     }
 
     public static void playWonSound() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
@@ -44,9 +47,10 @@ public class Sounds {
             wonSound = AudioSystem.getClip();
             wonSound.open(audioIn);
         }
+
         wonSound.stop();
         wonSound.setMicrosecondPosition(0);
         wonSound.start();
-        packRemovedSound.flush();
+//        packRemovedSound.flush();
     }
 }

@@ -35,7 +35,7 @@ public class LevelsPanel extends JPanel {
 //    		Timer timer = new Timer();
 //    		timer.schedule(player.new Life(), 5000, 5000);
 //    	}	
-//        init();
+        init();
     }
 
     private void init() {

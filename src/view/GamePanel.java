@@ -21,14 +21,14 @@ import model.boxes.Animatable;
 
 public class GamePanel extends JPanel {
 
-    private Dimension dim;
-    private GameBoard board;
-    private Player player;
+    private final Dimension dim;
+    private GameBoard gameBoard;
+    private final Player player;
+    private boolean rocketChosen, rocketReady, rocketFired;
     private int x, y;
     private static int startX, startY;
     private final static int BOX_WIDTH = 60;
-    private MainPanel mainPanel;
-    private MenuPanel menuPanel;
+    private final MainPanel mainPanel;
     private Game game;
     private JButton botPlay;
 
@@ -38,10 +38,9 @@ public class GamePanel extends JPanel {
         this.mainPanel = mainPanel;
         this.game = game;
         this.player = game.getPlayer();
-        System.out.println(player);
-        board = game.getBoard();
+        gameBoard = game.getBoard();
         init();
-        
+
     }
 
     private void init() {
@@ -53,8 +52,8 @@ public class GamePanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 x = (mouseEvent.getX() - startX) / BOX_WIDTH;
                 y = (mouseEvent.getY() - startY) / BOX_WIDTH;
-                if (!board.outOfRange(y, x) && board.boxHasReachedTarget(y, x)) // to avoid deleting a fruit that hasn't reached its target
-                    board.emptyPack(y, x);
+                if (!gameBoard.outOfRange(y, x) && gameBoard.boxHasReachedTarget(y, x)) // to avoid deleting a fruit that hasn't reached its target
+                    gameBoard.emptyPack(y, x);
 
 
                 repaint();
@@ -116,10 +115,19 @@ public class GamePanel extends JPanel {
                 botPlay.setForeground(Colors.B_GRAY);
             }
         });
-        
+
         botPlay.setBounds(500, 20, 120, 120);
         this.add(botPlay);
         initOptionBar();
+    }
+
+    private void drawRocket() {
+        JButton rocket = new JButton("rocket");
+        if (rocketReady) {
+            rocket.setIcon(Images.getRocketReady());
+
+        }
+
     }
 
     public void showOptionWindow(boolean hasWon) {
@@ -136,32 +144,40 @@ public class GamePanel extends JPanel {
             if (option == 0) {
                 mainPanel.removeAll();
                 if (game.getPlayer().getLastLevel() == game.getLevel().getNumber()) {
-                game.getPlayer().setLastLevel(game.getPlayer().getLastLevel() + 1);
+                    game.getPlayer().setLastLevel(game.getPlayer().getLastLevel() + 1);
 //                game.serializePlayerData();
                 }
-                game = new Game(mainPanel, board.getLevelNumber() + 1, game.getPlayer());
-                board = game.getBoard();
+                game = new Game(mainPanel, gameBoard.getLevelNumber() + 1, game.getPlayer());
+                gameBoard = game.getBoard();
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
             if (option == 1) {
                 mainPanel.removeAll();
-                game = new Game(mainPanel, board.getLevelNumber(), game.getPlayer());
-                board = game.getBoard();
+                game = new Game(mainPanel, gameBoard.getLevelNumber(), game.getPlayer());
+                gameBoard = game.getBoard();
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
         } else {
             repaint();
             revalidate();
-            if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
-                    "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
-            	mainPanel.removeAll();
-                game = new Game(mainPanel, board.getLevelNumber(), game.getPlayer());
-                board = game.getBoard();
-                mainPanel.repaint();
-                mainPanel.revalidate();
+
+            String[] options = {"Yes!", "No"};
+            int option = JOptionPane.showOptionDialog(null, "You have lost. Do you want to try again?",
+                    "Lost", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            if (option == 0) {
+                mainPanel.removeAll();
+                game = new Game(mainPanel, gameBoard.getLevelNumber(), game.getPlayer());
+                gameBoard = game.getBoard();
+            } else {
+                game.serializePlayerData();
+                mainPanel.removeAll();
+                mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, dim), dim, player));
             }
+            mainPanel.repaint();
+            mainPanel.revalidate();
         }
         game.serializePlayerData();
     }
@@ -188,24 +204,24 @@ public class GamePanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-    	
+
 
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        startX = (dim.width - board.getWidth() * BOX_WIDTH) / 2;
-        startY = (dim.height - board.getHeight() * BOX_WIDTH) / 2;
+        startX = (dim.width - gameBoard.getWidth() * BOX_WIDTH) / 2;
+        startY = (dim.height - gameBoard.getHeight() * BOX_WIDTH) / 2;
         g2.drawImage(Images.getWoodImage(), 30, dim.height - 180, null);
         g2.setFont(Fonts.getCevicheFont());
         String score = "Score: " + player.getScore();
         g2.drawString(score, 70, dim.height - 130);
         g2.drawString("Life: " + player.getLife(), 300, dim.height - 130);
         g2.setColor(new Color(125, 125, 125, 150));
-        g2.fillRoundRect(startX - 15, startY - 15, board.getWidth() * BOX_WIDTH + 30,
-                board.getHeight() * BOX_WIDTH + 30, 100, 100);
+        g2.fillRoundRect(startX - 15, startY - 15, gameBoard.getWidth() * BOX_WIDTH + 30,
+                gameBoard.getHeight() * BOX_WIDTH + 30, 100, 100);
 
-        for (int i = 0; i < board.getBoard().length; i++) {
-            for (int j = 0; j < board.getBoard()[0].length; j++) {
-                Animatable anim = board.getBoard()[i][j];
+        for (int i = 0; i < gameBoard.getBoard().length; i++) {
+            for (int j = 0; j < gameBoard.getBoard()[0].length; j++) {
+                Animatable anim = gameBoard.getBoard()[i][j];
                 anim.paint(g2, startX, startY);
             }
         }

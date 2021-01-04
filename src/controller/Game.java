@@ -31,14 +31,10 @@ public class Game {
         this.level = new Level(lNumber, this);
         this.gameBoard = level.getGameBoard();
         if (player == null) {
-        	if (new File("user/player_data").exists()) 
-        		this.player = Player.deserialize();
-        	 else
-        	this.player = new Player(); 
-        }
-        else {
-        	this.player = player;
-        	player.updateLife(player.getLife()-1);
+            this.player = new Player();
+        } else {
+            this.player = player;
+            player.updateLife(player.getLife() - 1);
         }
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
@@ -51,7 +47,7 @@ public class Game {
     synchronized private void initAnimationThread() {
         board = gameBoard.getBoard();
         System.out.println(player.getLife());
-        
+
         thread = new Thread(() -> {
             while (true) {
 //                synchronized (board) {
@@ -74,7 +70,7 @@ public class Game {
                         }
                     }
                 }
-                
+
                 if (botMode && (allBoxesReachedTarget || allBoxesAreStill)) {
                     botPlay();
                 }
@@ -97,11 +93,11 @@ public class Game {
 //                } 
                 try {
                     Thread.sleep(7);
-                   
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                
+
 
             }
         });
@@ -143,7 +139,7 @@ public class Game {
             e.printStackTrace();
         }
     }
-    
+
     public Level getLevel() {
         return level;
     }

@@ -17,6 +17,7 @@ public class Images {
     private static Icon avocadoImage, appleImage;
     private static Image woodImage, smallWoodImage;
     private static Image aboutUsTextImage;
+    private static Icon rocketReady, rocketFiring;
     private static Icon woodButtonIcon, woodLevelIcon, greyWoodLevelIcon, smallWoodIcon;
 
     public static Image getBackgroundImage() {
@@ -279,6 +280,32 @@ public class Images {
             }
         }
         return greyWoodLevelIcon;
+    }
+
+
+    public static Icon getRocketReady() {
+        if (rocketReady == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/rocket_ready.png"));
+                rocketReady = new ImageIcon(tmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return rocketReady;
+    }
+
+
+    public static Icon getRocketFiring() {
+        if (rocketFiring == null) {
+            try {
+                Image tmp = ImageIO.read(new File("resources/images/rocket_firing.png"));
+                rocketFiring = new ImageIcon(tmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return rocketFiring;
     }
 
     public static Image getAboutUsTextImage() {
