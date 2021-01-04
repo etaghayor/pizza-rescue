@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.File;
+
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -9,9 +13,9 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import model.Player;
+import model.TUI;
 import view.GUI;
-
-import javax.swing.*;
 
 
 public class PizzaRescue {
@@ -19,8 +23,8 @@ public class PizzaRescue {
     static CommandLineParser parser = new DefaultParser();
     static Options options = new Options();
     GUI gui;
-
-    //TextUI textUI;
+    TUI textUI;
+    
     static {
         OptionGroup interfaceGroup = new OptionGroup();
         interfaceGroup.addOption(
@@ -32,11 +36,6 @@ public class PizzaRescue {
                 Option.builder("g")
                         .longOpt("graphical")
                         .desc("Display a graphical interface")
-                        .build());
-        interfaceGroup.addOption(
-                Option.builder("b")
-                        .longOpt("bot")
-                        .desc("Let's a bot play the game on graphical interface")
                         .build());
         OptionGroup chooseLevel = new OptionGroup();
         chooseLevel.addOption(
@@ -65,7 +64,7 @@ public class PizzaRescue {
                 gui.setVisible(true);
             });
         } else {
-            //textUI = new TextUI();
+            textUI = new TUI();
         }
     }
 
@@ -100,24 +99,29 @@ public class PizzaRescue {
             if (isValidLevel(commandLine.getOptionValue("l"))) {
                 if (commandLine.hasOption("t")) {
                     new PizzaRescue(false);
-                    System.out.println("text method");
+                    if (new File("user/player_data").exists()) {
+                    	System.out.println("player data exists");
+                    	System.out.println(Player.deserialize().getLastLevel());
+                    	System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
+                    	if (Player.deserialize().getLastLevel() >= Integer.parseInt(commandLine.getOptionValue("l"))) {
+                    	System.out.println("ok");
+                    	}
+                    }
                     //Call the text user interface and select the good level
                 }
                 if (commandLine.hasOption("g")) {
                     System.out.println("graphical method");
                     new PizzaRescue(true);
-                    /*
-                     * Call the graphical user interface and select the level
-                     */
-                }
-                if (commandLine.hasOption("b")) {
-                    System.out.println("bot method");
-                    //Let's create the bot method
+                    if (new File("user/player_data").exists()) {
+//                    	System.out.println(Player.deserialize().getLastLevel());
+//                    	System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
+//                    	if (Player.deserialize().getLastLevel() >= Integer.parseInt(commandLine.getOptionValue("l"))) {
+//                    	
+//                    	}
+                    }
                 }
                 if (args.length == 2) {
                     new PizzaRescue(false);
-                    System.out.println("text method by default");
-                    //Call the text user by default
                 }
             } else {
                 System.err.println("You must declare an int between 1 and 10");

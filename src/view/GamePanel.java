@@ -131,7 +131,9 @@ public class GamePanel extends JPanel {
                     "Finished level", 0, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
             if (option == 0) {
                 mainPanel.removeAll();
+                if (game.getPlayer().getLastLevel() == game.getLevel().getNumber()) {
                 game.getPlayer().setLastLevel(game.getPlayer().getLastLevel() + 1);
+                }
                 game = new Game(mainPanel, board.getLevelNumber() + 1, game.getPlayer());
                 board = game.getBoard();
                 mainPanel.repaint();
@@ -151,6 +153,8 @@ public class GamePanel extends JPanel {
             if (JOptionPane.showConfirmDialog(null, "You have lost, do you want to try again ?",
                     "Finished level", JOptionPane.YES_NO_OPTION) == 0) {
                 board = new Level(board.getLevelNumber(), game).getGameBoard();
+                mainPanel.repaint();
+                mainPanel.revalidate();
             }
         }
     }

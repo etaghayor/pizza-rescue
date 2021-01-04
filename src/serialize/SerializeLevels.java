@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import model.Level;
-
 public class SerializeLevels {
     public static int num_file = 1;
     private LevelsResource serializable_levels;

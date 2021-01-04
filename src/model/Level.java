@@ -68,6 +68,7 @@ public class Level implements Serializable {
                 this.pizzas = 5;
             }
         }
+        
 
         updateImageAndColor();
         gameBoard.initLocations();
