@@ -6,7 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Time {
     static String currentTime;
-    static String lastTime = "2000/10/10 10/10/10";
+    static String lastTime;
+
+    static {
+        lastTime = "2000/10/10 10/10/10";
+    }
 
     public static void calcNow() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -20,21 +24,22 @@ public class Time {
         if (tmp != null)
             lastTime = tmp;
 //        }
+//        System.out.println(lastTime);
         calcNow();
-        assert lastTime != null;
         for (int i = 0; i < 13; i++) {
             if (currentTime.charAt(i) > lastTime.charAt(i))
                 return 5;
         }
         int lastTimeMinutes = Integer.parseInt(lastTime.substring(14, 16));
         int currentTimeMinutes = Integer.parseInt(currentTime.substring(14, 16));
-        return Math.min(5, (currentTimeMinutes - lastTimeMinutes) / 5);
+        return Math.min(5, (currentTimeMinutes - lastTimeMinutes) / 2);
 //        return 0;
     }
 
     public static void serializeTime() {
         File directory = new File("user");
         calcNow();
+        System.out.println(currentTime);
         if (!directory.exists()) {
             directory.mkdir();
             System.out.println("user directory created");

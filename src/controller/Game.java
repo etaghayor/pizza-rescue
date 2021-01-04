@@ -39,8 +39,10 @@ public class Game {
 //        }
         this.player = player;
         int playersLastLife = player.getLife();
-        player.updateLife(playersLastLife + Time.calcDistance());
-        if (playersLastLife != player.getLife())
+        int l = Time.calcDistance();
+        System.out.println(l + " lives should be added");
+        player.updateLife(playersLastLife + l);
+        if (playersLastLife < player.getLife())
             Time.serializeTime();
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
@@ -52,7 +54,7 @@ public class Game {
 
     synchronized private void initAnimationThread() {
         board = gameBoard.getBoard();
-        System.out.println(player.getLife());
+        System.out.println("player's life:" + player.getLife());
 
         thread = new Thread(() -> {
             while (true) {
@@ -60,7 +62,7 @@ public class Game {
 //                    update:
                 int playersLastLife = player.getLife();
                 player.updateLife(playersLastLife + Time.calcDistance());
-                if (playersLastLife != player.getLife())
+                if (playersLastLife < player.getLife())
                     Time.serializeTime();
                 allBoxesReachedTarget = true;
                 allBoxesAreStill = true;

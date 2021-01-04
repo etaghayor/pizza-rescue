@@ -77,9 +77,13 @@ public class Player implements Serializable {
     }
 
     public void updateLife(int l) {
-        if (l <= 5 && l >= 0) {
-            this.life = l;
-        }
+        if(l<0)
+            this.life = 0;
+        else
+            this.life = Math.min(5,l);
+//        if (l <= 5 && l >= 0) {
+//            this.life = l;
+//        }
     }
 
     public class Life extends TimerTask {

@@ -61,7 +61,7 @@ public class PizzaRescue {
 
     public PizzaRescue(boolean b) {
         if (b) {
-            Time.deserializeLastTime();
+//            Time.deserializeLastTime();
             SwingUtilities.invokeLater(() -> {
                 gui = new GUI();
                 gui.setVisible(true);
