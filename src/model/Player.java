@@ -12,10 +12,10 @@ import java.io.*;
 
 public class Player implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5440700875333587811L;
-	private int score, life = 5, coin;
+     *
+     */
+    private static final long serialVersionUID = 5440700875333587811L;
+    private int score, life = 5, coin;
     private int lastLevel = 1;
 
     public Player() {
@@ -77,21 +77,22 @@ public class Player implements Serializable {
     }
 
     public void updateLife(int l) {
-    	if(l<=5 && l>=0) {
-        this.life = l;
-    	}
+        if (l <= 5 && l >= 0) {
+            this.life = l;
+        }
     }
-    
+
     public class Life extends TimerTask {
 
-    	@Override
-    	public void run() {
-    	getPlayer().updateLife(getLife()+1);
-    	System.out.println(getPlayer().getLife());
-    	}
-    	public Player getPlayer() {
-    		   return Player.this;
-    		}
+        @Override
+        public void run() {
+            getPlayer().updateLife(getLife() + 1);
+            System.out.println(getPlayer().getLife());
+        }
+
+        public Player getPlayer() {
+            return Player.this;
+        }
     }
 
 }

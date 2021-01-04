@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
+import model.Time;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -25,7 +26,7 @@ public class PizzaRescue {
     static Options options = new Options();
     GUI gui;
     TUI textUI;
-    
+
     static {
         OptionGroup interfaceGroup = new OptionGroup();
         interfaceGroup.addOption(
@@ -60,6 +61,7 @@ public class PizzaRescue {
 
     public PizzaRescue(boolean b) {
         if (b) {
+            Time.deserializeLastTime();
             SwingUtilities.invokeLater(() -> {
                 gui = new GUI();
                 gui.setVisible(true);
@@ -101,14 +103,14 @@ public class PizzaRescue {
                 if (commandLine.hasOption("t")) {
                     PizzaRescue p = new PizzaRescue(false);
                     if (new File("user/player_data").exists()) {
-                    	System.out.println("player data exists");
-                    	System.out.println(Player.deserialize().getLastLevel());
-                    	System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
-                    	if (Player.deserialize().getLastLevel() >= Integer.parseInt(commandLine.getOptionValue("l"))) {
-                    	System.out.println("ok");
-                    	p.textUI.setLevel(Integer.parseInt(commandLine.getOptionValue("l")));
-                    	//TODO : Call the text user interface and select the good level
-                    	}
+                        System.out.println("player data exists");
+                        System.out.println(Player.deserialize().getLastLevel());
+                        System.out.println(Integer.parseInt(commandLine.getOptionValue("l")));
+                        if (Player.deserialize().getLastLevel() >= Integer.parseInt(commandLine.getOptionValue("l"))) {
+                            System.out.println("ok");
+                            p.textUI.setLevel(Integer.parseInt(commandLine.getOptionValue("l")));
+                            //TODO : Call the text user interface and select the good level
+                        }
                     }
                 }
                 if (commandLine.hasOption("g")) {
@@ -132,6 +134,6 @@ public class PizzaRescue {
             System.err.println("Wrong command");
             displayHelpAndExit();
         }
-      
+
     }
 }

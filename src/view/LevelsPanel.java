@@ -39,7 +39,7 @@ public class LevelsPanel extends JPanel {
     }
 
     private void init() {
-    	
+
         this.setLayout(null);
         this.setSize(dim);
         this.setOpaque(false);
@@ -65,11 +65,16 @@ public class LevelsPanel extends JPanel {
                 public void mouseClicked(MouseEvent mouseEvent) {
                     if (clickable) {
                         levels[myIndex].setForeground(Color.BLACK);
-                        mainPanel.removeAll();
+                        Player player = new Player();
+                        if (player.getLife() < 1) {
+                            JOptionPane.showConfirmDialog(null, "You can't play with 0 lives!");
+                        } else {
+                            mainPanel.removeAll();
 //                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim));
-                        new Game(mainPanel, myIndex, null);
-                        mainPanel.repaint();
-                        mainPanel.revalidate();
+                            new Game(mainPanel, myIndex, player);
+                            mainPanel.repaint();
+                            mainPanel.revalidate();
+                        }
                     }
                 }
 

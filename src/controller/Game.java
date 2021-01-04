@@ -10,6 +10,7 @@ import java.util.Timer;
 import model.GameBoard;
 import model.Level;
 import model.Player;
+import model.Time;
 import model.boxes.Animatable;
 import model.boxes.Box;
 import model.boxes.BoxType;
@@ -30,12 +31,15 @@ public class Game {
     public Game(MainPanel mainPanel, int lNumber, Player player) {
         this.level = new Level(lNumber, this);
         this.gameBoard = level.getGameBoard();
-        if (player == null) {
-            this.player = new Player();
-        } else {
-            this.player = player;
-            player.updateLife(player.getLife() - 1);
-        }
+//        if (player == null) {
+//            this.player = new Player();
+//        } else {
+//            this.player = player;
+//            player.updateLife(player.getLife() - 1);
+//        }
+        this.player = player;
+        player.updateLife(player.getLife() + Time.calcDistance());
+        Time.serializeTime();
         this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
         mainPanel.add(gamePanel);
 
@@ -52,7 +56,10 @@ public class Game {
             while (true) {
 //                synchronized (board) {
 //                    update:
-
+                int playersLastLife = player.getLife();
+                player.updateLife(playersLastLife + Time.calcDistance());
+                if (playersLastLife != player.getLife())
+                    Time.serializeTime();
                 allBoxesReachedTarget = true;
                 allBoxesAreStill = true;
                 for (Box[] boxes : board) {
@@ -83,7 +90,8 @@ public class Game {
                     return;
                 }
                 if (gameBoard.hasLost()) {
-                    gamePanel.showOptionWindow(true);
+                    gamePanel.showOptionWindow(false);
+                    player.updateLife(player.getLife() - 1);
                     return;
                 }
 //                if (player.getLife() <=5) {
