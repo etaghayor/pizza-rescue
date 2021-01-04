@@ -5,7 +5,6 @@ import media.Colors;
 import media.Fonts;
 import media.Images;
 import model.Player;
-import model.Player.Life;
 import model.Time;
 
 import javax.swing.*;
@@ -13,7 +12,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Timer;
 
 public class LevelsPanel extends JPanel {
     private final int LastLevel = 0;
@@ -45,9 +43,7 @@ public class LevelsPanel extends JPanel {
         this.setSize(dim);
         this.setOpaque(false);
         LevelsPanel lp = this;
-//        this.add(Box.createRigidArea(new Dimension(200, 100)));
         for (int i = 1; i < 11; i++) {
-//            this.add(Box.createRigidArea(new Dimension(250, 30)));
             levels[i] = makeButton((i) + "");
             index = i;
             c = index <= player.getLastLevel();
@@ -69,7 +65,7 @@ public class LevelsPanel extends JPanel {
                         Player player = new Player();
 
                         int playersLastLife = player.getLife();
-                        int l = Time.calcDistance();
+                        int l = Time.calcAddableLife();
                         System.out.println(l + " lives should be added");
                         player.updateLife(playersLastLife + l);
                         if (playersLastLife < player.getLife())
@@ -79,7 +75,6 @@ public class LevelsPanel extends JPanel {
                             JOptionPane.showMessageDialog(null, "You can't play with 0 lives!");
                         } else {
                             mainPanel.removeAll();
-//                    mainPanel.add(new GamePanel(mainPanel, levelsPanel, dim));
                             new Game(mainPanel, myIndex, player);
                             mainPanel.repaint();
                             mainPanel.revalidate();
