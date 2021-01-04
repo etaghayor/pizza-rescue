@@ -180,7 +180,6 @@ public class MenuPanel extends JPanel {
 //                exitButton.setBackground(Colors.TRANSPARENT);
                 exitButton.setForeground(Color.BLACK);
                 exitButton.repaint();
-                System.out.println("why");
                 System.exit(0);
             }
 

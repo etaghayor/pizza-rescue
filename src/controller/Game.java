@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Random;
-import java.util.Timer;
 
 import model.GameBoard;
 import model.Level;
@@ -40,7 +39,7 @@ public class Game {
         this.player = player;
 
         int playersLastLife = player.getLife();
-        int l = Time.calcDistance();
+        int l = Time.calcAddableLife();
         System.out.println(l + " lives should be added");
         player.updateLife(playersLastLife + l);
         if (playersLastLife < player.getLife())
@@ -62,7 +61,7 @@ public class Game {
 //                synchronized (board) {
 //                    update:
                 int playersLastLife = player.getLife();
-                player.updateLife(playersLastLife + Time.calcDistance());
+                player.updateLife(playersLastLife + Time.calcAddableLife());
                 if (playersLastLife < player.getLife())
                     Time.serializeTime();
                 allBoxesReachedTarget = true;
@@ -95,10 +94,11 @@ public class Game {
                     return;
                 }
                 if (gameBoard.hasLost()) {
+                    Time.serializeTime();
                     player.updateLife(player.getLife() - 1);
+                    serializePlayerData();
                     if (player.getLife() <= 0) {
                         JOptionPane.showMessageDialog(null, "You can't play with 0 lives!");
-                        serializePlayerData();
                         mainPanel.removeAll();
                         mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, mainPanel.getDim()), mainPanel.getDim(), player));
                         mainPanel.repaint();

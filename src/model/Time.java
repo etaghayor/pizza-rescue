@@ -18,7 +18,7 @@ public class Time {
         currentTime = dtf.format(now);
     }
 
-    public static int calcDistance() {
+    public static int calcAddableLife() {
 //        if (lastTime.equals("2000/10/10 10/10/10")) {
         String tmp = deserializeLastTime();
         if (tmp != null)
@@ -32,7 +32,16 @@ public class Time {
         }
         int lastTimeMinutes = Integer.parseInt(lastTime.substring(14, 16));
         int currentTimeMinutes = Integer.parseInt(currentTime.substring(14, 16));
-        return Math.min(5, (currentTimeMinutes - lastTimeMinutes) / 2);
+
+        int lastTimeSeconds = Integer.parseInt(lastTime.substring(17));
+        int currentTimeSeconds = Integer.parseInt(currentTime.substring(17));
+
+        if (currentTimeSeconds < lastTimeSeconds) {
+            currentTimeSeconds += 60;
+            currentTimeMinutes--;
+        }
+        int distance = (currentTimeMinutes - lastTimeMinutes) * 60 + currentTimeSeconds - lastTimeSeconds;
+        return Math.min(5, distance / 30);
 //        return 0;
     }
 
