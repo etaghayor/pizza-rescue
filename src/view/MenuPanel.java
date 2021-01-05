@@ -3,11 +3,10 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.util.Timer;
+import java.io.Serial;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.plaf.ColorUIResource;
 
 import media.Colors;
 import media.Fonts;
@@ -15,28 +14,18 @@ import media.Images;
 import model.Player;
 
 public class MenuPanel extends JPanel {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 440684360807810628L;
     private final MainPanel mainPanel;
     private final Dimension dim;
-    private final boolean entered = false;
-    private final boolean clicked = false;
-    //    private Button playButton, exitButton;
     private JButton playButton, exitButton, aboutUsButton, resetButton;
 
-    private static final int XMOVE = 10, YMOVE = 10;
 
-    public MenuPanel(MainPanel mainPanel, Dimension dim) {
+    public MenuPanel(MainPanel mainPanel) {
         super();
         this.mainPanel = mainPanel;
-        this.dim = dim;
+        this.dim = mainPanel.getDim();
         init();
     }
 
-    // Initialize the playButton and see if it is clicked, and if the button is clicked
-    // display the MainPanel (the game)
     private void init() {
 //        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.setLayout(null);
@@ -105,7 +94,7 @@ public class MenuPanel extends JPanel {
                 playButton.repaint();
                 mainPanel.removeAll();
                 Player player = new Player();
-                mainPanel.add(new LevelsPanel(mainPanel, menuPanel, dim, player));
+                mainPanel.add(new LevelsPanel(mainPanel, player));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }
@@ -145,7 +134,7 @@ public class MenuPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
 //                aboutUsButton.setForeground(Color.BLACK);
                 mainPanel.removeAll();
-                mainPanel.add(new AboutUsWindow(mainPanel, menuPanel));
+                mainPanel.add(new AboutUsWindow(mainPanel));
                 mainPanel.revalidate();
             }
 

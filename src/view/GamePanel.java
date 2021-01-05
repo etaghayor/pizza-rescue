@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.Timer;
 
 import controller.Game;
 import media.Colors;
@@ -31,9 +30,9 @@ public class GamePanel extends JPanel {
     private Game game;
     private JButton botPlay;
 
-    public GamePanel(MainPanel mainPanel, Dimension dim, Game game) {
+    public GamePanel(MainPanel mainPanel, Game game) {
         super();
-        this.dim = dim;
+        this.dim = mainPanel.getDim();
         this.mainPanel = mainPanel;
         this.game = game;
         this.player = game.getPlayer();
@@ -173,7 +172,7 @@ public class GamePanel extends JPanel {
             } else {
                 game.serializePlayerData();
                 mainPanel.removeAll();
-                mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, dim), dim, player));
+                mainPanel.add(new LevelsPanel(mainPanel, player));
             }
             mainPanel.repaint();
             mainPanel.revalidate();
@@ -192,7 +191,7 @@ public class GamePanel extends JPanel {
             if (option == 0) {
                 game.serializePlayerData();
                 mainPanel.removeAll();
-                mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, dim), dim, player));
+                mainPanel.add(new LevelsPanel(mainPanel, player));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }

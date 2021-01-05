@@ -16,7 +16,6 @@ import model.boxes.BoxType;
 import view.GamePanel;
 import view.LevelsPanel;
 import view.MainPanel;
-import view.MenuPanel;
 
 import javax.swing.*;
 
@@ -40,7 +39,7 @@ public class Game {
 
         respawnLife();
 
-        this.gamePanel = new GamePanel(mainPanel, mainPanel.getDim(), this);
+        this.gamePanel = new GamePanel(mainPanel, this);
         mainPanel.add(gamePanel);
 
         initAnimationThread();
@@ -102,7 +101,7 @@ public class Game {
                     if (player.getLife() <= 0) {
                         JOptionPane.showMessageDialog(null, "You can't play with 0 lives!");
                         mainPanel.removeAll();
-                        mainPanel.add(new LevelsPanel(mainPanel, new MenuPanel(mainPanel, mainPanel.getDim()), mainPanel.getDim(), player));
+                        mainPanel.add(new LevelsPanel(mainPanel, player));
                         mainPanel.repaint();
                         mainPanel.revalidate();
                     } else {

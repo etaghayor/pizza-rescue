@@ -11,12 +11,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class AboutUsWindow extends JPanel {
-    private MenuPanel menuPanel;
-    private MainPanel mainPanel;
-    private Dimension dim;
+    private final MainPanel mainPanel;
+    private final Dimension dim;
 
-    public AboutUsWindow(MainPanel mainPanel, MenuPanel menuPanel) {
-        this.menuPanel = menuPanel;
+    public AboutUsWindow(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.dim = mainPanel.getDim();
         init();
@@ -46,7 +44,7 @@ public class AboutUsWindow extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 ok.setForeground(Color.BLACK);
                 mainPanel.removeAll();
-                mainPanel.add(menuPanel);
+                mainPanel.add(new MenuPanel(mainPanel));
                 mainPanel.repaint();
                 mainPanel.revalidate();
             }

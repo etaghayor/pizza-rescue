@@ -23,8 +23,8 @@ public class MainPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.setOpaque(true);
         this.setVisible(true);
-        menuPanel = new MenuPanel(this, dim);
         this.dim = dim;
+        menuPanel = new MenuPanel(this);
         menuPanel.setVisible(true);
         this.add(menuPanel);
 

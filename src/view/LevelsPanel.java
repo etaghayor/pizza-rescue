@@ -14,26 +14,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class LevelsPanel extends JPanel {
-    private final int LastLevel = 0;
     private final Dimension dim;
     private final MainPanel mainPanel;
-    private final MenuPanel menuPanel;
     private final JButton[] levels = new JButton[11];
     private int index;
     private boolean c;
     private final Player player;
 
-    public LevelsPanel(MainPanel mainPanel, MenuPanel menuPanel, Dimension dim, Player player) {
+    public LevelsPanel(MainPanel mainPanel, Player player) {
         super();
         this.mainPanel = mainPanel;
-        this.menuPanel = menuPanel;
-        this.dim = dim;
+        this.dim = mainPanel.getDim();
         this.player = player;
-//        TODO : if u have an idea of where I can put this...
-//        if (player.getLife() <5) {
-//    		Timer timer = new Timer();
-//    		timer.schedule(player.new Life(), 5000, 5000);
-//    	}	
         init();
     }
 
@@ -66,7 +58,7 @@ public class LevelsPanel extends JPanel {
 
                         int playersLastLife = player.getLife();
                         int l = Time.calcAddableLife();
-                        System.out.println(l + " lives should be added");
+//                        System.out.println(l + " lives should be added");
                         player.updateLife(playersLastLife + l);
                         if (playersLastLife < player.getLife())
                             Time.serializeTime();
@@ -128,7 +120,7 @@ public class LevelsPanel extends JPanel {
         op.setVisible(true);
         op.getBackButton().addActionListener(actionEvent -> {
             mainPanel.removeAll();
-            mainPanel.add(menuPanel);
+            mainPanel.add(new MenuPanel(mainPanel));
             mainPanel.repaint();
             mainPanel.revalidate();
         });
