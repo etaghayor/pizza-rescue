@@ -13,20 +13,20 @@ public class SerializeLevels {
     // src
     public static void serialize(LevelsResource serializable_levels) {
         boolean allexist = true;
-        File directory = new File("levels");
+        File directory = new File("../levels");
 
         if (!directory.exists()) {
             directory.mkdir();
 //            System.out.println("user directory created");
         }
         for (int i = 0; i < 10; i++) {
-            if (!(new File("levels/level_" + i).exists()))
+            if (!(new File("../levels/level_" + i).exists()))
                 allexist = false;
         }
         if (allexist)
             return;
         for (int i = 0; i < serializable_levels.getBoards().length; i++) {
-            try (FileOutputStream fos = new FileOutputStream("levels/level_" + num_file);
+            try (FileOutputStream fos = new FileOutputStream("../levels/level_" + num_file);
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 // while(serializable_levels)
                 oos.writeObject(serializable_levels.getBoards()[i]);

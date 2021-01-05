@@ -147,13 +147,13 @@ public class Game {
     }
 
     public void serializePlayerData() {
-        File directory = new File("user");
+        File directory = new File("../user");
 
         if (!directory.exists()) {
             directory.mkdir();
 //            System.out.println("user directory created");
         }
-        try (FileOutputStream fos = new FileOutputStream("user/player_data");
+        try (FileOutputStream fos = new FileOutputStream("../user/player_data");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(player);
 //            System.out.println("The file user/player_data has been serialized in user directory");

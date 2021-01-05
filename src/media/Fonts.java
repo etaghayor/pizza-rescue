@@ -12,7 +12,7 @@ public class Fonts {
         if (blueberryFont == null) {
             try {
                 //create the font to use. Specify the size!
-                blueberryFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/Blueberry.ttf")).deriveFont(30f);
+                blueberryFont = Font.createFont(Font.TRUETYPE_FONT, new File("../resources/fonts/Blueberry.ttf")).deriveFont(30f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 //register the font
                 ge.registerFont(blueberryFont);
@@ -27,7 +27,7 @@ public class Fonts {
         if (blueberrySmallFont == null) {
             try {
                 //create the font to use. Specify the size!
-                blueberrySmallFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/Blueberry.ttf")).deriveFont(20f);
+                blueberrySmallFont = Font.createFont(Font.TRUETYPE_FONT, new File("../resources/fonts/Blueberry.ttf")).deriveFont(20f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 //register the font
                 ge.registerFont(blueberrySmallFont);
@@ -42,7 +42,7 @@ public class Fonts {
         if (cevicheFont == null) {
             try {
                 //create the font to use. Specify the size!
-                cevicheFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/CevicheOne-Regular.ttf")).deriveFont(34f);
+                cevicheFont = Font.createFont(Font.TRUETYPE_FONT, new File("../resources/fonts/CevicheOne-Regular.ttf")).deriveFont(34f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 //register the font
                 ge.registerFont(cevicheFont);

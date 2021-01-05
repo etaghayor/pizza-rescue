@@ -12,7 +12,7 @@ public class Sounds {
 
     public static void playMainSong() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         if (mainSong == null) {
-            File f = new File("resources/sounds/forest.wav");
+            File f = new File("../resources/sounds/forest.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
             mainSong = AudioSystem.getClip();
             mainSong.open(audioIn);
@@ -27,7 +27,7 @@ public class Sounds {
 
     public static void playPackRemovedSound() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         if (packRemovedSound == null) {
-            String path = "resources/sounds/pack_removed.wav";
+            String path = "../resources/sounds/pack_removed.wav";
             File f = new File(path);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
             packRemovedSound = AudioSystem.getClip();
@@ -42,7 +42,7 @@ public class Sounds {
 
     public static void playWonSound() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         if (wonSound == null) {
-            File f = new File("resources/sounds/level_completed.wav");
+            File f = new File("../resources/sounds/level_completed.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
             wonSound = AudioSystem.getClip();
             wonSound.open(audioIn);

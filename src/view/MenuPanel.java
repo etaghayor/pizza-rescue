@@ -43,7 +43,7 @@ public class MenuPanel extends JPanel {
                         "Reset Data", 0, JOptionPane.PLAIN_MESSAGE, Images.getAvocadoImage(), options, options[0]);
                 if (option == 0) {
 
-                    File userData = new File("user/player_data");
+                    File userData = new File("../user/player_data");
                     if (userData.exists()) {
                         if (userData.delete())
                             System.out.println("game has been reset!");

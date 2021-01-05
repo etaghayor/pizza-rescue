@@ -100,7 +100,7 @@ public class TUI {
 
     private void resetGame() {
 
-        File userData = new File("user/player_data");
+        File userData = new File("../user/player_data");
         if (userData.exists()) {
             if (userData.delete())
                 System.out.println("game has been reset!");
