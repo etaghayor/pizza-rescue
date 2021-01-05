@@ -109,11 +109,6 @@ public class Game {
                     }
                     return;
                 }
-//                if (player.getLife() <=5) {
-//                	Timer timer = new Timer();
-//                	timer.schedule(player.new Life(), 5000, 5000);
-//                	
-//                } 
                 try {
                     Thread.sleep(7);
 
@@ -126,7 +121,7 @@ public class Game {
         });
     }
 
-    public void botPlay() {
+    private void botPlay() {
         int j = new Random().nextInt(gameBoard.getWidth());
         int i = new Random().nextInt(gameBoard.getHeight());
         while (board[i][j].getType() == BoxType.EMPTY) {
@@ -142,9 +137,6 @@ public class Game {
         return level.getGameBoard();
     }
 
-    public void deletePack() {
-
-    }
 
     public void serializePlayerData() {
         File directory = new File("../user");

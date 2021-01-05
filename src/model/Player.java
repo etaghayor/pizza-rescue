@@ -26,7 +26,7 @@ public class Player implements Serializable {
         }
     }
 
-    public static Player deserialize() {
+    private static Player deserialize() {
         String path = "../user/player_data";
         if (!(new File(path).exists())) {
             return null;

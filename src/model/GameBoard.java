@@ -46,7 +46,7 @@ public class GameBoard {
         return board[x][y];
     }
 
-    public void initLocations() {
+    private void initLocations() {
         for (int j = 0; j < width; j++) {
             for (int i = 0; i < height; i++) {
                 board[i][j].setPos(j * BOX_WIDTH, i * BOX_WIDTH);
@@ -155,7 +155,7 @@ public class GameBoard {
     }
 
 
-    public void emptyBox(int i, int j) {
+    private void emptyBox(int i, int j) {
         double xPos = board[i][j].getX();
         double yPos = board[i][j].getY();
         board[i][j] = new EmptyBox();
@@ -164,7 +164,7 @@ public class GameBoard {
     }
 
     // THIS SHOULD MOVE THE BOXES SO THAT THERE'S NO EMPTY BOX LEFT
-    public void rearrange() {
+    private void rearrange() {
         vertical_rearrange();
         horizontal_rearrange();
 
@@ -178,7 +178,7 @@ public class GameBoard {
 
     }
 
-    public void vertical_rearrange() {
+    private void vertical_rearrange() {
         for (int j = 0; j < width; j++) {
             for (int i = height - 1; i >= 0; i--) {
 //                System.out.println("* " + board[i][j].getPos().x + "<X +    y> " + board[i][j].getPos().y);
@@ -211,7 +211,7 @@ public class GameBoard {
 
     }
 
-    public void horizontal_rearrange() {
+    private void horizontal_rearrange() {
         boolean shouldMove, moved = false;
         for (int j = 1; j < width; j++) {
             shouldMove = false;
@@ -278,7 +278,7 @@ public class GameBoard {
     }
 
 
-    public boolean isPizzaDown() {
+    private boolean isPizzaDown() {
         for (int i = 0; i < getWidth(); i++) {
             if (board[getHeight() - 1][i] instanceof PizzaBox) {
                 return true;
@@ -287,7 +287,7 @@ public class GameBoard {
         return false;
     }
 
-    public void savePizza() {
+    private void savePizza() {
         for (int i = 0; i < getWidth(); i++) {
             if (board[getHeight() - 1][i] instanceof PizzaBox) {
                 emptyBox(getHeight() - 1, i);
@@ -323,10 +323,6 @@ public class GameBoard {
             System.out.print((i + 1) + " ");
         }
         System.out.println();
-//        for (int i = 0; i < width; i++) {
-//            System.out.print("---");
-//        }
-//        System.out.println();
         for (int i = 0; i < height; i++) {
             System.out.print((i + 1) + " |");
 

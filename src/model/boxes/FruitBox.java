@@ -13,6 +13,7 @@ public class FruitBox extends Box {
 
     public enum Color {
         YELLOW(0), ORANGE(1), RED(2), GREEN(3), BLUE(4), PINK(5);
+
         int value;
 
         Color(int value) {
@@ -34,18 +35,24 @@ public class FruitBox extends Box {
 
     private void updateImage(Color color) {
         switch (color) {
-            case RED : this.image = Images.getRedBoxImage();
-            break;
-            case BLUE : this.image = Images.getBlueBoxImage();
-            break;
-            case PINK : this.image = Images.getPinkBoxImage();
-            break;
-            case GREEN : this.image = Images.getGreenBoxImage();
-            break;
-            case ORANGE : this.image = Images.getOrangeBoxImage();
-            break;
-            case YELLOW : this.image = Images.getYellowBoxImage();
-            break;
+            case RED:
+                this.image = Images.getRedBoxImage();
+                break;
+            case BLUE:
+                this.image = Images.getBlueBoxImage();
+                break;
+            case PINK:
+                this.image = Images.getPinkBoxImage();
+                break;
+            case GREEN:
+                this.image = Images.getGreenBoxImage();
+                break;
+            case ORANGE:
+                this.image = Images.getOrangeBoxImage();
+                break;
+            case YELLOW:
+                this.image = Images.getYellowBoxImage();
+                break;
         }
     }
 

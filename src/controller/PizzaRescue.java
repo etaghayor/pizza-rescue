@@ -17,12 +17,16 @@ public class PizzaRescue {
     public PizzaRescue(boolean b) {
         if (b) {
             // Time.deserializeLastTime();
+           
             SwingUtilities.invokeLater(() -> {
                 gui = new GUI();
                 gui.setVisible(true);
             });
         } else {
             textUI = new TUI();
+        }
+        while(true){
+                
         }
     }
 

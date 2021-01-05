@@ -101,7 +101,7 @@ public class Level implements Serializable {
     // We will create many levels and add each of them in different
     // files and the only thing we would have to do is recover the
     // level and deserialize it
-    public static Box[][] deserialize(String path) {
+    private static Box[][] deserialize(String path) {
 //        Level deserializableLevel = null;
         Box[][] deserializableBoard = null;
         try (FileInputStream fis = new FileInputStream(path); ObjectInputStream ois = new ObjectInputStream(fis)) {

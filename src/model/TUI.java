@@ -83,14 +83,12 @@ public class TUI {
                 }
                 if (gameBoard.hasLost()) {
                     System.out.println("You've lost:(");
-//                    Time.serializeTime();
                     player.updateLife(player.getLife() - 1);
                     game.serializePlayerData();
                     break;
                 }
             }
-            in.close();
-
+            
         }
     }
 
