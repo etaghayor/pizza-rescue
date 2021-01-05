@@ -16,7 +16,6 @@ import media.Fonts;
 import media.Images;
 import media.Sounds;
 import model.*;
-import model.Player.Life;
 import model.boxes.Animatable;
 
 public class GamePanel extends JPanel {

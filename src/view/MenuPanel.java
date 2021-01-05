@@ -13,7 +13,6 @@ import media.Colors;
 import media.Fonts;
 import media.Images;
 import model.Player;
-import model.Player.Life;
 
 public class MenuPanel extends JPanel {
     /**

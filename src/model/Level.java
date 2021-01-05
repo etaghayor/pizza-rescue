@@ -33,43 +33,43 @@ public class Level implements Serializable {
         this.number = l;
         switch (l) { // TODO read from File
             case 1 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_1"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_1"), this);
                 this.pizzas = 2;
             }
             case 2 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_2"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_2"), this);
                 this.pizzas = 5;
             }
             case 3 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_3"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_3"), this);
                 this.pizzas = 3;
             }
             case 4 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_4"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_4"), this);
                 this.pizzas = 4;
             }
             case 5 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_5"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_5"), this);
                 this.pizzas = 2;
             }
             case 6 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_6"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_6"), this);
                 this.pizzas = 6;
             }
             case 7 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_7"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_7"), this);
                 this.pizzas = 2;
             }
             case 8 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_8"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_8"), this);
                 this.pizzas = 5;
             }
             case 9 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_9"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_9"), this);
                 this.pizzas = 3;
             }
             case 10 -> {
-                gameBoard = new GameBoard(deserialize("Levels/level_10"), this);
+                gameBoard = new GameBoard(deserialize("levels/level_10"), this);
                 this.pizzas = 5;
             }
         }

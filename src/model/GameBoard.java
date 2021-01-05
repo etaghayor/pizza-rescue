@@ -1,15 +1,12 @@
 package model;
 
 import media.Sounds;
-import model.Player.Life;
 import model.boxes.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 public class GameBoard {
     private final Box[][] board;
@@ -19,7 +16,6 @@ public class GameBoard {
     private int fruitCount = 0;
     private FruitBox.Color level6Color1, level6Color2;
     private final Level level;
-    //    private Player playe;
     private static final int BOX_WIDTH = 60;
 
     // TODO : MAIN METHODS: rearrange() and emptyPack()

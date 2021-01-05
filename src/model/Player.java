@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.TimerTask;
-
-import java.io.*;
 
 public class Player implements Serializable {
     /**
@@ -77,26 +74,11 @@ public class Player implements Serializable {
     }
 
     public void updateLife(int l) {
-        if(l<0)
+        if (l < 0)
             this.life = 0;
         else
-            this.life = Math.min(5,l);
-//        if (l <= 5 && l >= 0) {
-//            this.life = l;
-//        }
+            this.life = Math.min(5, l);
     }
 
-    public class Life extends TimerTask {
-
-        @Override
-        public void run() {
-            getPlayer().updateLife(getLife() + 1);
-            System.out.println(getPlayer().getLife());
-        }
-
-        public Player getPlayer() {
-            return Player.this;
-        }
-    }
 
 }

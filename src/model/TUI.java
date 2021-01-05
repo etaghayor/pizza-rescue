@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.Scanner;
 
 import controller.Game;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.OptionGroup;
 
 public class TUI {
     private Game game;
