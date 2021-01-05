@@ -34,12 +34,18 @@ public class FruitBox extends Box {
 
     private void updateImage(Color color) {
         switch (color) {
-            case RED -> this.image = Images.getRedBoxImage();
-            case BLUE -> this.image = Images.getBlueBoxImage();
-            case PINK -> this.image = Images.getPinkBoxImage();
-            case GREEN -> this.image = Images.getGreenBoxImage();
-            case ORANGE -> this.image = Images.getOrangeBoxImage();
-            case YELLOW -> this.image = Images.getYellowBoxImage();
+            case RED : this.image = Images.getRedBoxImage();
+            break;
+            case BLUE : this.image = Images.getBlueBoxImage();
+            break;
+            case PINK : this.image = Images.getPinkBoxImage();
+            break;
+            case GREEN : this.image = Images.getGreenBoxImage();
+            break;
+            case ORANGE : this.image = Images.getOrangeBoxImage();
+            break;
+            case YELLOW : this.image = Images.getYellowBoxImage();
+            break;
         }
     }
 

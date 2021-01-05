@@ -96,12 +96,21 @@ public class OptionPanel extends JPanel {
 
     private JButton makeButton(String name) {
         JButton b;
+//        switch (name) {
+//            case "gear" -> b = new JButton(Images.getGearImage());
+//            case "music" -> b = new JButton(Images.getMusicImage());
+//            default -> b = new JButton(Images.getBackImage());
+//
+//        }
         switch (name) {
-            case "gear" -> b = new JButton(Images.getGearImage());
-            case "music" -> b = new JButton(Images.getMusicImage());
-            default -> b = new JButton(Images.getBackImage());
+        case "gear" : b = new JButton(Images.getGearImage());
+        break;
+        case "music" : b = new JButton(Images.getMusicImage());
+        break;
+        default : b = new JButton(Images.getBackImage());
+        break;
 
-        }
+    }
         b.setContentAreaFilled(false);
         Border emptyBorder = BorderFactory.createEmptyBorder();
         b.setBorder(emptyBorder);

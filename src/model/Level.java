@@ -32,46 +32,56 @@ public class Level implements Serializable {
         this.game = game;
         this.number = l;
         switch (l) { // TODO read from File
-            case 1 -> {
+            case 1 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_1"), this);
                 this.pizzas = 2;
             }
-            case 2 -> {
+            break;
+            case 2 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_2"), this);
                 this.pizzas = 5;
             }
-            case 3 -> {
+            break;
+            case 3 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_3"), this);
                 this.pizzas = 3;
             }
-            case 4 -> {
+            break;
+            case 4 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_4"), this);
                 this.pizzas = 4;
             }
-            case 5 -> {
+            break;
+            case 5 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_5"), this);
                 this.pizzas = 2;
             }
-            case 6 -> {
+            break;
+            case 6 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_6"), this);
                 this.pizzas = 6;
             }
-            case 7 -> {
+            break;
+            case 7 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_7"), this);
                 this.pizzas = 2;
             }
-            case 8 -> {
+            break;
+            case 8 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_8"), this);
                 this.pizzas = 5;
             }
-            case 9 -> {
+            break;
+            case 9 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_9"), this);
                 this.pizzas = 3;
             }
-            case 10 -> {
+            break;
+            case 10 : {
                 gameBoard = new GameBoard(deserialize("../levels/level_10"), this);
                 this.pizzas = 5;
             }
+            break;
         }
         updateImageAndColor();
         gameBoard.updateData();

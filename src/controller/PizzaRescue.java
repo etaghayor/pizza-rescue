@@ -35,6 +35,7 @@ public class PizzaRescue {
 
     public static void main(String[] args) {
         new SerializeLevels();
+        if (args.length == 0) displayHelpAndExit();
         if (args[0].equals("-t") || args[0].equals("-text"))
             new PizzaRescue(false);
         else if (args[0].equals("-g") || args[0].equals("-graphic"))
