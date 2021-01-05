@@ -30,7 +30,7 @@ public class TUI {
                 System.exit(0);
             } else if (n == 8888) {
                 resetGame();
-                game.serializePlayerData();
+                // game.serializePlayerData();
                 continue;
             }
 
@@ -89,6 +89,7 @@ public class TUI {
                     break;
                 }
             }
+            in.close();
 
         }
     }
