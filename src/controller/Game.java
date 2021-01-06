@@ -21,9 +21,9 @@ import javax.swing.*;
 
 public class Game {
     private GamePanel gamePanel = null;
-    private  Level level = null;
+    private Level level = null;
     private Box[][] board;
-    private  GameBoard gameBoard = null;
+    private GameBoard gameBoard = null;
     private Thread thread;
     private final Player player;
     private boolean botMode = false;
@@ -48,8 +48,8 @@ public class Game {
     }
 
     public Game(Player player) {
-//        this.level = new Level(lNumber, this);
-//        this.gameBoard = level.getGameBoard();
+        // this.level = new Level(lNumber, this);
+        // this.gameBoard = level.getGameBoard();
         this.player = player;
 
         respawnLife();
@@ -60,8 +60,8 @@ public class Game {
 
         thread = new Thread(() -> {
             while (true) {
-//                synchronized (board) {
-//                    update:
+                // synchronized (board) {
+                // update:
 
                 respawnLife();
 
@@ -95,7 +95,8 @@ public class Game {
                     return;
                 }
                 if (gameBoard.hasLost()) {
-                    Time.serializeTime();
+                    if (player.getLife() == 5)
+                        Time.serializeTime();
                     player.updateLife(player.getLife() - 1);
                     serializePlayerData();
                     if (player.getLife() <= 0) {
@@ -114,8 +115,8 @@ public class Game {
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
 
+                }
 
             }
         });
@@ -137,18 +138,18 @@ public class Game {
         return level.getGameBoard();
     }
 
-
     public void serializePlayerData() {
         File directory = new File("../user");
 
         if (!directory.exists()) {
             directory.mkdir();
-//            System.out.println("user directory created");
+            // System.out.println("user directory created");
         }
         try (FileOutputStream fos = new FileOutputStream("../user/player_data");
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(player);
-//            System.out.println("The file user/player_data has been serialized in user directory");
+            // System.out.println("The file user/player_data has been serialized in user
+            // directory");
 
         } catch (IOException e) {
             e.printStackTrace();

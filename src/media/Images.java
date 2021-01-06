@@ -10,7 +10,7 @@ import java.io.IOException;
 // This class stockes all of our images : backgroundImages, fruitsBoxImages, pizzaImage
 // With this way, we only have to call getMyImage() function to access to our images
 public class Images {
-    private static BufferedImage backgroundImage;
+    private static Image backgroundImage;
     private static Image yellowBoxImage, redBoxImage, blueBoxImage, pinkBoxImage, greenBoxImage, orangeBoxImage;
     private static Image pizzaImage, obstacleImage;
     private static ImageIcon gearImage, musicImage, musicOffImage, backImage;
@@ -24,6 +24,14 @@ public class Images {
         if (backgroundImage == null) {
             try {
                 backgroundImage = ImageIO.read(new File("../resources/images/Background2.png"));
+                Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+                double h = screenDim.getHeight();
+                int width = backgroundImage.getWidth(null);
+                int height = backgroundImage.getHeight(null);
+                double scale = (double) width / height;
+                double w = scale * h;
+                Image tmp = backgroundImage.getScaledInstance((int) w, (int) h, Image.SCALE_SMOOTH);
+                backgroundImage = tmp;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -229,7 +237,6 @@ public class Images {
         return woodButtonIcon;
     }
 
-
     public static Icon getSmallWoodIcon() {
         if (smallWoodIcon == null) {
             try {
@@ -282,7 +289,6 @@ public class Images {
         return greyWoodLevelIcon;
     }
 
-
     public static Icon getRocketReady() {
         if (rocketReady == null) {
             try {
@@ -294,7 +300,6 @@ public class Images {
         }
         return rocketReady;
     }
-
 
     public static Icon getRocketFiring() {
         if (rocketFiring == null) {

@@ -1,16 +1,20 @@
 # Pizza-Rescue
+an implementation of the game Pet Rescue Saga. <br/>
+ <br/>
+  <br/>
 
 
-#### Running the software 
+### Running the software 
 
- First you have to do : 
+<br/>
+ First, in pizza-rescue directory you have to do : 
  
  ```
  cd src
  javac controller/PizzaRescue.java
  ```
  
- To run the program:
+ To run the program (in src directory):
  
  ```
  java controller.PizzaRescue -g || java controller.PizzaRescue --graphic
@@ -23,8 +27,10 @@
  -g || --graphic for GUI mode
  
  -t || --text for TUI mode
+
+ <br/>
  
- #### A basic presentation of the game
+ ### A basic presentation of the game
  
  After launching the game, you can play the first level, to win the level, your goal is to bring down the pizzas, by removing the fruits, when all the pizzas are down, you win the level.
  As things progress, you will discover some new tools that could help you to finish levels.

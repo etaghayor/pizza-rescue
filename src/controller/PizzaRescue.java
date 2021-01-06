@@ -17,16 +17,16 @@ public class PizzaRescue {
     public PizzaRescue(boolean b) {
         if (b) {
             // Time.deserializeLastTime();
-           
-            SwingUtilities.invokeLater(() -> {
-                gui = new GUI();
-                gui.setVisible(true);
-            });
+
+            // SwingUtilities.invokeLater(() -> {
+            gui = new GUI();
+            gui.setVisible(true);
+            // });
         } else {
             textUI = new TUI();
         }
-        while(true){
-                
+        while (true) {
+
         }
     }
 
@@ -39,7 +39,8 @@ public class PizzaRescue {
 
     public static void main(String[] args) {
         new SerializeLevels();
-        if (args.length == 0) displayHelpAndExit();
+        if (args.length == 0)
+            displayHelpAndExit();
         if (args[0].equals("-t") || args[0].equals("-text"))
             new PizzaRescue(false);
         else if (args[0].equals("-g") || args[0].equals("-graphic"))
